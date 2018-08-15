@@ -1104,19 +1104,22 @@ class ApplicationTest extends TestCase
         $app = new ImplementApplication($this->getFoldersWithTestEnv(), $env);
 
         $value = $app->convertMemoryLimitToBytes('64M');
-        static::assertSame(6291456, $value);
+        static::assertSame(67108864, $value);
 
         $value = $app->convertMemoryLimitToBytes('256M');
-        static::assertSame(26214400, $value);
+        static::assertSame(268435456, $value);
 
         $value = $app->convertMemoryLimitToBytes('512M');
-        static::assertSame(53477376, $value);
+        static::assertSame(536870912, $value);
 
         $value = $app->convertMemoryLimitToBytes('64K');
-        static::assertSame(6144, $value);
+        static::assertSame(65536, $value);
 
         $value = $app->convertMemoryLimitToBytes('32G');
-        static::assertSame(3221225472, $value);
+        static::assertSame(34359738368.0, $value);
+
+        $value = $app->convertMemoryLimitToBytes('1G');
+        static::assertSame(1073741824, $value);
 
         $value = $app->convertMemoryLimitToBytes('-1');
         static::assertSame('-1', $value);

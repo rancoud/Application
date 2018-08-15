@@ -553,8 +553,8 @@ class Application
      * @return int
      */
     protected function convertMemoryLimitToBytes($memoryLimit)
-    {var_dump($memoryLimit);
-        $value = (int) mb_substr($memoryLimit, 0, mb_strlen($memoryLimit) - 2);
+    {
+        $value = (int) mb_substr($memoryLimit, 0, mb_strlen($memoryLimit) - 1);
         if (mb_substr($memoryLimit, -1) === 'K') {
             return $value * 1024;
         }
