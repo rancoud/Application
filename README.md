@@ -179,6 +179,9 @@ Application::removeInBag('db');
 * static setDatabase(database: Rancoud\Database\Database):void  
 * static getDatabase():?Rancoud\Database\Database  
 * static getRouter():Rancoud\Router\Router  
+* static getInBag(name: string):mixed  
+* static removeInBag(name: string):void  
+* static setInBag(name: string, object: mixed):void  
 
 ## Optionnals Dependencies
 [Database package](https://github.com/rancoud/Database)  

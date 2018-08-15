@@ -342,13 +342,13 @@ class Application
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @throws ApplicationException
      *
      * @return mixed
      */
-    public static function getInBag($name)
+    public static function getInBag(string $name)
     {
         if (static::$app === null) {
             throw new ApplicationException('Empty Instance');
@@ -358,11 +358,11 @@ class Application
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @throws ApplicationException
      */
-    public static function removeInBag($name)
+    public static function removeInBag(string $name): void
     {
         if (static::$app === null) {
             throw new ApplicationException('Empty Instance');
@@ -372,12 +372,12 @@ class Application
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @param $object
      *
      * @throws ApplicationException
      */
-    public static function setInBag($name, $object)
+    public static function setInBag(string $name, $object): void
     {
         if (static::$app === null) {
             throw new ApplicationException('Empty Instance');
