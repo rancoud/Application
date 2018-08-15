@@ -477,6 +477,7 @@ class ApplicationTest extends TestCase
         $app = new Application($this->getFoldersWithTestEnv(), $env);
 
         $infos = $app->getDebugInfos();
+        var_dump($infos);
         static::assertTrue(array_key_exists('memory', $infos));
         static::assertTrue(array_key_exists('usage', $infos['memory']));
         static::assertTrue(array_key_exists('limit', $infos['memory']));
