@@ -1115,9 +1115,6 @@ class ApplicationTest extends TestCase
         $value = $app->convertMemoryLimitToBytes('64K');
         static::assertSame(65536, $value);
 
-        $value = $app->convertMemoryLimitToBytes('32G');
-        static::assertSame(34359738368.0, $value);
-
         $value = $app->convertMemoryLimitToBytes('1G');
         static::assertSame(1073741824, $value);
 
