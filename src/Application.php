@@ -405,7 +405,7 @@ class Application
         $data['response'] = $this->getDebugResponse();
         $data['database'] = $this->getDebugDatabase();
         $data['session'] = $this->getDebugSession();
-
+        var_dump($data);
         return $data;
     }
 
