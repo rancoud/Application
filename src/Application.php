@@ -405,7 +405,7 @@ class Application
         $data['response'] = $this->getDebugResponse();
         $data['database'] = $this->getDebugDatabase();
         $data['session'] = $this->getDebugSession();
-        var_dump($data);
+
         return $data;
     }
 
@@ -553,8 +553,8 @@ class Application
      * @return int
      */
     protected function convertMemoryLimitToBytes($memoryLimit)
-    {
-        $value = mb_substr($memoryLimit, 0, mb_strlen($memoryLimit) - 2);
+    {var_dump($memoryLimit);
+        $value = (int) mb_substr($memoryLimit, 0, mb_strlen($memoryLimit) - 2);
         if (mb_substr($memoryLimit, -1) === 'K') {
             return $value * 1024;
         }
