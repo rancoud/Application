@@ -69,15 +69,15 @@ class Application
     protected function initFolders(array $folders): void
     {
         $props = $this->getFoldersName();
-        $propsCount = count($props);
+        $propsCount = \count($props);
         $validProps = implode(', ', $props);
         foreach ($folders as $name => $folder) {
-            if (!is_string($folder) || !file_exists($folder)) {
+            if (!\is_string($folder) || !file_exists($folder)) {
                 throw new ApplicationException('"' . $name . '" is not a valid folder.');
             }
 
             $this->folders[$name] = $folder;
-            if (in_array($name, $props, true)) {
+            if (\in_array($name, $props, true)) {
                 --$propsCount;
             }
         }
@@ -150,7 +150,7 @@ class Application
         }
 
         $allTimezones = DateTimeZone::listIdentifiers();
-        if (in_array($timezone, $allTimezones, true)) {
+        if (\in_array($timezone, $allTimezones, true)) {
             date_default_timezone_set($timezone);
         } else {
             $message = 'Invalid timezone: ' . $timezone . '. Check DateTimeZone::listIdentifiers()';
@@ -171,7 +171,7 @@ class Application
             return;
         }
 
-        if (!is_string($routes)) {
+        if (!\is_string($routes)) {
             throw new ApplicationException('Invalid routes');
         }
         $routes = explode(',', $routes);
