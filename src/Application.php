@@ -52,7 +52,7 @@ class Application
      */
     public function __construct(array $folders, Environment $env = null)
     {
-        $this->appStart = microtime(true);
+        $this->appStart = \microtime(true);
 
         $this->initFolders($folders);
         $this->initAttributes();
@@ -70,9 +70,9 @@ class Application
     {
         $props = $this->getFoldersName();
         $propsCount = \count($props);
-        $validProps = implode(', ', $props);
+        $validProps = \implode(', ', $props);
         foreach ($folders as $name => $folder) {
-            if (!\is_string($folder) || !file_exists($folder)) {
+            if (!\is_string($folder) || !\file_exists($folder)) {
                 throw new ApplicationException('"' . $name . '" is not a valid folder.');
             }
 
@@ -130,11 +130,11 @@ class Application
     {
         if ($this->config->get('DEBUG') === true) {
             $this->isDebug = true;
-            error_reporting(-1);
-            ini_set('display_errors', '1');
+            \error_reporting(-1);
+            \ini_set('display_errors', '1');
         } else {
-            ini_set('display_errors', '0');
-            error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
+            \ini_set('display_errors', '0');
+            \error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
         }
     }
 
@@ -151,7 +151,7 @@ class Application
 
         $allTimezones = DateTimeZone::listIdentifiers();
         if (\in_array($timezone, $allTimezones, true)) {
-            date_default_timezone_set($timezone);
+            \date_default_timezone_set($timezone);
         } else {
             $message = 'Invalid timezone: ' . $timezone . '. Check DateTimeZone::listIdentifiers()';
             throw new ApplicationException($message);
@@ -174,10 +174,10 @@ class Application
         if (!\is_string($routes)) {
             throw new ApplicationException('Invalid routes');
         }
-        $routes = explode(',', $routes);
+        $routes = \explode(',', $routes);
 
         foreach ($routes as $route) {
-            if (!file_exists($this->folders['ROUTES'] . $route . '.php')) {
+            if (!\file_exists($this->folders['ROUTES'] . $route . '.php')) {
                 throw new ApplicationException('Invalid route file');
             }
 
@@ -187,9 +187,9 @@ class Application
 
     protected function loadAllRoutesFilesInRoutesFolder(): void
     {
-        $res = opendir($this->folders['ROUTES']);
-        while (($routeFile = readdir($res)) !== false) {
-            if (mb_strripos($routeFile, '.php') === mb_strlen($routeFile) - 4) {
+        $res = \opendir($this->folders['ROUTES']);
+        while (($routeFile = \readdir($res)) !== false) {
+            if (\mb_strripos($routeFile, '.php') === \mb_strlen($routeFile) - 4) {
                 $this->loadRouteFile($routeFile);
             }
         }
@@ -248,11 +248,11 @@ class Application
         $default = $request->getProtocolVersion();
         $serverParams = $request->getServerParams();
 
-        if (!array_key_exists('SERVER_PROTOCOL', $serverParams)) {
+        if (!\array_key_exists('SERVER_PROTOCOL', $serverParams)) {
             return $default;
         }
 
-        return mb_substr($serverParams['SERVER_PROTOCOL'], 5);
+        return \mb_substr($serverParams['SERVER_PROTOCOL'], 5);
     }
 
     /**
@@ -264,7 +264,7 @@ class Application
      */
     public static function getFolder(string $index): string
     {
-        if (!array_key_exists($index, static::$app->folders)) {
+        if (!\array_key_exists($index, static::$app->folders)) {
             throw new ApplicationException('Invalid folder name');
         }
 
@@ -477,8 +477,8 @@ class Application
     {
         if ($this->config->get('DEBUG_MEMORY') === true) {
             $data = [];
-            $memoryUsage = memory_get_usage();
-            $memoryLimit = ini_get('memory_limit');
+            $memoryUsage = \memory_get_usage();
+            $memoryLimit = \ini_get('memory_limit');
             $memoryPercentage = $this->getMemoryPercentage($memoryUsage, $memoryLimit);
 
             $data['usage'] = $memoryUsage;
@@ -501,7 +501,7 @@ class Application
     protected function getDebugSpeed(): ?float
     {
         if ($this->config->get('DEBUG_SPEED') === true) {
-            return round((microtime(true) - $this->appStart) * 1000000) / 1000000;
+            return \round((\microtime(true) - $this->appStart) * 1000000) / 1000000;
         }
 
         return null;
@@ -515,7 +515,7 @@ class Application
     protected function getDebugIncludedFiles(): ?array
     {
         if ($this->config->get('DEBUG_INCLUDED_FILES') === true) {
-            return get_included_files();
+            return \get_included_files();
         }
 
         return null;
@@ -529,11 +529,11 @@ class Application
     protected function convertMemoryUsageToHuman($size): string
     {
         $units = ['b', 'kb', 'mb', 'gb', 'tb', 'pb'];
-        $log = log($size, 1024);
-        $unitIndex = (int) floor($log);
-        $pow = pow(1024, $unitIndex);
+        $log = \log($size, 1024);
+        $unitIndex = (int) \floor($log);
+        $pow = \pow(1024, $unitIndex);
 
-        return round($size / $pow, 2) . $units[$unitIndex];
+        return \round($size / $pow, 2) . $units[$unitIndex];
     }
 
     /**
@@ -544,7 +544,7 @@ class Application
      */
     protected function getMemoryPercentage($memoryUsage, $memoryLimit): float
     {
-        return round($memoryUsage * 100 / $this->convertMemoryLimitToBytes($memoryLimit), 2);
+        return \round($memoryUsage * 100 / $this->convertMemoryLimitToBytes($memoryLimit), 2);
     }
 
     /**
@@ -554,16 +554,16 @@ class Application
      */
     protected function convertMemoryLimitToBytes($memoryLimit)
     {
-        $value = (int) mb_substr($memoryLimit, 0, mb_strlen($memoryLimit) - 1);
-        if (mb_substr($memoryLimit, -1) === 'K') {
+        $value = (int) \mb_substr($memoryLimit, 0, \mb_strlen($memoryLimit) - 1);
+        if (\mb_substr($memoryLimit, -1) === 'K') {
             return $value * 1024;
         }
 
-        if (mb_substr($memoryLimit, -1) === 'M') {
+        if (\mb_substr($memoryLimit, -1) === 'M') {
             return $value * 1024 * 1024;
         }
 
-        if (mb_substr($memoryLimit, -1) === 'G') {
+        if (\mb_substr($memoryLimit, -1) === 'G') {
             return $value * 1024 * 1024 * 1024;
         }
 
