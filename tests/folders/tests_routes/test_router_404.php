@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Rancoud\Http\Message\Factory\MessageFactory;
 $config = [
     'router' => [
         'default_404' => false

@@ -169,19 +169,19 @@ Application::removeInBag('db');
 
 ## Application Methods
 ### General Commands  
-* run(request: \Psr\Http\Message\ServerRequestInterface):?\Rancoud\Http\Message\Response  
-* getDebugInfos():array  
+* run(request: \Psr\Http\Message\ServerRequestInterface): ?\Rancoud\Http\Message\Response  
+* getDebugInfos(): array  
 
 ### Static Methods  
-* static getFolder(index: string):string  
-* static getInstance():Rancoud\Application\Application  
-* static getConfig():Rancoud\Environment\Environment  
-* static setDatabase(database: Rancoud\Database\Database):void  
-* static getDatabase():?Rancoud\Database\Database  
-* static getRouter():Rancoud\Router\Router  
-* static getInBag(name: string):mixed  
-* static removeInBag(name: string):void  
-* static setInBag(name: string, object: mixed):void  
+* getFolder(index: string): string  
+* getInstance(): Rancoud\Application\Application  
+* getConfig(): Rancoud\Environment\Environment  
+* setDatabase(database: Rancoud\Database\Database): void  
+* getDatabase(): ?Rancoud\Database\Database  
+* getRouter(): Rancoud\Router\Router  
+* getInBag(name: string): mixed  
+* removeInBag(name: string): void  
+* setInBag(name: string, object: mixed): void  
 
 ## Optionnals Dependencies
 [Database package](https://github.com/rancoud/Database)  

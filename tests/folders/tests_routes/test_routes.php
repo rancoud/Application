@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-use Rancoud\Http\Message\Factory\MessageFactory;
+use Rancoud\Http\Message\Factory\Factory;
+use Rancoud\Http\Message\Stream;
+
 $config = [
     'routes' => [
         [
@@ -15,7 +17,7 @@ $config = [
             'methods'     => ['GET'],
             'url'         => '/',
             'callback'    => function($a,$b){
-                return (new MessageFactory())->createResponse(200, null, [], 'home');
+                return (new Factory())->createResponse(200)->withBody(Stream::create('home'));
             },
             'name'        => 'test_home'
         ]

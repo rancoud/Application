@@ -10,7 +10,7 @@ use Rancoud\Application\ApplicationException;
 use Rancoud\Database\Configurator;
 use Rancoud\Database\Database;
 use Rancoud\Environment\Environment;
-use Rancoud\Http\Message\Factory\ServerRequestFactory;
+use Rancoud\Http\Message\Factory\Factory;
 use Rancoud\Http\Message\Uri;
 use Rancoud\Router\RouterException;
 use Rancoud\Session\Session;
@@ -53,7 +53,7 @@ class ApplicationTest extends TestCase
 
     protected function getRequest(string $method, string $path)
     {
-        return (new ServerRequestFactory())->createServerRequest($method, $path);
+        return (new Factory())->createServerRequest($method, $path);
     }
 
     protected function createConfigurator(): Configurator
@@ -290,7 +290,7 @@ class ApplicationTest extends TestCase
 
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/0.9';
         $app = new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
-        $request = (new ServerRequestFactory())->createServerRequestFromGlobals();
+        $request = (new Factory())->createServerRequestFromGlobals();
         $request = $request->withMethod('GET');
         $request = $request->withUri((new Uri())->withPath('/'));
         $response = $app->run($request);
