@@ -22,24 +22,33 @@ class Application
 {
     /** @var float */
     protected $appStart;
+
     /** @var array */
-    protected $folders = [];
+    protected array $folders = [];
+
     /** @var Application */
-    protected static $app = null;
+    protected static ?Application $app = null;
+
     /** @var Router */
-    protected $router = null;
+    protected ?Router $router = null;
+
     /** @var Environment */
     protected $config = [];
+
     /** @var bool */
-    protected $isDebug = false;
+    protected bool $isDebug = false;
+
     /** @var \Rancoud\Database\Database */
-    protected $database = null;
-    /** @var ServerRequestInterface */
-    protected $request;
-    /** @var ResponseInterface */
-    protected $response;
+    protected ?\Rancoud\Database\Database $database = null;
+
+    /** @var ServerRequestInterface|null */
+    protected ?ServerRequestInterface $request = null;
+
+    /** @var ResponseInterface|null */
+    protected ?ResponseInterface $response = null;
+
     /** @var array */
-    protected $bags = [];
+    protected array $bags = [];
 
     /**
      * App constructor.
@@ -213,7 +222,7 @@ class Application
      * @throws InvalidArgumentException
      * @throws RouterException
      *
-     * @return null|Response
+     * @return Response|null
      */
     public function run(ServerRequestInterface $request): ?Response
     {
@@ -316,7 +325,7 @@ class Application
     /**
      * @throws ApplicationException
      *
-     * @return null|\Rancoud\Database\Database
+     * @return \Rancoud\Database\Database|null
      */
     public static function getDatabase(): ?\Rancoud\Database\Database
     {
@@ -416,7 +425,7 @@ class Application
      */
     protected function getDebugRequest(): ?ServerRequestInterface
     {
-        if ($this->config->get('DEBUG_REQUEST') === true && $this->request !== null) {
+        if ($this->request !== null && $this->config->get('DEBUG_REQUEST') === true) {
             return $this->request;
         }
 
@@ -430,7 +439,7 @@ class Application
      */
     protected function getDebugResponse(): ?ResponseInterface
     {
-        if ($this->config->get('DEBUG_RESPONSE') === true && $this->response !== null) {
+        if ($this->response !== null && $this->config->get('DEBUG_RESPONSE') === true) {
             return $this->response;
         }
 
@@ -444,7 +453,7 @@ class Application
      */
     protected function getDebugDatabase(): ?array
     {
-        if ($this->config->get('DEBUG_DATABASE') === true && $this->database !== null) {
+        if ($this->database !== null && $this->config->get('DEBUG_DATABASE') === true) {
             return $this->database->getSavedQueries();
         }
 
@@ -459,10 +468,8 @@ class Application
      */
     protected function getDebugSession(): ?array
     {
-        if ($this->config->get('DEBUG_SESSION') === true && isset($_SESSION)) {
-            if (isset($_SESSION)) {
-                return \Rancoud\Session\Session::getAll();
-            }
+        if (isset($_SESSION) && $this->config->get('DEBUG_SESSION') === true) {
+            return \Rancoud\Session\Session::getAll();
         }
 
         return null;
@@ -531,7 +538,7 @@ class Application
         $units = ['b', 'kb', 'mb', 'gb', 'tb', 'pb'];
         $log = \log($size, 1024);
         $unitIndex = (int) \floor($log);
-        $pow = \pow(1024, $unitIndex);
+        $pow = 1024 ** $unitIndex;
 
         return \round($size / $pow, 2) . $units[$unitIndex];
     }
@@ -554,7 +561,7 @@ class Application
      */
     protected function convertMemoryLimitToBytes($memoryLimit)
     {
-        $value = (int) \mb_substr($memoryLimit, 0, \mb_strlen($memoryLimit) - 1);
+        $value = (int) \mb_substr($memoryLimit, 0, -1);
         if (\mb_substr($memoryLimit, -1) === 'K') {
             return $value * 1024;
         }
