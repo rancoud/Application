@@ -1,6 +1,12 @@
 # Application Package
 
-[![Build Status](https://travis-ci.org/rancoud/Application.svg?branch=master)](https://travis-ci.org/rancoud/Application) [![Coverage Status](https://coveralls.io/repos/github/rancoud/Application/badge.svg?branch=master)](https://coveralls.io/github/rancoud/Application?branch=master)
+![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/rancoud/application)
+[![Packagist Version](https://img.shields.io/packagist/v/rancoud/application)](https://packagist.org/packages/rancoud/application)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/rancoud/application)](https://packagist.org/packages/rancoud/application)
+[![Composer dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](https://github.com/rancoud/application/blob/master/composer.json)
+[![Test workflow](https://img.shields.io/github/workflow/status/rancoud/application/test?label=test&logo=github)](https://github.com/rancoud/application/actions?workflow=test)
+[![Codecov](https://img.shields.io/codecov/c/github/rancoud/application?logo=codecov)](https://codecov.io/gh/rancoud/application)
+[![composer.lock](https://poser.pugx.org/rancoud/application/composerlock)](https://packagist.org/packages/rancoud/application)
 
 Application skeleton with strict minimum Router and Environment.  
 
@@ -188,5 +194,6 @@ Application::removeInBag('db');
 [Session package](https://github.com/rancoud/Session)  
 
 ## How to Dev
-`./run_all_commands.sh` for php-cs-fixer and phpunit and coverage  
-`./run_php_unit_coverage.sh` for phpunit and coverage  
+`composer ci` for php-cs-fixer and phpunit and coverage  
+`composer lint` for php-cs-fixer  
+`composer test` for phpunit and coverage  

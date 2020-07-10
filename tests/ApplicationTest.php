@@ -20,42 +20,46 @@ use Rancoud\Session\Session;
  */
 class ApplicationTest extends TestCase
 {
-    protected $folders =  __DIR__ . DIRECTORY_SEPARATOR . 'folders';
-    protected $testsEnvFolder =  __DIR__ . DIRECTORY_SEPARATOR . 'folders' . DIRECTORY_SEPARATOR . 'tests_env';
+    protected string $folders = __DIR__ . DIRECTORY_SEPARATOR . 'folders';
+    protected string $testsEnvFolder = __DIR__ . DIRECTORY_SEPARATOR . 'folders' . DIRECTORY_SEPARATOR . 'tests_env';
 
-    protected function getFoldersWithAppEnv()
+    protected function getFoldersWithAppEnv(): array
     {
-        $_ds = DIRECTORY_SEPARATOR;
+        $ds = DIRECTORY_SEPARATOR;
         return [
             'ROOT' => $this->folders,
-            'APP' => $this->folders . $_ds . 'app' . $_ds,
-            'WWW' => $this->folders . $_ds . 'www' . $_ds,
-            'ROUTES' => $this->folders . $_ds . 'routes' . $_ds
+            'APP' => $this->folders . $ds . 'app' . $ds,
+            'WWW' => $this->folders . $ds . 'www' . $ds,
+            'ROUTES' => $this->folders . $ds . 'routes' . $ds
         ];
     }
 
-    protected function getFoldersWithTestEnv()
+    protected function getFoldersWithTestEnv(): array
     {
-        $_ds = DIRECTORY_SEPARATOR;
+        $ds = DIRECTORY_SEPARATOR;
         return [
             'ROOT' => $this->folders,
-            'APP' => $this->folders . $_ds . 'app' . $_ds,
-            'WWW' => $this->folders . $_ds . 'www' . $_ds,
-            'ROUTES' => $this->folders . $_ds . 'tests_routes' . $_ds
+            'APP' => $this->folders . $ds . 'app' . $ds,
+            'WWW' => $this->folders . $ds . 'www' . $ds,
+            'ROUTES' => $this->folders . $ds . 'tests_routes' . $ds
         ];
     }
 
-    protected function getEnvironment()
+    protected function getEnvironment(): Environment
     {
-        $_ds = DIRECTORY_SEPARATOR;
-        return new Environment([dirname(__FILE__), $this->folders . $_ds . 'tests_env' . $_ds], 'test_valid_routes.env');
+        $ds = DIRECTORY_SEPARATOR;
+        return new Environment([__DIR__, $this->folders . $ds . 'tests_env' . $ds], 'test_valid_routes.env');
     }
 
-    protected function getRequest(string $method, string $path)
+    protected function getRequest(string $method, string $path): \Psr\Http\Message\ServerRequestInterface
     {
         return (new Factory())->createServerRequest($method, $path);
     }
 
+    /**
+     * @return Configurator
+     * @throws \Rancoud\Database\DatabaseException
+     */
     protected function createConfigurator(): Configurator
     {
         $params = [
@@ -71,8 +75,10 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testConstructorCorrectMinimumFoldersArgument()
+    public function testConstructorCorrectMinimumFoldersArgument(): void
     {
         $folders = $this->getFoldersWithAppEnv();
         $app = new Application(['ROOT' => $folders['ROOT'], 'ROUTES' => $folders['ROUTES']]);
@@ -84,8 +90,10 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testConstructorCorrectExtraFoldersArgument()
+    public function testConstructorCorrectExtraFoldersArgument(): void
     {
         $folders = $this->getFoldersWithAppEnv();
         $app = new Application($folders);
@@ -97,46 +105,55 @@ class ApplicationTest extends TestCase
         static::assertSame($folders['WWW'], Application::getFolder('WWW'));
     }
 
+
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testConstructorEmptyFoldersArgument()
+    public function testConstructorEmptyFoldersArgument(): void
     {
-        static::expectException(ApplicationException::class);
-        static::expectExceptionMessage('Missing folder name. Use ROOT, ROUTES');
+        $this->expectException(ApplicationException::class);
+        $this->expectExceptionMessage('Missing folder name. Use ROOT, ROUTES');
 
         new Application([]);
     }
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testConstructorIncorrectFoldersValueArgumentNotString()
+    public function testConstructorIncorrectFoldersValueArgumentNotString(): void
     {
-        static::expectException(ApplicationException::class);
-        static::expectExceptionMessage('"ROOT" is not a valid folder.');
+        $this->expectException(ApplicationException::class);
+        $this->expectExceptionMessage('"ROOT" is not a valid folder.');
 
         new Application(['ROOT' => true]);
     }
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testConstructorIncorrectFoldersValueArgumentNotFolder()
+    public function testConstructorIncorrectFoldersValueArgumentNotFolder(): void
     {
-        static::expectException(ApplicationException::class);
-        static::expectExceptionMessage('"ROOT" is not a valid folder.');
+        $this->expectException(ApplicationException::class);
+        $this->expectExceptionMessage('"ROOT" is not a valid folder.');
 
         new Application(['ROOT' => '/invalid_folder/']);
     }
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testGetInvalidFolder()
+    public function testGetInvalidFolder(): void
     {
-        static::expectException(ApplicationException::class);
-        static::expectExceptionMessage('Invalid folder name');
+        $this->expectException(ApplicationException::class);
+        $this->expectExceptionMessage('Invalid folder name');
 
         $folders = $this->getFoldersWithAppEnv();
         new Application($folders);
@@ -145,29 +162,36 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testConstructorEnvironment()
+    public function testConstructorEnvironment(): void
     {
         $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_empty.env'));
 
         static::assertSame(Application::class, get_class($app));
     }
 
+
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testConstructorEnvironmentBadTimezone()
+    public function testConstructorEnvironmentBadTimezone(): void
     {
-        static::expectException(ApplicationException::class);
-        static::expectExceptionMessage('Invalid timezone: invalid. Check DateTimeZone::listIdentifiers()');
+        $this->expectException(ApplicationException::class);
+        $this->expectExceptionMessage('Invalid timezone: invalid. Check DateTimeZone::listIdentifiers()');
 
         new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_bad_timezone.env'));
     }
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testConstructorEnvironmentGoodTimezone()
+    public function testConstructorEnvironmentGoodTimezone(): void
     {
         $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_good_timezone.env'));
 
@@ -176,30 +200,37 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testConstructorEnvironmentInvalidRoutes()
+    public function testConstructorEnvironmentInvalidRoutes(): void
     {
-        static::expectException(ApplicationException::class);
-        static::expectExceptionMessage('Invalid routes');
+        $this->expectException(ApplicationException::class);
+        $this->expectExceptionMessage('Invalid routes');
 
         new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_invalid_routes.env'));
     }
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testConstructorEnvironmentInvalidRoute()
+    public function testConstructorEnvironmentInvalidRoute(): void
     {
-        static::expectException(ApplicationException::class);
-        static::expectExceptionMessage('Invalid route file');
+        $this->expectException(ApplicationException::class);
+        $this->expectExceptionMessage('Invalid route file');
 
         new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_invalid_route.env'));
     }
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws RouterException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testRunFound()
+    public function testRunFound(): void
     {
         $app = new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
         $request = $this->getRequest('GET', '/');
@@ -215,8 +246,11 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws RouterException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testRunFoundButNoHandle()
+    public function testRunFoundButNoHandle(): void
     {
         $app = new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
         $request = $this->getRequest('GET', '/no_handle');
@@ -227,8 +261,11 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws RouterException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testRunNotFound()
+    public function testRunNotFound(): void
     {
         $app = new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
         $request = $this->getRequest('GET', '/not_found');
@@ -239,11 +276,14 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws RouterException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testRunRouterException404Invalid()
+    public function testRunRouterException404Invalid(): void
     {
-        static::expectException(RouterException::class);
-        static::expectExceptionMessage('The default404 is invalid');
+        $this->expectException(RouterException::class);
+        $this->expectExceptionMessage('The default404 is invalid');
 
         $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_router_404.env'));
         $request = $this->getRequest('GET', '/no_handle');
@@ -252,11 +292,14 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws RouterException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testRunRouterException()
+    public function testRunRouterException(): void
     {
-        static::expectException(RouterException::class);
-        static::expectExceptionMessage('The default404 is invalid');
+        $this->expectException(RouterException::class);
+        $this->expectExceptionMessage('The default404 is invalid');
 
         $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_router_404.env'));
         $request = $this->getRequest('GET', '/no_handle');
@@ -265,8 +308,11 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws RouterException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testRunFoundChangeServerProtocol()
+    public function testRunFoundChangeServerProtocol(): void
     {
         $app = new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
         $request = $this->getRequest('GET', '/');
@@ -303,55 +349,61 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
      */
-    public function testGetEmptyInstance()
+    public function testGetEmptyInstance(): void
     {
-        static::expectException(ApplicationException::class);
-        static::expectExceptionMessage('Empty Instance');
+        $this->expectException(ApplicationException::class);
+        $this->expectExceptionMessage('Empty Instance');
 
         Application::getInstance();
     }
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
      */
-    public function testGetEmptyRouter()
+    public function testGetEmptyRouter(): void
     {
-        static::expectException(ApplicationException::class);
-        static::expectExceptionMessage('Empty Instance');
+        $this->expectException(ApplicationException::class);
+        $this->expectExceptionMessage('Empty Instance');
 
         Application::getRouter();
     }
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
      */
-    public function testGetEmptyConfig()
+    public function testGetEmptyConfig(): void
     {
-        static::expectException(ApplicationException::class);
-        static::expectExceptionMessage('Empty Instance');
+        $this->expectException(ApplicationException::class);
+        $this->expectExceptionMessage('Empty Instance');
 
         Application::getConfig();
     }
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
      */
-    public function testGetEmptyDatabase()
+    public function testGetEmptyDatabase(): void
     {
-        static::expectException(ApplicationException::class);
-        static::expectExceptionMessage('Empty Instance');
+        $this->expectException(ApplicationException::class);
+        $this->expectExceptionMessage('Empty Instance');
 
         Application::getDatabase();
     }
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Database\DatabaseException
      */
-    public function testSetEmptyDatabase()
+    public function testSetEmptyDatabase(): void
     {
-        static::expectException(ApplicationException::class);
-        static::expectExceptionMessage('Empty Instance');
+        $this->expectException(ApplicationException::class);
+        $this->expectExceptionMessage('Empty Instance');
 
         $configurator = $this->createConfigurator();
         $database = new Database($configurator);
@@ -360,41 +412,46 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
      */
-    public function testGetEmptyBag()
+    public function testGetEmptyBag(): void
     {
-        static::expectException(ApplicationException::class);
-        static::expectExceptionMessage('Empty Instance');
+        $this->expectException(ApplicationException::class);
+        $this->expectExceptionMessage('Empty Instance');
 
         Application::getInBag('a');
     }
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
      */
-    public function testSetEmptyBag()
+    public function testSetEmptyBag(): void
     {
-        static::expectException(ApplicationException::class);
-        static::expectExceptionMessage('Empty Instance');
+        $this->expectException(ApplicationException::class);
+        $this->expectExceptionMessage('Empty Instance');
 
         Application::setInBag('a', 'b');
     }
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
      */
-    public function testRemoveEmptyBag()
+    public function testRemoveEmptyBag(): void
     {
-        static::expectException(ApplicationException::class);
-        static::expectExceptionMessage('Empty Instance');
+        $this->expectException(ApplicationException::class);
+        $this->expectExceptionMessage('Empty Instance');
 
         Application::removeInBag('a');
     }
-    
+
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testGetInstance()
+    public function testGetInstance(): void
     {
         $app = new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
         static::assertSame($app, Application::getInstance());
@@ -402,8 +459,10 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testGetConfig()
+    public function testGetConfig(): void
     {
         new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
 
@@ -415,8 +474,10 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testGetRouter()
+    public function testGetRouter(): void
     {
         new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
 
@@ -424,13 +485,16 @@ class ApplicationTest extends TestCase
 
         static::assertSame('/no_handle', $router->generateUrl('test_no_handle'));
         static::assertSame('/', $router->generateUrl('test_home'));
-        static::assertSame(2, count($router->getRoutes()));
+        static::assertCount(2, $router->getRoutes());
     }
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Database\DatabaseException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testGetSetDatabase()
+    public function testGetSetDatabase(): void
     {
         new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
 
@@ -448,8 +512,10 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testGetSetRemoveInBag()
+    public function testGetSetRemoveInBag(): void
     {
         new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
 
@@ -469,42 +535,47 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws RouterException
+     * @throws \Rancoud\Database\DatabaseException
+     * @throws \Rancoud\Environment\EnvironmentException
+     * @throws \Exception
      */
-    public function testGetDebug()
+    public function testGetDebug(): void
     {
-        $_ds = DIRECTORY_SEPARATOR;
-        $env = new Environment([$this->folders . $_ds . 'tests_env' . $_ds], 'test_debug.env');
+        $ds = DIRECTORY_SEPARATOR;
+        $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug.env');
         $app = new Application($this->getFoldersWithTestEnv(), $env);
 
         $infos = $app->getDebugInfos();
 
-        static::assertTrue(array_key_exists('memory', $infos));
-        static::assertTrue(array_key_exists('usage', $infos['memory']));
-        static::assertTrue(array_key_exists('limit', $infos['memory']));
-        static::assertTrue(array_key_exists('percentage', $infos['memory']));
-        static::assertTrue(array_key_exists('summary', $infos['memory']));
+        static::assertArrayHasKey('memory', $infos);
+        static::assertArrayHasKey('usage', $infos['memory']);
+        static::assertArrayHasKey('limit', $infos['memory']);
+        static::assertArrayHasKey('percentage', $infos['memory']);
+        static::assertArrayHasKey('summary', $infos['memory']);
 
-        static::assertTrue(is_int($infos['memory']['usage']));
-        static::assertTrue(is_string($infos['memory']['limit']));
-        static::assertTrue(is_float($infos['memory']['percentage']));
-        static::assertTrue(is_string($infos['memory']['summary']));
+        static::assertIsInt($infos['memory']['usage']);
+        static::assertIsString($infos['memory']['limit']);
+        static::assertIsFloat($infos['memory']['percentage']);
+        static::assertIsString($infos['memory']['summary']);
 
-        static::assertTrue(array_key_exists('speed', $infos));
-        static::assertTrue(is_float($infos['speed']));
+        static::assertArrayHasKey('speed', $infos);
+        static::assertIsFloat($infos['speed']);
 
-        static::assertTrue(array_key_exists('included_files', $infos));
-        static::assertTrue(is_array($infos['included_files']));
+        static::assertArrayHasKey('included_files', $infos);
+        static::assertIsArray($infos['included_files']);
         
-        static::assertTrue(array_key_exists('request', $infos));
+        static::assertArrayHasKey('request', $infos);
         static::assertNull($infos['request']);
         
-        static::assertTrue(array_key_exists('response', $infos));
+        static::assertArrayHasKey('response', $infos);
         static::assertNull($infos['response']);
         
-        static::assertTrue(array_key_exists('database', $infos));
+        static::assertArrayHasKey('database', $infos);
         static::assertNull($infos['database']);
         
-        static::assertTrue(array_key_exists('session', $infos));
+        static::assertArrayHasKey('session', $infos);
         static::assertNull($infos['session']);
 
         $request = $this->getRequest('GET', '/');
@@ -512,35 +583,35 @@ class ApplicationTest extends TestCase
         $app->run($request);
 
         $infos = $app->getDebugInfos();
-        static::assertTrue(array_key_exists('memory', $infos));
-        static::assertTrue(array_key_exists('usage', $infos['memory']));
-        static::assertTrue(array_key_exists('limit', $infos['memory']));
-        static::assertTrue(array_key_exists('percentage', $infos['memory']));
-        static::assertTrue(array_key_exists('summary', $infos['memory']));
+        static::assertArrayHasKey('memory', $infos);
+        static::assertArrayHasKey('usage', $infos['memory']);
+        static::assertArrayHasKey('limit', $infos['memory']);
+        static::assertArrayHasKey('percentage', $infos['memory']);
+        static::assertArrayHasKey('summary', $infos['memory']);
 
-        static::assertTrue(is_int($infos['memory']['usage']));
-        static::assertTrue(is_string($infos['memory']['limit']));
-        static::assertTrue(is_float($infos['memory']['percentage']));
-        static::assertTrue(is_string($infos['memory']['summary']));
+        static::assertIsInt($infos['memory']['usage']);
+        static::assertIsString($infos['memory']['limit']);
+        static::assertIsFloat($infos['memory']['percentage']);
+        static::assertIsString($infos['memory']['summary']);
 
-        static::assertTrue(array_key_exists('speed', $infos));
-        static::assertTrue(is_float($infos['speed']));
+        static::assertArrayHasKey('speed', $infos);
+        static::assertIsFloat($infos['speed']);
 
-        static::assertTrue(array_key_exists('included_files', $infos));
-        static::assertTrue(is_array($infos['included_files']));
+        static::assertArrayHasKey('included_files', $infos);
+        static::assertIsArray($infos['included_files']);
 
-        static::assertTrue(array_key_exists('request', $infos));
+        static::assertArrayHasKey('request', $infos);
         static::assertNotNull($infos['request']);
-        static::assertSame('Rancoud\Http\Message\ServerRequest', get_class($infos['request']));
+        static::assertInstanceOf(\Rancoud\Http\Message\ServerRequest::class, $infos['request']);
 
-        static::assertTrue(array_key_exists('response', $infos));
+        static::assertArrayHasKey('response', $infos);
         static::assertNotNull($infos['response']);
-        static::assertSame('Rancoud\Http\Message\Response', get_class($infos['response']));
+        static::assertInstanceOf(\Rancoud\Http\Message\Response::class, $infos['response']);
 
-        static::assertTrue(array_key_exists('database', $infos));
+        static::assertArrayHasKey('database', $infos);
         static::assertNull($infos['database']);
 
-        static::assertTrue(array_key_exists('session', $infos));
+        static::assertArrayHasKey('session', $infos);
         static::assertNull($infos['session']);
 
         $config = new Configurator([
@@ -556,77 +627,82 @@ class ApplicationTest extends TestCase
         Session::start();
 
         $infos = $app->getDebugInfos();
-        static::assertTrue(array_key_exists('memory', $infos));
-        static::assertTrue(array_key_exists('usage', $infos['memory']));
-        static::assertTrue(array_key_exists('limit', $infos['memory']));
-        static::assertTrue(array_key_exists('percentage', $infos['memory']));
-        static::assertTrue(array_key_exists('summary', $infos['memory']));
+        static::assertArrayHasKey('memory', $infos);
+        static::assertArrayHasKey('usage', $infos['memory']);
+        static::assertArrayHasKey('limit', $infos['memory']);
+        static::assertArrayHasKey('percentage', $infos['memory']);
+        static::assertArrayHasKey('summary', $infos['memory']);
 
-        static::assertTrue(is_int($infos['memory']['usage']));
-        static::assertTrue(is_string($infos['memory']['limit']));
-        static::assertTrue(is_float($infos['memory']['percentage']));
-        static::assertTrue(is_string($infos['memory']['summary']));
+        static::assertIsInt($infos['memory']['usage']);
+        static::assertIsString($infos['memory']['limit']);
+        static::assertIsFloat($infos['memory']['percentage']);
+        static::assertIsString($infos['memory']['summary']);
 
-        static::assertTrue(array_key_exists('speed', $infos));
-        static::assertTrue(is_float($infos['speed']));
+        static::assertArrayHasKey('speed', $infos);
+        static::assertIsFloat($infos['speed']);
 
-        static::assertTrue(array_key_exists('included_files', $infos));
-        static::assertTrue(is_array($infos['included_files']));
+        static::assertArrayHasKey('included_files', $infos);
+        static::assertIsArray($infos['included_files']);
 
-        static::assertTrue(array_key_exists('request', $infos));
+        static::assertArrayHasKey('request', $infos);
         static::assertNotNull($infos['request']);
-        static::assertSame('Rancoud\Http\Message\ServerRequest', get_class($infos['request']));
+        static::assertInstanceOf(\Rancoud\Http\Message\ServerRequest::class, $infos['request']);
 
-        static::assertTrue(array_key_exists('response', $infos));
+        static::assertArrayHasKey('response', $infos);
         static::assertNotNull($infos['response']);
-        static::assertSame('Rancoud\Http\Message\Response', get_class($infos['response']));
+        static::assertInstanceOf(\Rancoud\Http\Message\Response::class, $infos['response']);
 
-        static::assertTrue(array_key_exists('database', $infos));
+        static::assertArrayHasKey('database', $infos);
         static::assertNotNull($infos['database']);
-        static::assertTrue(is_array($infos['database']));
+        static::assertIsArray($infos['database']);
 
-        static::assertTrue(array_key_exists('session', $infos));
+        static::assertArrayHasKey('session', $infos);
         static::assertNotNull($infos['session']);
-        static::assertTrue(is_array($infos['session']));
+        static::assertIsArray($infos['session']);
     }
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws RouterException
+     * @throws \Rancoud\Database\DatabaseException
+     * @throws \Rancoud\Environment\EnvironmentException
+     * @throws \Exception
      */
-    public function testGetDebugExcludeDatabase()
+    public function testGetDebugExcludeDatabase(): void
     {
-        $_ds = DIRECTORY_SEPARATOR;
-        $env = new Environment([$this->folders . $_ds . 'tests_env' . $_ds], 'test_debug_exclude_database.env');
+        $ds = DIRECTORY_SEPARATOR;
+        $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_database.env');
         $app = new Application($this->getFoldersWithTestEnv(), $env);
 
         $infos = $app->getDebugInfos();
-        static::assertTrue(array_key_exists('memory', $infos));
-        static::assertTrue(array_key_exists('usage', $infos['memory']));
-        static::assertTrue(array_key_exists('limit', $infos['memory']));
-        static::assertTrue(array_key_exists('percentage', $infos['memory']));
-        static::assertTrue(array_key_exists('summary', $infos['memory']));
+        static::assertArrayHasKey('memory', $infos);
+        static::assertArrayHasKey('usage', $infos['memory']);
+        static::assertArrayHasKey('limit', $infos['memory']);
+        static::assertArrayHasKey('percentage', $infos['memory']);
+        static::assertArrayHasKey('summary', $infos['memory']);
 
-        static::assertTrue(is_int($infos['memory']['usage']));
-        static::assertTrue(is_string($infos['memory']['limit']));
-        static::assertTrue(is_float($infos['memory']['percentage']));
-        static::assertTrue(is_string($infos['memory']['summary']));
+        static::assertIsInt($infos['memory']['usage']);
+        static::assertIsString($infos['memory']['limit']);
+        static::assertIsFloat($infos['memory']['percentage']);
+        static::assertIsString($infos['memory']['summary']);
 
-        static::assertTrue(array_key_exists('speed', $infos));
-        static::assertTrue(is_float($infos['speed']));
+        static::assertArrayHasKey('speed', $infos);
+        static::assertIsFloat($infos['speed']);
 
-        static::assertTrue(array_key_exists('included_files', $infos));
-        static::assertTrue(is_array($infos['included_files']));
+        static::assertArrayHasKey('included_files', $infos);
+        static::assertIsArray($infos['included_files']);
 
-        static::assertTrue(array_key_exists('request', $infos));
+        static::assertArrayHasKey('request', $infos);
         static::assertNull($infos['request']);
 
-        static::assertTrue(array_key_exists('response', $infos));
+        static::assertArrayHasKey('response', $infos);
         static::assertNull($infos['response']);
 
-        static::assertTrue(array_key_exists('database', $infos));
+        static::assertArrayHasKey('database', $infos);
         static::assertNull($infos['database']);
 
-        static::assertTrue(array_key_exists('session', $infos));
+        static::assertArrayHasKey('session', $infos);
         static::assertNull($infos['session']);
 
         $request = $this->getRequest('GET', '/');
@@ -634,35 +710,35 @@ class ApplicationTest extends TestCase
         $app->run($request);
 
         $infos = $app->getDebugInfos();
-        static::assertTrue(array_key_exists('memory', $infos));
-        static::assertTrue(array_key_exists('usage', $infos['memory']));
-        static::assertTrue(array_key_exists('limit', $infos['memory']));
-        static::assertTrue(array_key_exists('percentage', $infos['memory']));
-        static::assertTrue(array_key_exists('summary', $infos['memory']));
+        static::assertArrayHasKey('memory', $infos);
+        static::assertArrayHasKey('usage', $infos['memory']);
+        static::assertArrayHasKey('limit', $infos['memory']);
+        static::assertArrayHasKey('percentage', $infos['memory']);
+        static::assertArrayHasKey('summary', $infos['memory']);
 
-        static::assertTrue(is_int($infos['memory']['usage']));
-        static::assertTrue(is_string($infos['memory']['limit']));
-        static::assertTrue(is_float($infos['memory']['percentage']));
-        static::assertTrue(is_string($infos['memory']['summary']));
+        static::assertIsInt($infos['memory']['usage']);
+        static::assertIsString($infos['memory']['limit']);
+        static::assertIsFloat($infos['memory']['percentage']);
+        static::assertIsString($infos['memory']['summary']);
 
-        static::assertTrue(array_key_exists('speed', $infos));
-        static::assertTrue(is_float($infos['speed']));
+        static::assertArrayHasKey('speed', $infos);
+        static::assertIsFloat($infos['speed']);
 
-        static::assertTrue(array_key_exists('included_files', $infos));
-        static::assertTrue(is_array($infos['included_files']));
+        static::assertArrayHasKey('included_files', $infos);
+        static::assertIsArray($infos['included_files']);
 
-        static::assertTrue(array_key_exists('request', $infos));
+        static::assertArrayHasKey('request', $infos);
         static::assertNotNull($infos['request']);
-        static::assertSame('Rancoud\Http\Message\ServerRequest', get_class($infos['request']));
+        static::assertInstanceOf(\Rancoud\Http\Message\ServerRequest::class, $infos['request']);
 
-        static::assertTrue(array_key_exists('response', $infos));
+        static::assertArrayHasKey('response', $infos);
         static::assertNotNull($infos['response']);
-        static::assertSame('Rancoud\Http\Message\Response', get_class($infos['response']));
+        static::assertInstanceOf(\Rancoud\Http\Message\Response::class, $infos['response']);
 
-        static::assertTrue(array_key_exists('database', $infos));
+        static::assertArrayHasKey('database', $infos);
         static::assertNull($infos['database']);
 
-        static::assertTrue(array_key_exists('session', $infos));
+        static::assertArrayHasKey('session', $infos);
         static::assertNull($infos['session']);
 
         $config = new Configurator([
@@ -678,148 +754,155 @@ class ApplicationTest extends TestCase
         Session::start();
 
         $infos = $app->getDebugInfos();
-        static::assertTrue(array_key_exists('memory', $infos));
-        static::assertTrue(array_key_exists('usage', $infos['memory']));
-        static::assertTrue(array_key_exists('limit', $infos['memory']));
-        static::assertTrue(array_key_exists('percentage', $infos['memory']));
-        static::assertTrue(array_key_exists('summary', $infos['memory']));
+        static::assertArrayHasKey('memory', $infos);
+        static::assertArrayHasKey('usage', $infos['memory']);
+        static::assertArrayHasKey('limit', $infos['memory']);
+        static::assertArrayHasKey('percentage', $infos['memory']);
+        static::assertArrayHasKey('summary', $infos['memory']);
 
-        static::assertTrue(is_int($infos['memory']['usage']));
-        static::assertTrue(is_string($infos['memory']['limit']));
-        static::assertTrue(is_float($infos['memory']['percentage']));
-        static::assertTrue(is_string($infos['memory']['summary']));
+        static::assertIsInt($infos['memory']['usage']);
+        static::assertIsString($infos['memory']['limit']);
+        static::assertIsFloat($infos['memory']['percentage']);
+        static::assertIsString($infos['memory']['summary']);
 
-        static::assertTrue(array_key_exists('speed', $infos));
-        static::assertTrue(is_float($infos['speed']));
+        static::assertArrayHasKey('speed', $infos);
+        static::assertIsFloat($infos['speed']);
 
-        static::assertTrue(array_key_exists('included_files', $infos));
-        static::assertTrue(is_array($infos['included_files']));
+        static::assertArrayHasKey('included_files', $infos);
+        static::assertIsArray($infos['included_files']);
 
-        static::assertTrue(array_key_exists('request', $infos));
+        static::assertArrayHasKey('request', $infos);
         static::assertNotNull($infos['request']);
-        static::assertSame('Rancoud\Http\Message\ServerRequest', get_class($infos['request']));
+        static::assertInstanceOf(\Rancoud\Http\Message\ServerRequest::class, $infos['request']);
 
-        static::assertTrue(array_key_exists('response', $infos));
+        static::assertArrayHasKey('response', $infos);
         static::assertNotNull($infos['response']);
-        static::assertSame('Rancoud\Http\Message\Response', get_class($infos['response']));
+        static::assertInstanceOf(\Rancoud\Http\Message\Response::class, $infos['response']);
 
-        static::assertTrue(array_key_exists('database', $infos));
+        static::assertArrayHasKey('database', $infos);
         static::assertNull($infos['database']);
 
-        static::assertTrue(array_key_exists('session', $infos));
+        static::assertArrayHasKey('session', $infos);
         static::assertNotNull($infos['session']);
-        static::assertTrue(is_array($infos['session']));
+        static::assertIsArray($infos['session']);
     }
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testGetDebugExcludeIncludeFiles()
+    public function testGetDebugExcludeIncludeFiles(): void
     {
-        $_ds = DIRECTORY_SEPARATOR;
-        $env = new Environment([$this->folders . $_ds . 'tests_env' . $_ds], 'test_debug_exclude_include_files.env');
+        $ds = DIRECTORY_SEPARATOR;
+        $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_include_files.env');
         $app = new Application($this->getFoldersWithTestEnv(), $env);
 
         $infos = $app->getDebugInfos();
-        static::assertTrue(array_key_exists('memory', $infos));
-        static::assertTrue(array_key_exists('usage', $infos['memory']));
-        static::assertTrue(array_key_exists('limit', $infos['memory']));
-        static::assertTrue(array_key_exists('percentage', $infos['memory']));
-        static::assertTrue(array_key_exists('summary', $infos['memory']));
+        static::assertArrayHasKey('memory', $infos);
+        static::assertArrayHasKey('usage', $infos['memory']);
+        static::assertArrayHasKey('limit', $infos['memory']);
+        static::assertArrayHasKey('percentage', $infos['memory']);
+        static::assertArrayHasKey('summary', $infos['memory']);
 
-        static::assertTrue(is_int($infos['memory']['usage']));
-        static::assertTrue(is_string($infos['memory']['limit']));
-        static::assertTrue(is_float($infos['memory']['percentage']));
-        static::assertTrue(is_string($infos['memory']['summary']));
+        static::assertIsInt($infos['memory']['usage']);
+        static::assertIsString($infos['memory']['limit']);
+        static::assertIsFloat($infos['memory']['percentage']);
+        static::assertIsString($infos['memory']['summary']);
 
-        static::assertTrue(array_key_exists('speed', $infos));
-        static::assertTrue(is_float($infos['speed']));
+        static::assertArrayHasKey('speed', $infos);
+        static::assertIsFloat($infos['speed']);
 
-        static::assertTrue(array_key_exists('included_files', $infos));
+        static::assertArrayHasKey('included_files', $infos);
         static::assertNull($infos['included_files']);
 
-        static::assertTrue(array_key_exists('request', $infos));
+        static::assertArrayHasKey('request', $infos);
         static::assertNull($infos['request']);
 
-        static::assertTrue(array_key_exists('response', $infos));
+        static::assertArrayHasKey('response', $infos);
         static::assertNull($infos['response']);
 
-        static::assertTrue(array_key_exists('database', $infos));
+        static::assertArrayHasKey('database', $infos);
         static::assertNull($infos['database']);
 
-        static::assertTrue(array_key_exists('session', $infos));
+        static::assertArrayHasKey('session', $infos);
         static::assertNull($infos['session']);
     }
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testGetDebugExcludeMemory()
+    public function testGetDebugExcludeMemory(): void
     {
-        $_ds = DIRECTORY_SEPARATOR;
-        $env = new Environment([$this->folders . $_ds . 'tests_env' . $_ds], 'test_debug_exclude_memory.env');
+        $ds = DIRECTORY_SEPARATOR;
+        $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_memory.env');
         $app = new Application($this->getFoldersWithTestEnv(), $env);
 
         $infos = $app->getDebugInfos();
-        static::assertTrue(array_key_exists('memory', $infos));
+        static::assertArrayHasKey('memory', $infos);
         static::assertNull($infos['memory']);
 
-        static::assertTrue(array_key_exists('speed', $infos));
-        static::assertTrue(is_float($infos['speed']));
+        static::assertArrayHasKey('speed', $infos);
+        static::assertIsFloat($infos['speed']);
 
-        static::assertTrue(array_key_exists('included_files', $infos));
-        static::assertTrue(is_array($infos['included_files']));
+        static::assertArrayHasKey('included_files', $infos);
+        static::assertIsArray($infos['included_files']);
 
-        static::assertTrue(array_key_exists('request', $infos));
+        static::assertArrayHasKey('request', $infos);
         static::assertNull($infos['request']);
 
-        static::assertTrue(array_key_exists('response', $infos));
+        static::assertArrayHasKey('response', $infos);
         static::assertNull($infos['response']);
 
-        static::assertTrue(array_key_exists('database', $infos));
+        static::assertArrayHasKey('database', $infos);
         static::assertNull($infos['database']);
 
-        static::assertTrue(array_key_exists('session', $infos));
+        static::assertArrayHasKey('session', $infos);
         static::assertNull($infos['session']);
     }
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws RouterException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testGetDebugExcludeRequest()
+    public function testGetDebugExcludeRequest(): void
     {
-        $_ds = DIRECTORY_SEPARATOR;
-        $env = new Environment([$this->folders . $_ds . 'tests_env' . $_ds], 'test_debug_exclude_request.env');
+        $ds = DIRECTORY_SEPARATOR;
+        $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_request.env');
         $app = new Application($this->getFoldersWithTestEnv(), $env);
 
         $infos = $app->getDebugInfos();
-        static::assertTrue(array_key_exists('memory', $infos));
-        static::assertTrue(array_key_exists('usage', $infos['memory']));
-        static::assertTrue(array_key_exists('limit', $infos['memory']));
-        static::assertTrue(array_key_exists('percentage', $infos['memory']));
-        static::assertTrue(array_key_exists('summary', $infos['memory']));
+        static::assertArrayHasKey('memory', $infos);
+        static::assertArrayHasKey('usage', $infos['memory']);
+        static::assertArrayHasKey('limit', $infos['memory']);
+        static::assertArrayHasKey('percentage', $infos['memory']);
+        static::assertArrayHasKey('summary', $infos['memory']);
 
-        static::assertTrue(is_int($infos['memory']['usage']));
-        static::assertTrue(is_string($infos['memory']['limit']));
-        static::assertTrue(is_float($infos['memory']['percentage']));
-        static::assertTrue(is_string($infos['memory']['summary']));
+        static::assertIsInt($infos['memory']['usage']);
+        static::assertIsString($infos['memory']['limit']);
+        static::assertIsFloat($infos['memory']['percentage']);
+        static::assertIsString($infos['memory']['summary']);
 
-        static::assertTrue(array_key_exists('speed', $infos));
-        static::assertTrue(is_float($infos['speed']));
+        static::assertArrayHasKey('speed', $infos);
+        static::assertIsFloat($infos['speed']);
 
-        static::assertTrue(array_key_exists('included_files', $infos));
-        static::assertTrue(is_array($infos['included_files']));
+        static::assertArrayHasKey('included_files', $infos);
+        static::assertIsArray($infos['included_files']);
 
-        static::assertTrue(array_key_exists('request', $infos));
+        static::assertArrayHasKey('request', $infos);
         static::assertNull($infos['request']);
 
-        static::assertTrue(array_key_exists('response', $infos));
+        static::assertArrayHasKey('response', $infos);
         static::assertNull($infos['response']);
 
-        static::assertTrue(array_key_exists('database', $infos));
+        static::assertArrayHasKey('database', $infos);
         static::assertNull($infos['database']);
 
-        static::assertTrue(array_key_exists('session', $infos));
+        static::assertArrayHasKey('session', $infos);
         static::assertNull($infos['session']);
 
         $request = $this->getRequest('GET', '/');
@@ -827,74 +910,77 @@ class ApplicationTest extends TestCase
         $app->run($request);
 
         $infos = $app->getDebugInfos();
-        static::assertTrue(array_key_exists('memory', $infos));
-        static::assertTrue(array_key_exists('usage', $infos['memory']));
-        static::assertTrue(array_key_exists('limit', $infos['memory']));
-        static::assertTrue(array_key_exists('percentage', $infos['memory']));
-        static::assertTrue(array_key_exists('summary', $infos['memory']));
+        static::assertArrayHasKey('memory', $infos);
+        static::assertArrayHasKey('usage', $infos['memory']);
+        static::assertArrayHasKey('limit', $infos['memory']);
+        static::assertArrayHasKey('percentage', $infos['memory']);
+        static::assertArrayHasKey('summary', $infos['memory']);
 
-        static::assertTrue(is_int($infos['memory']['usage']));
-        static::assertTrue(is_string($infos['memory']['limit']));
-        static::assertTrue(is_float($infos['memory']['percentage']));
-        static::assertTrue(is_string($infos['memory']['summary']));
+        static::assertIsInt($infos['memory']['usage']);
+        static::assertIsString($infos['memory']['limit']);
+        static::assertIsFloat($infos['memory']['percentage']);
+        static::assertIsString($infos['memory']['summary']);
 
-        static::assertTrue(array_key_exists('speed', $infos));
-        static::assertTrue(is_float($infos['speed']));
+        static::assertArrayHasKey('speed', $infos);
+        static::assertIsFloat($infos['speed']);
 
-        static::assertTrue(array_key_exists('included_files', $infos));
-        static::assertTrue(is_array($infos['included_files']));
+        static::assertArrayHasKey('included_files', $infos);
+        static::assertIsArray($infos['included_files']);
 
-        static::assertTrue(array_key_exists('request', $infos));
+        static::assertArrayHasKey('request', $infos);
         static::assertNull($infos['request']);
 
-        static::assertTrue(array_key_exists('response', $infos));
+        static::assertArrayHasKey('response', $infos);
         static::assertNotNull($infos['response']);
-        static::assertSame('Rancoud\Http\Message\Response', get_class($infos['response']));
+        static::assertInstanceOf(\Rancoud\Http\Message\Response::class, $infos['response']);
 
-        static::assertTrue(array_key_exists('database', $infos));
+        static::assertArrayHasKey('database', $infos);
         static::assertNull($infos['database']);
 
-        static::assertTrue(array_key_exists('session', $infos));
+        static::assertArrayHasKey('session', $infos);
         static::assertNull($infos['session']);
     }
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws RouterException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testGetDebugExcludeResponse()
+    public function testGetDebugExcludeResponse(): void
     {
-        $_ds = DIRECTORY_SEPARATOR;
-        $env = new Environment([$this->folders . $_ds . 'tests_env' . $_ds], 'test_debug_exclude_response.env');
+        $ds = DIRECTORY_SEPARATOR;
+        $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_response.env');
         $app = new Application($this->getFoldersWithTestEnv(), $env);
 
         $infos = $app->getDebugInfos();
-        static::assertTrue(array_key_exists('memory', $infos));
-        static::assertTrue(array_key_exists('usage', $infos['memory']));
-        static::assertTrue(array_key_exists('limit', $infos['memory']));
-        static::assertTrue(array_key_exists('percentage', $infos['memory']));
-        static::assertTrue(array_key_exists('summary', $infos['memory']));
+        static::assertArrayHasKey('memory', $infos);
+        static::assertArrayHasKey('usage', $infos['memory']);
+        static::assertArrayHasKey('limit', $infos['memory']);
+        static::assertArrayHasKey('percentage', $infos['memory']);
+        static::assertArrayHasKey('summary', $infos['memory']);
 
-        static::assertTrue(is_int($infos['memory']['usage']));
-        static::assertTrue(is_string($infos['memory']['limit']));
-        static::assertTrue(is_float($infos['memory']['percentage']));
-        static::assertTrue(is_string($infos['memory']['summary']));
+        static::assertIsInt($infos['memory']['usage']);
+        static::assertIsString($infos['memory']['limit']);
+        static::assertIsFloat($infos['memory']['percentage']);
+        static::assertIsString($infos['memory']['summary']);
 
-        static::assertTrue(array_key_exists('speed', $infos));
-        static::assertTrue(is_float($infos['speed']));
+        static::assertArrayHasKey('speed', $infos);
+        static::assertIsFloat($infos['speed']);
 
-        static::assertTrue(array_key_exists('included_files', $infos));
-        static::assertTrue(is_array($infos['included_files']));
+        static::assertArrayHasKey('included_files', $infos);
+        static::assertIsArray($infos['included_files']);
 
-        static::assertTrue(array_key_exists('request', $infos));
+        static::assertArrayHasKey('request', $infos);
         static::assertNull($infos['request']);
 
-        static::assertTrue(array_key_exists('response', $infos));
+        static::assertArrayHasKey('response', $infos);
         static::assertNull($infos['response']);
 
-        static::assertTrue(array_key_exists('database', $infos));
+        static::assertArrayHasKey('database', $infos);
         static::assertNull($infos['database']);
 
-        static::assertTrue(array_key_exists('session', $infos));
+        static::assertArrayHasKey('session', $infos);
         static::assertNull($infos['session']);
 
 
@@ -903,74 +989,79 @@ class ApplicationTest extends TestCase
         $app->run($request);
 
         $infos = $app->getDebugInfos();
-        static::assertTrue(array_key_exists('memory', $infos));
-        static::assertTrue(array_key_exists('usage', $infos['memory']));
-        static::assertTrue(array_key_exists('limit', $infos['memory']));
-        static::assertTrue(array_key_exists('percentage', $infos['memory']));
-        static::assertTrue(array_key_exists('summary', $infos['memory']));
+        static::assertArrayHasKey('memory', $infos);
+        static::assertArrayHasKey('usage', $infos['memory']);
+        static::assertArrayHasKey('limit', $infos['memory']);
+        static::assertArrayHasKey('percentage', $infos['memory']);
+        static::assertArrayHasKey('summary', $infos['memory']);
 
-        static::assertTrue(is_int($infos['memory']['usage']));
-        static::assertTrue(is_string($infos['memory']['limit']));
-        static::assertTrue(is_float($infos['memory']['percentage']));
-        static::assertTrue(is_string($infos['memory']['summary']));
+        static::assertIsInt($infos['memory']['usage']);
+        static::assertIsString($infos['memory']['limit']);
+        static::assertIsFloat($infos['memory']['percentage']);
+        static::assertIsString($infos['memory']['summary']);
 
-        static::assertTrue(array_key_exists('speed', $infos));
-        static::assertTrue(is_float($infos['speed']));
+        static::assertArrayHasKey('speed', $infos);
+        static::assertIsFloat($infos['speed']);
 
-        static::assertTrue(array_key_exists('included_files', $infos));
-        static::assertTrue(is_array($infos['included_files']));
+        static::assertArrayHasKey('included_files', $infos);
+        static::assertIsArray($infos['included_files']);
 
-        static::assertTrue(array_key_exists('request', $infos));
+        static::assertArrayHasKey('request', $infos);
         static::assertNotNull($infos['request']);
-        static::assertSame('Rancoud\Http\Message\ServerRequest', get_class($infos['request']));
+        static::assertInstanceOf(\Rancoud\Http\Message\ServerRequest::class, $infos['request']);
 
-        static::assertTrue(array_key_exists('response', $infos));
+        static::assertArrayHasKey('response', $infos);
         static::assertNull($infos['response']);
 
-        static::assertTrue(array_key_exists('database', $infos));
+        static::assertArrayHasKey('database', $infos);
         static::assertNull($infos['database']);
 
-        static::assertTrue(array_key_exists('session', $infos));
+        static::assertArrayHasKey('session', $infos);
         static::assertNull($infos['session']);
     }
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws RouterException
+     * @throws \Rancoud\Database\DatabaseException
+     * @throws \Rancoud\Environment\EnvironmentException
+     * @throws \Exception
      */
-    public function testGetDebugExcludeSession()
+    public function testGetDebugExcludeSession(): void
     {
-        $_ds = DIRECTORY_SEPARATOR;
-        $env = new Environment([$this->folders . $_ds . 'tests_env' . $_ds], 'test_debug_exclude_session.env');
+        $ds = DIRECTORY_SEPARATOR;
+        $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_session.env');
         $app = new Application($this->getFoldersWithTestEnv(), $env);
 
         $infos = $app->getDebugInfos();
-        static::assertTrue(array_key_exists('memory', $infos));
-        static::assertTrue(array_key_exists('usage', $infos['memory']));
-        static::assertTrue(array_key_exists('limit', $infos['memory']));
-        static::assertTrue(array_key_exists('percentage', $infos['memory']));
-        static::assertTrue(array_key_exists('summary', $infos['memory']));
+        static::assertArrayHasKey('memory', $infos);
+        static::assertArrayHasKey('usage', $infos['memory']);
+        static::assertArrayHasKey('limit', $infos['memory']);
+        static::assertArrayHasKey('percentage', $infos['memory']);
+        static::assertArrayHasKey('summary', $infos['memory']);
 
-        static::assertTrue(is_int($infos['memory']['usage']));
-        static::assertTrue(is_string($infos['memory']['limit']));
-        static::assertTrue(is_float($infos['memory']['percentage']));
-        static::assertTrue(is_string($infos['memory']['summary']));
+        static::assertIsInt($infos['memory']['usage']);
+        static::assertIsString($infos['memory']['limit']);
+        static::assertIsFloat($infos['memory']['percentage']);
+        static::assertIsString($infos['memory']['summary']);
 
-        static::assertTrue(array_key_exists('speed', $infos));
-        static::assertTrue(is_float($infos['speed']));
+        static::assertArrayHasKey('speed', $infos);
+        static::assertIsFloat($infos['speed']);
 
-        static::assertTrue(array_key_exists('included_files', $infos));
-        static::assertTrue(is_array($infos['included_files']));
+        static::assertArrayHasKey('included_files', $infos);
+        static::assertIsArray($infos['included_files']);
 
-        static::assertTrue(array_key_exists('request', $infos));
+        static::assertArrayHasKey('request', $infos);
         static::assertNull($infos['request']);
 
-        static::assertTrue(array_key_exists('response', $infos));
+        static::assertArrayHasKey('response', $infos);
         static::assertNull($infos['response']);
 
-        static::assertTrue(array_key_exists('database', $infos));
+        static::assertArrayHasKey('database', $infos);
         static::assertNull($infos['database']);
 
-        static::assertTrue(array_key_exists('session', $infos));
+        static::assertArrayHasKey('session', $infos);
         static::assertNull($infos['session']);
 
 
@@ -979,35 +1070,35 @@ class ApplicationTest extends TestCase
         $app->run($request);
 
         $infos = $app->getDebugInfos();
-        static::assertTrue(array_key_exists('memory', $infos));
-        static::assertTrue(array_key_exists('usage', $infos['memory']));
-        static::assertTrue(array_key_exists('limit', $infos['memory']));
-        static::assertTrue(array_key_exists('percentage', $infos['memory']));
-        static::assertTrue(array_key_exists('summary', $infos['memory']));
+        static::assertArrayHasKey('memory', $infos);
+        static::assertArrayHasKey('usage', $infos['memory']);
+        static::assertArrayHasKey('limit', $infos['memory']);
+        static::assertArrayHasKey('percentage', $infos['memory']);
+        static::assertArrayHasKey('summary', $infos['memory']);
 
-        static::assertTrue(is_int($infos['memory']['usage']));
-        static::assertTrue(is_string($infos['memory']['limit']));
-        static::assertTrue(is_float($infos['memory']['percentage']));
-        static::assertTrue(is_string($infos['memory']['summary']));
+        static::assertIsInt($infos['memory']['usage']);
+        static::assertIsString($infos['memory']['limit']);
+        static::assertIsFloat($infos['memory']['percentage']);
+        static::assertIsString($infos['memory']['summary']);
 
-        static::assertTrue(array_key_exists('speed', $infos));
-        static::assertTrue(is_float($infos['speed']));
+        static::assertArrayHasKey('speed', $infos);
+        static::assertIsFloat($infos['speed']);
 
-        static::assertTrue(array_key_exists('included_files', $infos));
-        static::assertTrue(is_array($infos['included_files']));
+        static::assertArrayHasKey('included_files', $infos);
+        static::assertIsArray($infos['included_files']);
 
-        static::assertTrue(array_key_exists('request', $infos));
+        static::assertArrayHasKey('request', $infos);
         static::assertNotNull($infos['request']);
-        static::assertSame('Rancoud\Http\Message\ServerRequest', get_class($infos['request']));
+        static::assertInstanceOf(\Rancoud\Http\Message\ServerRequest::class, $infos['request']);
 
-        static::assertTrue(array_key_exists('response', $infos));
+        static::assertArrayHasKey('response', $infos);
         static::assertNotNull($infos['response']);
-        static::assertSame('Rancoud\Http\Message\Response', get_class($infos['response']));
+        static::assertInstanceOf(\Rancoud\Http\Message\Response::class, $infos['response']);
 
-        static::assertTrue(array_key_exists('database', $infos));
+        static::assertArrayHasKey('database', $infos);
         static::assertNull($infos['database']);
 
-        static::assertTrue(array_key_exists('session', $infos));
+        static::assertArrayHasKey('session', $infos);
         static::assertNull($infos['session']);
 
         $config = new Configurator([
@@ -1023,84 +1114,90 @@ class ApplicationTest extends TestCase
         Session::start();
 
         $infos = $app->getDebugInfos();
-        static::assertTrue(array_key_exists('memory', $infos));
-        static::assertTrue(array_key_exists('usage', $infos['memory']));
-        static::assertTrue(array_key_exists('limit', $infos['memory']));
-        static::assertTrue(array_key_exists('percentage', $infos['memory']));
-        static::assertTrue(array_key_exists('summary', $infos['memory']));
+        static::assertArrayHasKey('memory', $infos);
+        static::assertArrayHasKey('usage', $infos['memory']);
+        static::assertArrayHasKey('limit', $infos['memory']);
+        static::assertArrayHasKey('percentage', $infos['memory']);
+        static::assertArrayHasKey('summary', $infos['memory']);
 
-        static::assertTrue(is_int($infos['memory']['usage']));
-        static::assertTrue(is_string($infos['memory']['limit']));
-        static::assertTrue(is_float($infos['memory']['percentage']));
-        static::assertTrue(is_string($infos['memory']['summary']));
+        static::assertIsInt($infos['memory']['usage']);
+        static::assertIsString($infos['memory']['limit']);
+        static::assertIsFloat($infos['memory']['percentage']);
+        static::assertIsString($infos['memory']['summary']);
 
-        static::assertTrue(array_key_exists('speed', $infos));
-        static::assertTrue(is_float($infos['speed']));
+        static::assertArrayHasKey('speed', $infos);
+        static::assertIsFloat($infos['speed']);
 
-        static::assertTrue(array_key_exists('included_files', $infos));
-        static::assertTrue(is_array($infos['included_files']));
+        static::assertArrayHasKey('included_files', $infos);
+        static::assertIsArray($infos['included_files']);
 
-        static::assertTrue(array_key_exists('request', $infos));
+        static::assertArrayHasKey('request', $infos);
         static::assertNotNull($infos['request']);
-        static::assertSame('Rancoud\Http\Message\ServerRequest', get_class($infos['request']));
+        static::assertInstanceOf(\Rancoud\Http\Message\ServerRequest::class, $infos['request']);
 
-        static::assertTrue(array_key_exists('response', $infos));
+        static::assertArrayHasKey('response', $infos);
         static::assertNotNull($infos['response']);
-        static::assertSame('Rancoud\Http\Message\Response', get_class($infos['response']));
+        static::assertInstanceOf(\Rancoud\Http\Message\Response::class, $infos['response']);
 
-        static::assertTrue(array_key_exists('database', $infos));
+        static::assertArrayHasKey('database', $infos);
         static::assertNotNull($infos['database']);
-        static::assertTrue(is_array($infos['database']));
+        static::assertIsArray($infos['database']);
 
-        static::assertTrue(array_key_exists('session', $infos));
+        static::assertArrayHasKey('session', $infos);
         static::assertNull($infos['session']);
     }
 
     /**
      * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testGetDebugExcludeSpeed()
+    public function testGetDebugExcludeSpeed(): void
     {
-        $_ds = DIRECTORY_SEPARATOR;
-        $env = new Environment([$this->folders . $_ds . 'tests_env' . $_ds], 'test_debug_exclude_speed.env');
+        $ds = DIRECTORY_SEPARATOR;
+        $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_speed.env');
         $app = new Application($this->getFoldersWithTestEnv(), $env);
 
         $infos = $app->getDebugInfos();
-        static::assertTrue(array_key_exists('memory', $infos));
-        static::assertTrue(array_key_exists('usage', $infos['memory']));
-        static::assertTrue(array_key_exists('limit', $infos['memory']));
-        static::assertTrue(array_key_exists('percentage', $infos['memory']));
-        static::assertTrue(array_key_exists('summary', $infos['memory']));
+        static::assertArrayHasKey('memory', $infos);
+        static::assertArrayHasKey('usage', $infos['memory']);
+        static::assertArrayHasKey('limit', $infos['memory']);
+        static::assertArrayHasKey('percentage', $infos['memory']);
+        static::assertArrayHasKey('summary', $infos['memory']);
 
-        static::assertTrue(is_int($infos['memory']['usage']));
-        static::assertTrue(is_string($infos['memory']['limit']));
-        static::assertTrue(is_float($infos['memory']['percentage']));
-        static::assertTrue(is_string($infos['memory']['summary']));
+        static::assertIsInt($infos['memory']['usage']);
+        static::assertIsString($infos['memory']['limit']);
+        static::assertIsFloat($infos['memory']['percentage']);
+        static::assertIsString($infos['memory']['summary']);
 
-        static::assertTrue(array_key_exists('speed', $infos));
+        static::assertArrayHasKey('speed', $infos);
         static::assertNull($infos['speed']);
 
-        static::assertTrue(array_key_exists('included_files', $infos));
-        static::assertTrue(is_array($infos['included_files']));
+        static::assertArrayHasKey('included_files', $infos);
+        static::assertIsArray($infos['included_files']);
 
-        static::assertTrue(array_key_exists('request', $infos));
+        static::assertArrayHasKey('request', $infos);
         static::assertNull($infos['request']);
 
-        static::assertTrue(array_key_exists('response', $infos));
+        static::assertArrayHasKey('response', $infos);
         static::assertNull($infos['response']);
 
-        static::assertTrue(array_key_exists('database', $infos));
+        static::assertArrayHasKey('database', $infos);
         static::assertNull($infos['database']);
 
-        static::assertTrue(array_key_exists('session', $infos));
+        static::assertArrayHasKey('session', $infos);
         static::assertNull($infos['session']);
     }
 
-    /** @runInSeparateProcess */
-    public function testConvertMemoryLimitToBytes()
+    /**
+     * @runInSeparateProcess
+     * @throws ApplicationException
+     * @throws \Rancoud\Environment\EnvironmentException
+     */
+    public function testConvertMemoryLimitToBytes(): void
     {
-        $_ds = DIRECTORY_SEPARATOR;
-        $env = new Environment([$this->folders . $_ds . 'tests_env' . $_ds], 'test_debug_exclude_speed.env');
+        $ds = DIRECTORY_SEPARATOR;
+        $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_speed.env');
         $app = new ImplementApplication($this->getFoldersWithTestEnv(), $env);
 
         $value = $app->convertMemoryLimitToBytes('64M');
