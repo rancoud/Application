@@ -226,25 +226,24 @@ class Application
      */
     public function run(ServerRequestInterface $request): ?Response
     {
-        if ($this->router->findRouteRequest($request)) {
-            /* @var Response $response */
-            try {
-                $response = $this->router->dispatch($request);
-            } catch (RouterException $routerException) {
-                if ($routerException->getMessage() === 'No route found to dispatch') {
-                    return null;
-                }
-                throw $routerException;
+        $this->router->findRouteRequest($request);
+
+        /* @var Response $response */
+        try {
+            $response = $this->router->dispatch($request);
+        } catch (RouterException $routerException) {
+            if ($routerException->getMessage() === 'No route found to dispatch') {
+                return null;
             }
-            $response = $response->withProtocolVersion($this->extractProtocolVersion($request));
-
-            $this->request = $request;
-            $this->response = $response;
-
-            return $response;
+            throw $routerException;
         }
 
-        return null;
+        $response = $response->withProtocolVersion($this->extractProtocolVersion($request));
+
+        $this->request = $request;
+        $this->response = $response;
+
+        return $response;
     }
 
     /**
