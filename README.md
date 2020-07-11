@@ -26,12 +26,16 @@ $folders = [
     'ROOT' => folder_path,
     'ROUTES' => folder_path
 ];
-// ROOT is used for reading the .env file
-// ROUTES is used for initialize the router with routes
+// ROOT is used for reading the .env file (must be a folder)
+// ROUTES is used for initialize the router with routes (must be a folder, because it will read files inside it)
 
 $app = new Application($folders);
 
-$request = (new ServerRequestFactory())->createServerRequest($method, $path);
+// create server request from globals
+$request = (new \Rancoud\Http\Message\Factory\Factory())->createServerRequestFromGlobals();
+
+// you can create request from scratch for example:
+// $request = new \Rancoud\Http\Message\ServerRequest('GET', '/home');
 
 $response = $app->run($request);
 ```
