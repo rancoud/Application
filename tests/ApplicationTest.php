@@ -28,9 +28,9 @@ class ApplicationTest extends TestCase
         $ds = DIRECTORY_SEPARATOR;
         return [
             'ROOT' => $this->folders,
-            'APP' => $this->folders . $ds . 'app' . $ds,
-            'WWW' => $this->folders . $ds . 'www' . $ds,
-            'ROUTES' => $this->folders . $ds . 'routes' . $ds
+            'APP' => $this->folders . $ds . 'app',
+            'WWW' => $this->folders . $ds . 'www',
+            'ROUTES' => $this->folders . $ds . 'routes'
         ];
     }
 
@@ -84,8 +84,10 @@ class ApplicationTest extends TestCase
         $app = new Application(['ROOT' => $folders['ROOT'], 'ROUTES' => $folders['ROUTES']]);
 
         static::assertSame(Application::class, get_class($app));
-        static::assertSame($folders['ROOT'], Application::getFolder('ROOT'));
-        static::assertSame($folders['ROUTES'], Application::getFolder('ROUTES'));
+        static::assertNotSame($folders['ROOT'], Application::getFolder('ROOT'));
+        static::assertNotSame($folders['ROUTES'], Application::getFolder('ROUTES'));
+        static::assertSame($folders['ROOT'] . DIRECTORY_SEPARATOR, Application::getFolder('ROOT'));
+        static::assertSame($folders['ROUTES'] . DIRECTORY_SEPARATOR, Application::getFolder('ROUTES'));
     }
 
     /**
@@ -99,10 +101,14 @@ class ApplicationTest extends TestCase
         $app = new Application($folders);
 
         static::assertSame(Application::class, get_class($app));
-        static::assertSame($folders['ROOT'], Application::getFolder('ROOT'));
-        static::assertSame($folders['ROUTES'], Application::getFolder('ROUTES'));
-        static::assertSame($folders['APP'], Application::getFolder('APP'));
-        static::assertSame($folders['WWW'], Application::getFolder('WWW'));
+        static::assertNotSame($folders['ROOT'], Application::getFolder('ROOT'));
+        static::assertNotSame($folders['ROUTES'], Application::getFolder('ROUTES'));
+        static::assertNotSame($folders['APP'], Application::getFolder('APP'));
+        static::assertNotSame($folders['WWW'], Application::getFolder('WWW'));
+        static::assertSame($folders['ROOT'] . DIRECTORY_SEPARATOR, Application::getFolder('ROOT'));
+        static::assertSame($folders['ROUTES'] . DIRECTORY_SEPARATOR, Application::getFolder('ROUTES'));
+        static::assertSame($folders['APP'] . DIRECTORY_SEPARATOR, Application::getFolder('APP'));
+        static::assertSame($folders['WWW'] . DIRECTORY_SEPARATOR, Application::getFolder('WWW'));
     }
 
 
@@ -547,6 +553,8 @@ class ApplicationTest extends TestCase
         $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug.env');
         $app = new Application($this->getFoldersWithTestEnv(), $env);
 
+        static::assertSame('1', ini_get('display_errors'));
+
         $infos = $app->getDebugInfos();
 
         static::assertArrayHasKey('memory', $infos);
@@ -560,8 +568,8 @@ class ApplicationTest extends TestCase
         static::assertIsFloat($infos['memory']['percentage']);
         static::assertIsString($infos['memory']['summary']);
 
-        static::assertArrayHasKey('speed', $infos);
-        static::assertIsFloat($infos['speed']);
+        static::assertArrayHasKey('run_elapsed_times', $infos);
+        static::assertIsArray($infos['run_elapsed_times']);
 
         static::assertArrayHasKey('included_files', $infos);
         static::assertIsArray($infos['included_files']);
@@ -594,8 +602,9 @@ class ApplicationTest extends TestCase
         static::assertIsFloat($infos['memory']['percentage']);
         static::assertIsString($infos['memory']['summary']);
 
-        static::assertArrayHasKey('speed', $infos);
-        static::assertIsFloat($infos['speed']);
+        static::assertArrayHasKey('run_elapsed_times', $infos);
+        static::assertIsArray($infos['run_elapsed_times']);
+        static::assertNotEmpty($infos['run_elapsed_times']);
 
         static::assertArrayHasKey('included_files', $infos);
         static::assertIsArray($infos['included_files']);
@@ -638,8 +647,9 @@ class ApplicationTest extends TestCase
         static::assertIsFloat($infos['memory']['percentage']);
         static::assertIsString($infos['memory']['summary']);
 
-        static::assertArrayHasKey('speed', $infos);
-        static::assertIsFloat($infos['speed']);
+        static::assertArrayHasKey('run_elapsed_times', $infos);
+        static::assertIsArray($infos['run_elapsed_times']);
+        static::assertNotEmpty($infos['run_elapsed_times']);
 
         static::assertArrayHasKey('included_files', $infos);
         static::assertIsArray($infos['included_files']);
@@ -675,6 +685,8 @@ class ApplicationTest extends TestCase
         $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_database.env');
         $app = new Application($this->getFoldersWithTestEnv(), $env);
 
+        static::assertSame('0', ini_get('display_errors'));
+
         $infos = $app->getDebugInfos();
         static::assertArrayHasKey('memory', $infos);
         static::assertArrayHasKey('usage', $infos['memory']);
@@ -687,8 +699,9 @@ class ApplicationTest extends TestCase
         static::assertIsFloat($infos['memory']['percentage']);
         static::assertIsString($infos['memory']['summary']);
 
-        static::assertArrayHasKey('speed', $infos);
-        static::assertIsFloat($infos['speed']);
+        static::assertArrayHasKey('run_elapsed_times', $infos);
+        static::assertIsArray($infos['run_elapsed_times']);
+        static::assertEmpty($infos['run_elapsed_times']);
 
         static::assertArrayHasKey('included_files', $infos);
         static::assertIsArray($infos['included_files']);
@@ -721,8 +734,9 @@ class ApplicationTest extends TestCase
         static::assertIsFloat($infos['memory']['percentage']);
         static::assertIsString($infos['memory']['summary']);
 
-        static::assertArrayHasKey('speed', $infos);
-        static::assertIsFloat($infos['speed']);
+        static::assertArrayHasKey('run_elapsed_times', $infos);
+        static::assertIsArray($infos['run_elapsed_times']);
+        static::assertNotEmpty($infos['run_elapsed_times']);
 
         static::assertArrayHasKey('included_files', $infos);
         static::assertIsArray($infos['included_files']);
@@ -765,8 +779,9 @@ class ApplicationTest extends TestCase
         static::assertIsFloat($infos['memory']['percentage']);
         static::assertIsString($infos['memory']['summary']);
 
-        static::assertArrayHasKey('speed', $infos);
-        static::assertIsFloat($infos['speed']);
+        static::assertArrayHasKey('run_elapsed_times', $infos);
+        static::assertIsArray($infos['run_elapsed_times']);
+        static::assertNotEmpty($infos['run_elapsed_times']);
 
         static::assertArrayHasKey('included_files', $infos);
         static::assertIsArray($infos['included_files']);
@@ -810,8 +825,9 @@ class ApplicationTest extends TestCase
         static::assertIsFloat($infos['memory']['percentage']);
         static::assertIsString($infos['memory']['summary']);
 
-        static::assertArrayHasKey('speed', $infos);
-        static::assertIsFloat($infos['speed']);
+        static::assertArrayHasKey('run_elapsed_times', $infos);
+        static::assertIsArray($infos['run_elapsed_times']);
+        static::assertEmpty($infos['run_elapsed_times']);
 
         static::assertArrayHasKey('included_files', $infos);
         static::assertNull($infos['included_files']);
@@ -844,8 +860,9 @@ class ApplicationTest extends TestCase
         static::assertArrayHasKey('memory', $infos);
         static::assertNull($infos['memory']);
 
-        static::assertArrayHasKey('speed', $infos);
-        static::assertIsFloat($infos['speed']);
+        static::assertArrayHasKey('run_elapsed_times', $infos);
+        static::assertIsArray($infos['run_elapsed_times']);
+        static::assertEmpty($infos['run_elapsed_times']);
 
         static::assertArrayHasKey('included_files', $infos);
         static::assertIsArray($infos['included_files']);
@@ -887,8 +904,9 @@ class ApplicationTest extends TestCase
         static::assertIsFloat($infos['memory']['percentage']);
         static::assertIsString($infos['memory']['summary']);
 
-        static::assertArrayHasKey('speed', $infos);
-        static::assertIsFloat($infos['speed']);
+        static::assertArrayHasKey('run_elapsed_times', $infos);
+        static::assertIsArray($infos['run_elapsed_times']);
+        static::assertEmpty($infos['run_elapsed_times']);
 
         static::assertArrayHasKey('included_files', $infos);
         static::assertIsArray($infos['included_files']);
@@ -921,8 +939,9 @@ class ApplicationTest extends TestCase
         static::assertIsFloat($infos['memory']['percentage']);
         static::assertIsString($infos['memory']['summary']);
 
-        static::assertArrayHasKey('speed', $infos);
-        static::assertIsFloat($infos['speed']);
+        static::assertArrayHasKey('run_elapsed_times', $infos);
+        static::assertIsArray($infos['run_elapsed_times']);
+        static::assertNotEmpty($infos['run_elapsed_times']);
 
         static::assertArrayHasKey('included_files', $infos);
         static::assertIsArray($infos['included_files']);
@@ -965,8 +984,9 @@ class ApplicationTest extends TestCase
         static::assertIsFloat($infos['memory']['percentage']);
         static::assertIsString($infos['memory']['summary']);
 
-        static::assertArrayHasKey('speed', $infos);
-        static::assertIsFloat($infos['speed']);
+        static::assertArrayHasKey('run_elapsed_times', $infos);
+        static::assertIsArray($infos['run_elapsed_times']);
+        static::assertEmpty($infos['run_elapsed_times']);
 
         static::assertArrayHasKey('included_files', $infos);
         static::assertIsArray($infos['included_files']);
@@ -1000,8 +1020,9 @@ class ApplicationTest extends TestCase
         static::assertIsFloat($infos['memory']['percentage']);
         static::assertIsString($infos['memory']['summary']);
 
-        static::assertArrayHasKey('speed', $infos);
-        static::assertIsFloat($infos['speed']);
+        static::assertArrayHasKey('run_elapsed_times', $infos);
+        static::assertIsArray($infos['run_elapsed_times']);
+        static::assertNotEmpty($infos['run_elapsed_times']);
 
         static::assertArrayHasKey('included_files', $infos);
         static::assertIsArray($infos['included_files']);
@@ -1046,8 +1067,9 @@ class ApplicationTest extends TestCase
         static::assertIsFloat($infos['memory']['percentage']);
         static::assertIsString($infos['memory']['summary']);
 
-        static::assertArrayHasKey('speed', $infos);
-        static::assertIsFloat($infos['speed']);
+        static::assertArrayHasKey('run_elapsed_times', $infos);
+        static::assertIsArray($infos['run_elapsed_times']);
+        static::assertEmpty($infos['run_elapsed_times']);
 
         static::assertArrayHasKey('included_files', $infos);
         static::assertIsArray($infos['included_files']);
@@ -1081,8 +1103,9 @@ class ApplicationTest extends TestCase
         static::assertIsFloat($infos['memory']['percentage']);
         static::assertIsString($infos['memory']['summary']);
 
-        static::assertArrayHasKey('speed', $infos);
-        static::assertIsFloat($infos['speed']);
+        static::assertArrayHasKey('run_elapsed_times', $infos);
+        static::assertIsArray($infos['run_elapsed_times']);
+        static::assertNotEmpty($infos['run_elapsed_times']);
 
         static::assertArrayHasKey('included_files', $infos);
         static::assertIsArray($infos['included_files']);
@@ -1125,8 +1148,9 @@ class ApplicationTest extends TestCase
         static::assertIsFloat($infos['memory']['percentage']);
         static::assertIsString($infos['memory']['summary']);
 
-        static::assertArrayHasKey('speed', $infos);
-        static::assertIsFloat($infos['speed']);
+        static::assertArrayHasKey('run_elapsed_times', $infos);
+        static::assertIsArray($infos['run_elapsed_times']);
+        static::assertNotEmpty($infos['run_elapsed_times']);
 
         static::assertArrayHasKey('included_files', $infos);
         static::assertIsArray($infos['included_files']);
@@ -1152,10 +1176,10 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testGetDebugExcludeSpeed(): void
+    public function testGetDebugExcludeRunElapsedTimes(): void
     {
         $ds = DIRECTORY_SEPARATOR;
-        $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_speed.env');
+        $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_run_elapsed_times.env');
         $app = new Application($this->getFoldersWithTestEnv(), $env);
 
         $infos = $app->getDebugInfos();
@@ -1170,8 +1194,8 @@ class ApplicationTest extends TestCase
         static::assertIsFloat($infos['memory']['percentage']);
         static::assertIsString($infos['memory']['summary']);
 
-        static::assertArrayHasKey('speed', $infos);
-        static::assertNull($infos['speed']);
+        static::assertArrayHasKey('run_elapsed_times', $infos);
+        static::assertEmpty($infos['run_elapsed_times']);
 
         static::assertArrayHasKey('included_files', $infos);
         static::assertIsArray($infos['included_files']);
@@ -1197,7 +1221,7 @@ class ApplicationTest extends TestCase
     public function testConvertMemoryLimitToBytes(): void
     {
         $ds = DIRECTORY_SEPARATOR;
-        $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_speed.env');
+        $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_run_elapsed_times.env');
         $app = new ImplementApplication($this->getFoldersWithTestEnv(), $env);
 
         $value = $app->convertMemoryLimitToBytes('64M');
