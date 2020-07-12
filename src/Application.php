@@ -20,9 +20,6 @@ use Rancoud\Router\RouterException;
  */
 class Application
 {
-    /** @var float */
-    protected $appStart;
-
     /** @var array */
     protected array $folders = [];
 
@@ -34,9 +31,6 @@ class Application
 
     /** @var Environment */
     protected $config = [];
-
-    /** @var bool */
-    protected bool $isDebug = false;
 
     /** @var \Rancoud\Database\Database */
     protected ?\Rancoud\Database\Database $database = null;
@@ -50,6 +44,12 @@ class Application
     /** @var array */
     protected array $bags = [];
 
+    /** @var array */
+    protected array $runElapsedTimes = [];
+
+    /** @var bool */
+    protected bool $isDebug = false;
+
     /**
      * App constructor.
      *
@@ -61,8 +61,6 @@ class Application
      */
     public function __construct(array $folders, Environment $env = null)
     {
-        $this->appStart = \microtime(true);
-
         $this->initFolders($folders);
         $this->initAttributes();
         $this->loadEnvironment($env);
@@ -83,6 +81,10 @@ class Application
         foreach ($folders as $name => $folder) {
             if (!\is_string($folder) || !\file_exists($folder)) {
                 throw new ApplicationException('"' . $name . '" is not a valid folder.');
+            }
+
+            if (\mb_substr($folder, -1) !== \DIRECTORY_SEPARATOR) {
+                $folder .= \DIRECTORY_SEPARATOR;
             }
 
             $this->folders[$name] = $folder;
@@ -139,6 +141,9 @@ class Application
     {
         if ($this->config->get('DEBUG') === true) {
             $this->isDebug = true;
+        }
+
+        if ($this->isDebug && $this->config->get('DEBUG_PHP') === true) {
             \error_reporting(-1);
             \ini_set('display_errors', '1');
         } else {
@@ -226,6 +231,8 @@ class Application
      */
     public function run(ServerRequestInterface $request): ?Response
     {
+        $runStart = \microtime(true);
+
         $this->router->findRouteRequest($request);
 
         /* @var Response $response */
@@ -242,6 +249,8 @@ class Application
 
         $this->request = $request;
         $this->response = $response;
+
+        $this->runElapsedTimes[] = \round((\microtime(true) - $runStart) * 1000000) / 1000000;
 
         return $response;
     }
@@ -311,11 +320,16 @@ class Application
      * @param \Rancoud\Database\Database $database
      *
      * @throws ApplicationException
+     * @throws EnvironmentException
      */
     public static function setDatabase(\Rancoud\Database\Database $database): void
     {
         if (static::$app === null) {
             throw new ApplicationException('Empty Instance');
+        }
+
+        if (static::$app->isDebug && static::$app->config->get('DEBUG_DATABASE') === true) {
+            $database->enableSaveQueries();
         }
 
         static::$app->database = $database;
@@ -407,7 +421,7 @@ class Application
         }
 
         $data['memory'] = $this->getDebugMemory();
-        $data['speed'] = $this->getDebugSpeed();
+        $data['run_elapsed_times'] = $this->getDebugRunElapsedTimes();
         $data['included_files'] = $this->getDebugIncludedFiles();
         $data['request'] = $this->getDebugRequest();
         $data['response'] = $this->getDebugResponse();
@@ -502,15 +516,15 @@ class Application
     /**
      * @throws EnvironmentException
      *
-     * @return float|null
+     * @return array
      */
-    protected function getDebugSpeed(): ?float
+    protected function getDebugRunElapsedTimes(): array
     {
-        if ($this->config->get('DEBUG_SPEED') === true) {
-            return \round((\microtime(true) - $this->appStart) * 1000000) / 1000000;
+        if ($this->config->get('DEBUG_RUN_ELAPSED_TIMES') === true) {
+            return $this->runElapsedTimes;
         }
 
-        return null;
+        return [];
     }
 
     /**

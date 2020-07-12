@@ -20,24 +20,74 @@ composer require rancoud/application
 ```
 
 ## How to use it?
-### General  
+### General
+#### Requirements
+You need `.env` file and route file called for example `routes.php`
+Content of default `.env` file
+```dotenv
+# setup timezone, by default use timezone from php.ini (valid timezones are checked with DateTimeZone::listIdentifiers())
+TIMEZONE=null
+
+# specific files to load for setting router, if null it will load all files in folder given in Application constructor
+ROUTES=null
+
+# for enabling DEBUG_* parameters
+DEBUG=false
+
+# enable error_reporting: show php errors
+DEBUG_PHP=false
+
+# keep PSR-7 request object
+DEBUG_REQUEST=false
+
+# keep PSR-7 response object 
+DEBUG_RESPONSE=false
+
+# return saved queries 
+DEBUG_DATABASE=false
+
+# return all values in Session object
+DEBUG_SESSION=false
+
+# return memory usage/limit/percentage
+DEBUG_MEMORY=false
+
+# return elapsed time of each Application->run()
+DEBUG_RUN_ELAPSED_TIMES=false
+
+# return all files included
+DEBUG_INCLUDED_FILES=false
+```
+`DEBUG_*` infos are available with `Application->getDebugInfos();` (except `DEBUG_PHP`)  
+Content of `routes.php`
 ```php
+<?php
+/** @var \Rancoud\Router\Router $router */
+$router->any('/home', static function ($request, $next) {
+    return (new \Rancoud\Http\Message\Factory\Factory())->createResponse()->withBody(Rancoud\Http\Message\Stream::create('hello world'));
+});
+```
+#### Usage
+```php
+// you have to set thoses required folders
 $folders = [
-    'ROOT' => folder_path,
-    'ROUTES' => folder_path
+    'ROOT' => folder_path,    // ROOT is used for reading the .env file (must be a folder)
+    'ROUTES' => folder_path   // ROUTES is used for initialize the router with routes (must be a folder, because it will read files inside it)
 ];
-// ROOT is used for reading the .env file (must be a folder)
-// ROUTES is used for initialize the router with routes (must be a folder, because it will read files inside it)
 
 $app = new Application($folders);
 
 // create server request from globals
 $request = (new \Rancoud\Http\Message\Factory\Factory())->createServerRequestFromGlobals();
 
-// you can create request from scratch for example:
+// you can also create request from scratch for example
 // $request = new \Rancoud\Http\Message\ServerRequest('GET', '/home');
 
+// $response can be null if no route AND no default404 has been found by the Router
 $response = $app->run($request);
+
+// you can send response output directly (if not null of course)
+$response->send();
 ```
 
 You can add more folders in constructor  
@@ -70,7 +120,7 @@ $config = Application::getConfig();
 By default it will load all php files in the ROUTES folder.  
 You can specify in .env file what routes file you want to use.  
 ```dotenv
-; it will require() 3 files: www.php , backoffice.php and api.php in the routes folder
+# it will require() 3 files: www.php , backoffice.php and api.php in the routes folder
 ROUTES=www,backoffice,api
 ```
 
@@ -123,35 +173,38 @@ You are free to use something else.
 By default the timezone used will be from php.ini  
 You can specify a timezone in .env file  
 ```dotenv
-; valid timezones are checked with DateTimeZone::listIdentifiers()
+# valid timezones are checked with DateTimeZone::listIdentifiers()
 TIMEZONE="Europe/Paris"
 ```
 
 ### Debug Infos
 You have to enable it in .env file
 ```dotenv
-; for enabling the rest of debug parameters
+# for enabling DEBUG_* parameters
 DEBUG=true
 
-; get request object
+# enable error_reporting: show php errors
+DEBUG_PHP=true
+
+# keep PSR-7 request object
 DEBUG_REQUEST=true
 
-; get response object
+# keep PSR-7 response object
 DEBUG_RESPONSE=true
 
-; get all save queries
+# return saved queries
 DEBUG_DATABASE=true
 
-; get all values in session
+# return all values in Session object
 DEBUG_SESSION=true
 
-; get memory usage, limit and percentage
+# return memory usage/limit/percentage
 DEBUG_MEMORY=true
 
-; get time spend between new App and the call of function getDebugInfos
-DEBUG_SPEED=true
+# return elapsed time of each Application->run()
+DEBUG_RUN_ELAPSED_TIMES=true
 
-; get all included files
+# return all files included
 DEBUG_INCLUDED_FILES=true
 ```
 
