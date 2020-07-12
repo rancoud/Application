@@ -97,16 +97,16 @@
         },
         {
             "name": "rancoud/router",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Router.git",
-                "reference": "bd4c6fc1da0cc09585380c0503dfc78b84ffba5c"
+                "reference": "06209abb4b3bc4bf9d7903c3bd64ee4996017fc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Router/zipball/bd4c6fc1da0cc09585380c0503dfc78b84ffba5c",
-                "reference": "bd4c6fc1da0cc09585380c0503dfc78b84ffba5c",
+                "url": "https://api.github.com/repos/rancoud/Router/zipball/06209abb4b3bc4bf9d7903c3bd64ee4996017fc4",
+                "reference": "06209abb4b3bc4bf9d7903c3bd64ee4996017fc4",
                 "shasum": ""
             },
             "require": {
@@ -135,7 +135,7 @@
                 }
             ],
             "description": "Router package",
-            "time": "2020-07-10T01:06:45+00:00"
+            "time": "2020-07-12T04:07:18+00:00"
         }
     ],
     "packages-dev": [
@@ -1104,16 +1104,16 @@
         },
         {
             "name": "phpunit/php-file-iterator",
-            "version": "3.0.3",
+            "version": "3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-file-iterator.git",
-                "reference": "8e282e5f5e2db5fb2271b3962ad69875c34a6f41"
+                "reference": "25fefc5b19835ca653877fe081644a3f8c1d915e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/8e282e5f5e2db5fb2271b3962ad69875c34a6f41",
-                "reference": "8e282e5f5e2db5fb2271b3962ad69875c34a6f41",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/25fefc5b19835ca653877fe081644a3f8c1d915e",
+                "reference": "25fefc5b19835ca653877fe081644a3f8c1d915e",
                 "shasum": ""
             },
             "require": {
@@ -1156,7 +1156,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-06-26T11:50:37+00:00"
+            "time": "2020-07-11T05:18:21+00:00"
         },
         {
             "name": "phpunit/php-invoker",
