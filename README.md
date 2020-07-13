@@ -3,7 +3,7 @@
 ![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/rancoud/application)
 [![Packagist Version](https://img.shields.io/packagist/v/rancoud/application)](https://packagist.org/packages/rancoud/application)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/rancoud/application)](https://packagist.org/packages/rancoud/application)
-[![Composer dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](https://github.com/rancoud/application/blob/master/composer.json)
+[![Composer dependencies](https://img.shields.io/badge/dependencies-2-brightgreen)](https://github.com/rancoud/application/blob/master/composer.json)
 [![Test workflow](https://img.shields.io/github/workflow/status/rancoud/application/test?label=test&logo=github)](https://github.com/rancoud/application/actions?workflow=test)
 [![Codecov](https://img.shields.io/codecov/c/github/rancoud/application?logo=codecov)](https://codecov.io/gh/rancoud/application)
 [![composer.lock](https://poser.pugx.org/rancoud/application/composerlock)](https://packagist.org/packages/rancoud/application)
