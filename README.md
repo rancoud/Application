@@ -28,51 +28,55 @@ Content of default `.env` file
 # setup timezone, by default use timezone from php.ini (valid timezones are checked with DateTimeZone::listIdentifiers())
 TIMEZONE=null
 
-# specific files to load for setting router, if null it will load all files in folder given in Application constructor
+# file names that contain route configurations, if null it will load all files in current folder provided to the Application constructor
 ROUTES=null
 
-# for enabling DEBUG_* parameters
+# to enable all DEBUG_* parameters
 DEBUG=false
 
 # enable error_reporting: show php errors
 DEBUG_PHP=false
 
-# keep PSR-7 request object
+# save PSR-7 request object for Application->getDebugInfos()
 DEBUG_REQUEST=false
 
-# keep PSR-7 response object 
+# save PSR-7 response object for Application->getDebugInfos()
 DEBUG_RESPONSE=false
 
-# return saved queries 
+# save queries for Application->getDebugInfos()
 DEBUG_DATABASE=false
 
-# return all values in Session object
+# add all values of Session object to Application->getDebugInfos()
 DEBUG_SESSION=false
 
-# return memory usage/limit/percentage
+# add memory usage/limit/percentage to Application->getDebugInfos()
 DEBUG_MEMORY=false
 
-# return elapsed time of each Application->run()
+# save elapsed time of each call of Application->run() for Application->getDebugInfos()
 DEBUG_RUN_ELAPSED_TIMES=false
 
-# return all files included
+# add all included files included to Application->getDebugInfos()
 DEBUG_INCLUDED_FILES=false
 ```
 `DEBUG_*` infos are available with `Application->getDebugInfos();` (except `DEBUG_PHP`)  
 Content of `routes.php`
 ```php
 <?php
+
+use Rancoud\Http\Message\Factory\Factory;
+use Rancoud\Http\Message\Stream;
+
 /** @var \Rancoud\Router\Router $router */
 $router->any('/home', static function ($request, $next) {
-    return (new \Rancoud\Http\Message\Factory\Factory())->createResponse()->withBody(Rancoud\Http\Message\Stream::create('hello world'));
+    return (new Factory())->createResponse()->withBody(Stream::create('hello world'));
 });
 ```
 #### Usage
 ```php
 // you have to set thoses required folders
 $folders = [
-    'ROOT' => folder_path,    // ROOT is used for reading the .env file (must be a folder)
-    'ROUTES' => folder_path   // ROUTES is used for initialize the router with routes (must be a folder, because it will read files inside it)
+    'ROOT' => 'folder/path/of/env',    // ROOT is used to read the .env file (must be a folder)
+    'ROUTES' => 'folder/path/of/routes'   // ROUTES is used to initialize the router with routes (must be a folder, so it will read php files inside it)
 ];
 
 $app = new Application($folders);
@@ -94,9 +98,9 @@ You can add more folders in constructor
 
 ```php
 $folders = [
-    'ROOT' => folder_path,
-    'ROUTES' => folder_path,
-    'EXTRA' => folder_path
+    'ROOT' => 'folder/path/of/env',
+    'ROUTES' => 'folder/path/of/routes',
+    'EXTRA' => 'folder/path/of/extra'
 ];
 
 $app = new Application($folders);
@@ -109,7 +113,7 @@ $folderExtra = Application::getFolder('EXTRA');
 You can specify another environment file instead of using .env in ROOT folder  
 
 ```php
-$env = new Environment([folder_path], 'another.env');
+$env = new Environment('folder/path/of/env', 'another.env');
 $app = new Application($folders, $env);
 
 // you can access to the environment
@@ -118,13 +122,13 @@ $config = Application::getConfig();
 
 ### Routes  
 By default it will load all php files in the ROUTES folder.  
-You can specify in .env file what routes file you want to use.  
+You can specify in .env file which routes files you want to use.  
 ```dotenv
-# it will require() 3 files: www.php , backoffice.php and api.php in the routes folder
+# in this example, it will require() 3 files: www.php , backoffice.php and api.php in the routes folder
 ROUTES=www,backoffice,api
 ```
 
-This is an example how to add routes for the router  
+This example show how to add routes for the router  
 
 ```php
 $config = [
@@ -160,7 +164,7 @@ Application::setDatabase($database);
 $db = Application::getDatabase();
 
 $infos = $app->getDebugInfos();
-// if enable, all saved queries will be display in $infos['database']
+// when enabled, all saved queries will be display in $infos['database']
 ```
 You are free to use something else if you don't use functions `setDatabase` and `getDatabase`.  
 
@@ -180,31 +184,31 @@ TIMEZONE="Europe/Paris"
 ### Debug Infos
 You have to enable it in .env file
 ```dotenv
-# for enabling DEBUG_* parameters
+# to enable all DEBUG_* parameters
 DEBUG=true
 
 # enable error_reporting: show php errors
 DEBUG_PHP=true
 
-# keep PSR-7 request object
-DEBUG_REQUEST=true
+# save PSR-7 request object for Application->getDebugInfos()
+DEBUG_REQUEST=false
 
-# keep PSR-7 response object
-DEBUG_RESPONSE=true
+# save PSR-7 response object for Application->getDebugInfos()
+DEBUG_RESPONSE=false
 
-# return saved queries
-DEBUG_DATABASE=true
+# save queries for Application->getDebugInfos()
+DEBUG_DATABASE=false
 
-# return all values in Session object
-DEBUG_SESSION=true
+# add all values of Session object to Application->getDebugInfos()
+DEBUG_SESSION=false
 
-# return memory usage/limit/percentage
-DEBUG_MEMORY=true
+# add memory usage/limit/percentage to Application->getDebugInfos()
+DEBUG_MEMORY=false
 
-# return elapsed time of each Application->run()
-DEBUG_RUN_ELAPSED_TIMES=true
+# save elapsed time of each call of Application->run() for Application->getDebugInfos()
+DEBUG_RUN_ELAPSED_TIMES=false
 
-# return all files included
+# add all included files included to Application->getDebugInfos()
 DEBUG_INCLUDED_FILES=true
 ```
 
@@ -214,8 +218,8 @@ You can put whatever you want in "bags", like your own database driver
 $app = new Application($folders, $env);
 
 Application::setInBag('db', $mydb);
-$dbInBag = Application::getInBag('db');
-Application::removeInBag('db');
+$dbInBag = Application::getFromBag('db');
+Application::removeFromBag('db');
 ```
 
 ## Application Constructor
@@ -225,7 +229,7 @@ Application::removeInBag('db');
 | --- | --- | --- |
 | folders | array | Folder's list. ROOT and ROUTES are mandatory |
 
-#### Optionnals
+#### Optionals
 | Parameter | Type | Default value | Description |
 | --- | --- | --- | --- |
 | env | Rancoud\Environment\Environment | null | Setup a different .env file |
@@ -242,11 +246,11 @@ Application::removeInBag('db');
 * setDatabase(database: Rancoud\Database\Database): void  
 * getDatabase(): ?Rancoud\Database\Database  
 * getRouter(): Rancoud\Router\Router  
-* getInBag(name: string): mixed  
-* removeInBag(name: string): void  
+* getFromBag(name: string): mixed  
+* removeFromBag(name: string): void  
 * setInBag(name: string, object: mixed): void  
 
-## Optionnals Dependencies
+## Optionals Dependencies
 [Database package](https://github.com/rancoud/Database)  
 [Session package](https://github.com/rancoud/Session)  
 

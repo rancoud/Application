@@ -425,7 +425,7 @@ class ApplicationTest extends TestCase
         $this->expectException(ApplicationException::class);
         $this->expectExceptionMessage('Empty Instance');
 
-        Application::getInBag('a');
+        Application::getFromBag('a');
     }
 
     /**
@@ -449,7 +449,7 @@ class ApplicationTest extends TestCase
         $this->expectException(ApplicationException::class);
         $this->expectExceptionMessage('Empty Instance');
 
-        Application::removeInBag('a');
+        Application::removeFromBag('a');
     }
 
     /**
@@ -525,17 +525,17 @@ class ApplicationTest extends TestCase
     {
         new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
 
-        $bag = Application::getInBag('a');
+        $bag = Application::getFromBag('a');
         static::assertNull($bag);
 
         Application::setInBag('b','c');
 
-        $bag = Application::getInBag('b');
+        $bag = Application::getFromBag('b');
         static::assertSame('c', $bag);
 
-        Application::removeInBag('b');
+        Application::removeFromBag('b');
 
-        $bag = Application::getInBag('b');
+        $bag = Application::getFromBag('b');
         static::assertNull($bag);
     }
 
