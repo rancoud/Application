@@ -370,7 +370,7 @@ class Application
      *
      * @return mixed
      */
-    public static function getInBag(string $name)
+    public static function getFromBag(string $name)
     {
         if (static::$app === null) {
             throw new ApplicationException('Empty Instance');
@@ -384,7 +384,7 @@ class Application
      *
      * @throws ApplicationException
      */
-    public static function removeInBag(string $name): void
+    public static function removeFromBag(string $name): void
     {
         if (static::$app === null) {
             throw new ApplicationException('Empty Instance');
