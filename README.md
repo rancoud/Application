@@ -113,7 +113,7 @@ $folderExtra = Application::getFolder('EXTRA');
 You can specify another environment file instead of using .env in ROOT folder  
 
 ```php
-$env = new Environment('folder/path/of/env', 'another.env');
+$env = new Environment(['folder/path/of/env'], 'another.env');
 $app = new Application($folders, $env);
 
 // you can access to the environment
@@ -191,22 +191,22 @@ DEBUG=true
 DEBUG_PHP=true
 
 # save PSR-7 request object for Application->getDebugInfos()
-DEBUG_REQUEST=false
+DEBUG_REQUEST=true
 
 # save PSR-7 response object for Application->getDebugInfos()
-DEBUG_RESPONSE=false
+DEBUG_RESPONSE=true
 
 # save queries for Application->getDebugInfos()
-DEBUG_DATABASE=false
+DEBUG_DATABASE=true
 
 # add all values of Session object to Application->getDebugInfos()
-DEBUG_SESSION=false
+DEBUG_SESSION=true
 
 # add memory usage/limit/percentage to Application->getDebugInfos()
-DEBUG_MEMORY=false
+DEBUG_MEMORY=true
 
 # save elapsed time of each call of Application->run() for Application->getDebugInfos()
-DEBUG_RUN_ELAPSED_TIMES=false
+DEBUG_RUN_ELAPSED_TIMES=true
 
 # add all included files included to Application->getDebugInfos()
 DEBUG_INCLUDED_FILES=true

@@ -521,7 +521,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
-    public function testGetSetRemoveInBag(): void
+    public function testGetSetRemoveFromBag(): void
     {
         new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
 
