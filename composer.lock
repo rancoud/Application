@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "82fce3a8db9ce4ba23eac01fcc7db1e8",
+    "content-hash": "e8dc9670caf36c80e344d7c476f6e7f8",
     "packages": [
         {
             "name": "rancoud/environment",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Environment.git",
-                "reference": "e7a52ec8ecff65ba590dc04036a91a65cd90d149"
+                "reference": "70901408426e5dc96913cdc739b7ee54e369eca7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Environment/zipball/e7a52ec8ecff65ba590dc04036a91a65cd90d149",
-                "reference": "e7a52ec8ecff65ba590dc04036a91a65cd90d149",
+                "url": "https://api.github.com/repos/rancoud/Environment/zipball/70901408426e5dc96913cdc739b7ee54e369eca7",
+                "reference": "70901408426e5dc96913cdc739b7ee54e369eca7",
                 "shasum": ""
             },
             "require": {
@@ -46,20 +46,20 @@
                 }
             ],
             "description": "Environment package",
-            "time": "2020-07-01T19:53:29+00:00"
+            "time": "2020-07-26T13:14:50+00:00"
         },
         {
             "name": "rancoud/http",
-            "version": "3.0.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Http.git",
-                "reference": "0935033df924bd51d970ef350540efd8c5745951"
+                "reference": "ec2767716af4bc96fb577b861fbbd82245f2e59f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Http/zipball/0935033df924bd51d970ef350540efd8c5745951",
-                "reference": "0935033df924bd51d970ef350540efd8c5745951",
+                "url": "https://api.github.com/repos/rancoud/Http/zipball/ec2767716af4bc96fb577b861fbbd82245f2e59f",
+                "reference": "ec2767716af4bc96fb577b861fbbd82245f2e59f",
                 "shasum": ""
             },
             "require": {
@@ -93,20 +93,20 @@
                 }
             ],
             "description": "Http package",
-            "time": "2020-07-17T18:11:48+00:00"
+            "time": "2020-07-26T13:17:09+00:00"
         },
         {
             "name": "rancoud/router",
-            "version": "3.0.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Router.git",
-                "reference": "1158dfca2210cb0f0e6f33820663385b1169c911"
+                "reference": "6f4be2268bf3ec0b23b27a6f05e016747a82297d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Router/zipball/1158dfca2210cb0f0e6f33820663385b1169c911",
-                "reference": "1158dfca2210cb0f0e6f33820663385b1169c911",
+                "url": "https://api.github.com/repos/rancoud/Router/zipball/6f4be2268bf3ec0b23b27a6f05e016747a82297d",
+                "reference": "6f4be2268bf3ec0b23b27a6f05e016747a82297d",
                 "shasum": ""
             },
             "require": {
@@ -135,7 +135,7 @@
                 }
             ],
             "description": "Router package",
-            "time": "2020-07-22T22:28:19+00:00"
+            "time": "2020-07-26T13:28:05+00:00"
         }
     ],
     "packages-dev": [
@@ -1623,16 +1623,16 @@
         },
         {
             "name": "rancoud/database",
-            "version": "4.0.1",
+            "version": "5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Database.git",
-                "reference": "1c2aa2e8b7554950f4eed765d23ec240b61d2248"
+                "reference": "4b06a2f3291a6d04bd6a90149a9d750fa6147db0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Database/zipball/1c2aa2e8b7554950f4eed765d23ec240b61d2248",
-                "reference": "1c2aa2e8b7554950f4eed765d23ec240b61d2248",
+                "url": "https://api.github.com/repos/rancoud/Database/zipball/4b06a2f3291a6d04bd6a90149a9d750fa6147db0",
+                "reference": "4b06a2f3291a6d04bd6a90149a9d750fa6147db0",
                 "shasum": ""
             },
             "require": {
@@ -1661,20 +1661,20 @@
                 }
             ],
             "description": "Database package",
-            "time": "2020-07-01T20:03:41+00:00"
+            "time": "2020-07-25T16:36:52+00:00"
         },
         {
             "name": "rancoud/session",
-            "version": "2.0.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Session.git",
-                "reference": "00c8bb39f0be5537c6dfb408932c3c0f5add2b7e"
+                "reference": "a3337a86f7d1737cd65f1d65e1192ae60a77189e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Session/zipball/00c8bb39f0be5537c6dfb408932c3c0f5add2b7e",
-                "reference": "00c8bb39f0be5537c6dfb408932c3c0f5add2b7e",
+                "url": "https://api.github.com/repos/rancoud/Session/zipball/a3337a86f7d1737cd65f1d65e1192ae60a77189e",
+                "reference": "a3337a86f7d1737cd65f1d65e1192ae60a77189e",
                 "shasum": ""
             },
             "require": {
@@ -1685,7 +1685,7 @@
                 "friendsofphp/php-cs-fixer": "^2.16",
                 "phpunit/phpunit": "^9.1",
                 "predis/predis": "^1.1",
-                "rancoud/database": "^4.0",
+                "rancoud/database": "^5.0",
                 "squizlabs/php_codesniffer": "^3.5"
             },
             "type": "library",
@@ -1705,7 +1705,7 @@
                 }
             ],
             "description": "Session package",
-            "time": "2020-07-10T13:41:09+00:00"
+            "time": "2020-07-25T20:42:57+00:00"
         },
         {
             "name": "sebastian/code-unit",
@@ -2496,16 +2496,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.1.2",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "34ac555a3627e324b660e318daa07572e1140123"
+                "reference": "2226c68009627934b8cfc01260b4d287eab070df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/34ac555a3627e324b660e318daa07572e1140123",
-                "reference": "34ac555a3627e324b660e318daa07572e1140123",
+                "url": "https://api.github.com/repos/symfony/console/zipball/2226c68009627934b8cfc01260b4d287eab070df",
+                "reference": "2226c68009627934b8cfc01260b4d287eab070df",
                 "shasum": ""
             },
             "require": {
@@ -2585,7 +2585,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-15T12:59:21+00:00"
+            "time": "2020-07-06T13:23:11+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -2653,16 +2653,16 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v5.1.2",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "cc0d059e2e997e79ca34125a52f3e33de4424ac7"
+                "reference": "7827d55911f91c070fc293ea51a06eec80797d76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/cc0d059e2e997e79ca34125a52f3e33de4424ac7",
-                "reference": "cc0d059e2e997e79ca34125a52f3e33de4424ac7",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/7827d55911f91c070fc293ea51a06eec80797d76",
+                "reference": "7827d55911f91c070fc293ea51a06eec80797d76",
                 "shasum": ""
             },
             "require": {
@@ -2735,7 +2735,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-20T17:43:50+00:00"
+            "time": "2020-06-18T18:24:02+00:00"
         },
         {
             "name": "symfony/event-dispatcher-contracts",
@@ -2815,7 +2815,7 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v5.1.2",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
@@ -2879,7 +2879,7 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v5.1.2",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
@@ -2942,16 +2942,16 @@
         },
         {
             "name": "symfony/options-resolver",
-            "version": "v5.1.2",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "663f5dd5e14057d1954fe721f9709d35837f2447"
+                "reference": "9ff59517938f88d90b6e65311fef08faa640f681"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/663f5dd5e14057d1954fe721f9709d35837f2447",
-                "reference": "663f5dd5e14057d1954fe721f9709d35837f2447",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/9ff59517938f88d90b6e65311fef08faa640f681",
+                "reference": "9ff59517938f88d90b6e65311fef08faa640f681",
                 "shasum": ""
             },
             "require": {
@@ -3008,7 +3008,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-23T13:08:13+00:00"
+            "time": "2020-07-12T12:58:00+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -3630,16 +3630,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v5.1.2",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "7f6378c1fa2147eeb1b4c385856ce9de0d46ebd1"
+                "reference": "1864216226af21eb76d9477f691e7cbf198e0402"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/7f6378c1fa2147eeb1b4c385856ce9de0d46ebd1",
-                "reference": "7f6378c1fa2147eeb1b4c385856ce9de0d46ebd1",
+                "url": "https://api.github.com/repos/symfony/process/zipball/1864216226af21eb76d9477f691e7cbf198e0402",
+                "reference": "1864216226af21eb76d9477f691e7cbf198e0402",
                 "shasum": ""
             },
             "require": {
@@ -3690,7 +3690,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-30T20:35:19+00:00"
+            "time": "2020-07-23T08:36:24+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -3770,7 +3770,7 @@
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v5.1.2",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
@@ -3834,16 +3834,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.1.2",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "ac70459db781108db7c6d8981dd31ce0e29e3298"
+                "reference": "f629ba9b611c76224feb21fe2bcbf0b6f992300b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/ac70459db781108db7c6d8981dd31ce0e29e3298",
-                "reference": "ac70459db781108db7c6d8981dd31ce0e29e3298",
+                "url": "https://api.github.com/repos/symfony/string/zipball/f629ba9b611c76224feb21fe2bcbf0b6f992300b",
+                "reference": "f629ba9b611c76224feb21fe2bcbf0b6f992300b",
                 "shasum": ""
             },
             "require": {
@@ -3915,7 +3915,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-11T12:16:36+00:00"
+            "time": "2020-07-08T08:27:49+00:00"
         },
         {
             "name": "theseer/tokenizer",

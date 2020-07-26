@@ -63,7 +63,7 @@ class ApplicationTest extends TestCase
     protected function createConfigurator(): Configurator
     {
         $params = [
-            'engine'       => 'mysql',
+            'driver'       => 'mysql',
             'host'         => 'localhost',
             'user'         => 'root',
             'password'     => '',
@@ -624,7 +624,7 @@ class ApplicationTest extends TestCase
         static::assertNull($infos['session']);
 
         $config = new Configurator([
-            'engine'       => 'mysql',
+            'driver'       => 'mysql',
             'host'         => '127.0.0.1',
             'user'         => 'root',
             'password'     => '',
@@ -756,7 +756,7 @@ class ApplicationTest extends TestCase
         static::assertNull($infos['session']);
 
         $config = new Configurator([
-            'engine'       => 'mysql',
+            'driver'       => 'mysql',
             'host'         => '127.0.0.1',
             'user'         => 'root',
             'password'     => '',
@@ -1125,7 +1125,7 @@ class ApplicationTest extends TestCase
         static::assertNull($infos['session']);
 
         $config = new Configurator([
-            'engine'       => 'mysql',
+            'driver'       => 'mysql',
             'host'         => '127.0.0.1',
             'user'         => 'root',
             'password'     => '',
