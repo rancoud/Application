@@ -1665,16 +1665,16 @@
         },
         {
             "name": "rancoud/session",
-            "version": "3.0.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Session.git",
-                "reference": "a3337a86f7d1737cd65f1d65e1192ae60a77189e"
+                "reference": "cbfd181eb58f46bd65a3066396c6336679279a92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Session/zipball/a3337a86f7d1737cd65f1d65e1192ae60a77189e",
-                "reference": "a3337a86f7d1737cd65f1d65e1192ae60a77189e",
+                "url": "https://api.github.com/repos/rancoud/Session/zipball/cbfd181eb58f46bd65a3066396c6336679279a92",
+                "reference": "cbfd181eb58f46bd65a3066396c6336679279a92",
                 "shasum": ""
             },
             "require": {
@@ -1705,7 +1705,7 @@
                 }
             ],
             "description": "Session package",
-            "time": "2020-07-25T20:42:57+00:00"
+            "time": "2020-08-08T01:51:57+00:00"
         },
         {
             "name": "sebastian/code-unit",
