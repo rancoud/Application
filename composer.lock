@@ -97,16 +97,16 @@
         },
         {
             "name": "rancoud/router",
-            "version": "3.0.1",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Router.git",
-                "reference": "6f4be2268bf3ec0b23b27a6f05e016747a82297d"
+                "reference": "40b84db2b7e1febf26fa5e1e8b2b51adf480ada0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Router/zipball/6f4be2268bf3ec0b23b27a6f05e016747a82297d",
-                "reference": "6f4be2268bf3ec0b23b27a6f05e016747a82297d",
+                "url": "https://api.github.com/repos/rancoud/Router/zipball/40b84db2b7e1febf26fa5e1e8b2b51adf480ada0",
+                "reference": "40b84db2b7e1febf26fa5e1e8b2b51adf480ada0",
                 "shasum": ""
             },
             "require": {
@@ -135,7 +135,7 @@
                 }
             ],
             "description": "Router package",
-            "time": "2020-07-26T13:28:05+00:00"
+            "time": "2020-09-02T18:48:40+00:00"
         }
     ],
     "packages-dev": [
