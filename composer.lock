@@ -50,16 +50,16 @@
         },
         {
             "name": "rancoud/http",
-            "version": "3.0.1",
+            "version": "3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Http.git",
-                "reference": "ec2767716af4bc96fb577b861fbbd82245f2e59f"
+                "reference": "2ce08ea77f31b684420fe9de63c5ce990e0dae98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Http/zipball/ec2767716af4bc96fb577b861fbbd82245f2e59f",
-                "reference": "ec2767716af4bc96fb577b861fbbd82245f2e59f",
+                "url": "https://api.github.com/repos/rancoud/Http/zipball/2ce08ea77f31b684420fe9de63c5ce990e0dae98",
+                "reference": "2ce08ea77f31b684420fe9de63c5ce990e0dae98",
                 "shasum": ""
             },
             "require": {
@@ -93,20 +93,20 @@
                 }
             ],
             "description": "Http package",
-            "time": "2020-07-26T13:17:09+00:00"
+            "time": "2020-12-05T07:19:44+00:00"
         },
         {
             "name": "rancoud/router",
-            "version": "3.0.3",
+            "version": "3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Router.git",
-                "reference": "70ceaca28b1b9390e914cf2502b4fb50364148a2"
+                "reference": "97db418c51efda27eb6b3fd27f604cb9a5bcba72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Router/zipball/70ceaca28b1b9390e914cf2502b4fb50364148a2",
-                "reference": "70ceaca28b1b9390e914cf2502b4fb50364148a2",
+                "url": "https://api.github.com/repos/rancoud/Router/zipball/97db418c51efda27eb6b3fd27f604cb9a5bcba72",
+                "reference": "97db418c51efda27eb6b3fd27f604cb9a5bcba72",
                 "shasum": ""
             },
             "require": {
@@ -135,7 +135,7 @@
                 }
             ],
             "description": "Router package",
-            "time": "2020-09-11T22:40:06+00:00"
+            "time": "2020-12-05T07:33:59+00:00"
         }
     ],
     "packages-dev": [
