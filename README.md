@@ -11,8 +11,8 @@
 Application skeleton with strict minimum Router and Environment.  
 
 ## Dependencies
-[Environment package](https://github.com/rancoud/Environment)  
-[Router package](https://github.com/rancoud/Router)  
+[Environment package: https://github.com/rancoud/Environment](https://github.com/rancoud/Environment)  
+[Router package: https://github.com/rancoud/Router](https://github.com/rancoud/Router)  
 
 ## Installation
 ```php
@@ -251,8 +251,8 @@ Application::removeFromBag('db');
 * setInBag(name: string, object: mixed): void  
 
 ## Optionals Dependencies
-[Database package](https://github.com/rancoud/Database)  
-[Session package](https://github.com/rancoud/Session)  
+[Database package: https://github.com/rancoud/Database](https://github.com/rancoud/Database)  
+[Session package: https://github.com/rancoud/Session](https://github.com/rancoud/Session)  
 
 ## How to Dev
 `composer ci` for php-cs-fixer and phpunit and coverage  
