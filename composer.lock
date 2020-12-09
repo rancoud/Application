@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e8e3b7ba4e4eec8a87f997d05e69cc26",
+    "content-hash": "f0e354c81797f9afa269bf5dbec22aaa",
     "packages": [
         {
             "name": "rancoud/environment",
@@ -1635,16 +1635,16 @@
         },
         {
             "name": "rancoud/session",
-            "version": "3.0.1",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Session.git",
-                "reference": "cbfd181eb58f46bd65a3066396c6336679279a92"
+                "reference": "b5afd48c3e4d769e351af2e5bb353eb7331fea03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Session/zipball/cbfd181eb58f46bd65a3066396c6336679279a92",
-                "reference": "cbfd181eb58f46bd65a3066396c6336679279a92",
+                "url": "https://api.github.com/repos/rancoud/Session/zipball/b5afd48c3e4d769e351af2e5bb353eb7331fea03",
+                "reference": "b5afd48c3e4d769e351af2e5bb353eb7331fea03",
                 "shasum": ""
             },
             "require": {
@@ -1655,7 +1655,7 @@
                 "friendsofphp/php-cs-fixer": "^2.16",
                 "phpunit/phpunit": "^9.1",
                 "predis/predis": "^1.1",
-                "rancoud/database": "^5.0",
+                "rancoud/database": "^5.0 || ^6.0",
                 "squizlabs/php_codesniffer": "^3.5"
             },
             "type": "library",
@@ -1675,7 +1675,7 @@
                 }
             ],
             "description": "Session package",
-            "time": "2020-08-08T01:51:57+00:00"
+            "time": "2020-12-09T01:53:35+00:00"
         },
         {
             "name": "sebastian/cli-parser",
