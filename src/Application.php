@@ -23,16 +23,16 @@ class Application
     /** @var array */
     protected array $folders = [];
 
-    /** @var Application */
+    /** @var ?Application */
     protected static ?Application $app = null;
 
-    /** @var Router */
+    /** @var ?Router */
     protected ?Router $router = null;
 
     /** @var Environment */
     protected $config = [];
 
-    /** @var \Rancoud\Database\Database */
+    /** @var ?\Rancoud\Database\Database */
     protected ?\Rancoud\Database\Database $database = null;
 
     /** @var ServerRequestInterface|null */
@@ -376,7 +376,7 @@ class Application
             throw new ApplicationException('Empty Instance');
         }
 
-        return static::$app->bags[$name];
+        return static::$app->bags[$name] ?? null;
     }
 
     /**
