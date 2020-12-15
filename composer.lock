@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "rancoud/environment",
-            "version": "2.0.3",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Environment.git",
-                "reference": "2676e8aa1b493baa16e36167fe862c668a3b20a7"
+                "reference": "8a7baa47e1ac3f22e38e2329cc50a054d150fa59"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Environment/zipball/2676e8aa1b493baa16e36167fe862c668a3b20a7",
-                "reference": "2676e8aa1b493baa16e36167fe862c668a3b20a7",
+                "url": "https://api.github.com/repos/rancoud/Environment/zipball/8a7baa47e1ac3f22e38e2329cc50a054d150fa59",
+                "reference": "8a7baa47e1ac3f22e38e2329cc50a054d150fa59",
                 "shasum": ""
             },
             "require": {
@@ -46,7 +46,11 @@
                 }
             ],
             "description": "Environment package",
-            "time": "2020-12-05T03:56:16+00:00"
+            "support": {
+                "issues": "https://github.com/rancoud/Environment/issues",
+                "source": "https://github.com/rancoud/Environment/tree/2.1.0"
+            },
+            "time": "2020-12-15T19:42:45+00:00"
         },
         {
             "name": "rancoud/http",
@@ -4112,5 +4116,5 @@
         "php": ">=7.4.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }
