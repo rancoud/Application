@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "rancoud/environment",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Environment.git",
-                "reference": "994ee052006ed9dfbae08458c8e5634c5fd1a1c0"
+                "reference": "6d3476e6a32cb07b0e662f56efc0ddee48c35271"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Environment/zipball/994ee052006ed9dfbae08458c8e5634c5fd1a1c0",
-                "reference": "994ee052006ed9dfbae08458c8e5634c5fd1a1c0",
+                "url": "https://api.github.com/repos/rancoud/Environment/zipball/6d3476e6a32cb07b0e662f56efc0ddee48c35271",
+                "reference": "6d3476e6a32cb07b0e662f56efc0ddee48c35271",
                 "shasum": ""
             },
             "require": {
@@ -48,9 +48,9 @@
             "description": "Environment package",
             "support": {
                 "issues": "https://github.com/rancoud/Environment/issues",
-                "source": "https://github.com/rancoud/Environment/tree/2.1.1"
+                "source": "https://github.com/rancoud/Environment/tree/2.1.2"
             },
-            "time": "2021-02-07T02:36:33+00:00"
+            "time": "2021-04-22T18:24:45+00:00"
         },
         {
             "name": "rancoud/http",
