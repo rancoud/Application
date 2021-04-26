@@ -10,13 +10,15 @@ $config = [
         [
             'methods'     => ['GET'],
             'url'         => '/no_handle',
-            'callback'    => function($a,$b){$b($a);},
+            'callback'    => static function ($a, $b) {
+                $b($a);
+            },
             'name'        => 'test_no_handle'
         ],
         [
             'methods'     => ['GET'],
             'url'         => '/',
-            'callback'    => function($a,$b){
+            'callback'    => static function ($a, $b) {
                 return (new Factory())->createResponse(200)->withBody(Stream::create('home'));
             },
             'name'        => 'test_home'

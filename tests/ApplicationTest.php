@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rancoud\Application\Test;
+namespace tests;
 
 use PHPUnit\Framework\TestCase;
 use Rancoud\Application\Application;
@@ -20,34 +20,37 @@ use Rancoud\Session\Session;
  */
 class ApplicationTest extends TestCase
 {
-    protected string $folders = __DIR__ . DIRECTORY_SEPARATOR . 'folders';
-    protected string $testsEnvFolder = __DIR__ . DIRECTORY_SEPARATOR . 'folders' . DIRECTORY_SEPARATOR . 'tests_env';
+    protected string $folders = __DIR__ . \DIRECTORY_SEPARATOR . 'folders';
+    protected string $testsEnvFolder = __DIR__ . \DIRECTORY_SEPARATOR . 'folders' . \DIRECTORY_SEPARATOR . 'tests_env';
 
     protected function getFoldersWithAppEnv(): array
     {
-        $ds = DIRECTORY_SEPARATOR;
+        $ds = \DIRECTORY_SEPARATOR;
+
         return [
-            'ROOT' => $this->folders,
-            'APP' => $this->folders . $ds . 'app',
-            'WWW' => $this->folders . $ds . 'www',
+            'ROOT'   => $this->folders,
+            'APP'    => $this->folders . $ds . 'app',
+            'WWW'    => $this->folders . $ds . 'www',
             'ROUTES' => $this->folders . $ds . 'routes'
         ];
     }
 
     protected function getFoldersWithTestEnv(): array
     {
-        $ds = DIRECTORY_SEPARATOR;
+        $ds = \DIRECTORY_SEPARATOR;
+
         return [
-            'ROOT' => $this->folders,
-            'APP' => $this->folders . $ds . 'app' . $ds,
-            'WWW' => $this->folders . $ds . 'www' . $ds,
+            'ROOT'   => $this->folders,
+            'APP'    => $this->folders . $ds . 'app' . $ds,
+            'WWW'    => $this->folders . $ds . 'www' . $ds,
             'ROUTES' => $this->folders . $ds . 'tests_routes' . $ds
         ];
     }
 
     protected function getEnvironment(): Environment
     {
-        $ds = DIRECTORY_SEPARATOR;
+        $ds = \DIRECTORY_SEPARATOR;
+
         return new Environment([__DIR__, $this->folders . $ds . 'tests_env' . $ds], 'test_valid_routes.env');
     }
 
@@ -57,8 +60,9 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @return Configurator
      * @throws \Rancoud\Database\DatabaseException
+     *
+     * @return Configurator
      */
     protected function createConfigurator(): Configurator
     {
@@ -75,6 +79,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
@@ -83,15 +88,16 @@ class ApplicationTest extends TestCase
         $folders = $this->getFoldersWithAppEnv();
         $app = new Application(['ROOT' => $folders['ROOT'], 'ROUTES' => $folders['ROUTES']]);
 
-        static::assertSame(Application::class, get_class($app));
+        static::assertSame(Application::class, \get_class($app));
         static::assertNotSame($folders['ROOT'], Application::getFolder('ROOT'));
         static::assertNotSame($folders['ROUTES'], Application::getFolder('ROUTES'));
-        static::assertSame($folders['ROOT'] . DIRECTORY_SEPARATOR, Application::getFolder('ROOT'));
-        static::assertSame($folders['ROUTES'] . DIRECTORY_SEPARATOR, Application::getFolder('ROUTES'));
+        static::assertSame($folders['ROOT'] . \DIRECTORY_SEPARATOR, Application::getFolder('ROOT'));
+        static::assertSame($folders['ROUTES'] . \DIRECTORY_SEPARATOR, Application::getFolder('ROUTES'));
     }
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
@@ -100,20 +106,20 @@ class ApplicationTest extends TestCase
         $folders = $this->getFoldersWithAppEnv();
         $app = new Application($folders);
 
-        static::assertSame(Application::class, get_class($app));
+        static::assertSame(Application::class, \get_class($app));
         static::assertNotSame($folders['ROOT'], Application::getFolder('ROOT'));
         static::assertNotSame($folders['ROUTES'], Application::getFolder('ROUTES'));
         static::assertNotSame($folders['APP'], Application::getFolder('APP'));
         static::assertNotSame($folders['WWW'], Application::getFolder('WWW'));
-        static::assertSame($folders['ROOT'] . DIRECTORY_SEPARATOR, Application::getFolder('ROOT'));
-        static::assertSame($folders['ROUTES'] . DIRECTORY_SEPARATOR, Application::getFolder('ROUTES'));
-        static::assertSame($folders['APP'] . DIRECTORY_SEPARATOR, Application::getFolder('APP'));
-        static::assertSame($folders['WWW'] . DIRECTORY_SEPARATOR, Application::getFolder('WWW'));
+        static::assertSame($folders['ROOT'] . \DIRECTORY_SEPARATOR, Application::getFolder('ROOT'));
+        static::assertSame($folders['ROUTES'] . \DIRECTORY_SEPARATOR, Application::getFolder('ROUTES'));
+        static::assertSame($folders['APP'] . \DIRECTORY_SEPARATOR, Application::getFolder('APP'));
+        static::assertSame($folders['WWW'] . \DIRECTORY_SEPARATOR, Application::getFolder('WWW'));
     }
-
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
@@ -127,6 +133,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
@@ -140,6 +147,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
@@ -153,6 +161,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
@@ -168,19 +177,20 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
     public function testConstructorEnvironment(): void
     {
-        $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_empty.env'));
+        $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_empty.env')); //phpcs:ignore
 
-        static::assertSame(Application::class, get_class($app));
+        static::assertSame(Application::class, \get_class($app));
     }
-
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
@@ -189,23 +199,25 @@ class ApplicationTest extends TestCase
         $this->expectException(ApplicationException::class);
         $this->expectExceptionMessage('Invalid timezone: invalid. Check DateTimeZone::listIdentifiers()');
 
-        new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_bad_timezone.env'));
+        new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_bad_timezone.env')); //phpcs:ignore
     }
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
     public function testConstructorEnvironmentGoodTimezone(): void
     {
-        $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_good_timezone.env'));
+        $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_good_timezone.env')); //phpcs:ignore
 
-        static::assertSame(Application::class, get_class($app));
+        static::assertSame(Application::class, \get_class($app));
     }
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
@@ -214,11 +226,12 @@ class ApplicationTest extends TestCase
         $this->expectException(ApplicationException::class);
         $this->expectExceptionMessage('Invalid routes');
 
-        new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_invalid_routes.env'));
+        new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_invalid_routes.env')); //phpcs:ignore
     }
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
@@ -227,11 +240,12 @@ class ApplicationTest extends TestCase
         $this->expectException(ApplicationException::class);
         $this->expectExceptionMessage('Invalid route file');
 
-        new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_invalid_route.env'));
+        new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_invalid_route.env')); //phpcs:ignore
     }
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws RouterException
      * @throws \Rancoud\Environment\EnvironmentException
@@ -244,7 +258,7 @@ class ApplicationTest extends TestCase
 
         static::assertNotNull($response);
         static::assertSame(200, $response->getStatusCode());
-        static::assertEquals('home', $response->getBody());
+        static::assertSame('home', (string) $response->getBody());
 
         $infos = $app->getDebugInfos();
         static::assertSame([], $infos);
@@ -252,6 +266,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws RouterException
      * @throws \Rancoud\Environment\EnvironmentException
@@ -267,6 +282,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws RouterException
      * @throws \Rancoud\Environment\EnvironmentException
@@ -282,6 +298,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws RouterException
      * @throws \Rancoud\Environment\EnvironmentException
@@ -291,13 +308,14 @@ class ApplicationTest extends TestCase
         $this->expectException(RouterException::class);
         $this->expectExceptionMessage('The default404 is invalid');
 
-        $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_router_404.env'));
+        $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_router_404.env')); //phpcs:ignore
         $request = $this->getRequest('GET', '/no_handle');
         $app->run($request);
     }
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws RouterException
      * @throws \Rancoud\Environment\EnvironmentException
@@ -307,13 +325,14 @@ class ApplicationTest extends TestCase
         $this->expectException(RouterException::class);
         $this->expectExceptionMessage('The default404 is invalid');
 
-        $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_router_404.env'));
+        $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_router_404.env')); //phpcs:ignore
         $request = $this->getRequest('GET', '/no_handle');
         $app->run($request);
     }
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws RouterException
      * @throws \Rancoud\Environment\EnvironmentException
@@ -327,7 +346,7 @@ class ApplicationTest extends TestCase
 
         static::assertNotNull($response);
         static::assertSame(200, $response->getStatusCode());
-        static::assertEquals('home', $response->getBody());
+        static::assertSame('home', (string) $response->getBody());
         static::assertSame('1.0', $response->getProtocolVersion());
 
         $app = new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
@@ -337,7 +356,7 @@ class ApplicationTest extends TestCase
 
         static::assertNotNull($response);
         static::assertSame(200, $response->getStatusCode());
-        static::assertEquals('home', $response->getBody());
+        static::assertSame('home', (string) $response->getBody());
         static::assertSame('2', $response->getProtocolVersion());
 
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/0.9';
@@ -349,12 +368,13 @@ class ApplicationTest extends TestCase
 
         static::assertNotNull($response);
         static::assertSame(200, $response->getStatusCode());
-        static::assertEquals('home', $response->getBody());
+        static::assertSame('home', (string) $response->getBody());
         static::assertSame('0.9', $response->getProtocolVersion());
     }
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      */
     public function testGetEmptyInstance(): void
@@ -367,6 +387,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      */
     public function testGetEmptyRouter(): void
@@ -379,6 +400,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      */
     public function testGetEmptyConfig(): void
@@ -391,6 +413,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      */
     public function testGetEmptyDatabase(): void
@@ -403,8 +426,10 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Database\DatabaseException
+     * @throws \Rancoud\Environment\EnvironmentException
      */
     public function testSetEmptyDatabase(): void
     {
@@ -418,6 +443,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      */
     public function testGetEmptyBag(): void
@@ -430,6 +456,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      */
     public function testSetEmptyBag(): void
@@ -442,6 +469,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      */
     public function testRemoveEmptyBag(): void
@@ -454,6 +482,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
@@ -465,6 +494,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
@@ -475,11 +505,12 @@ class ApplicationTest extends TestCase
         $env = $this->getEnvironment();
         $env->load();
 
-        static::assertEquals($env, Application::getConfig());
+        static::assertEqualsCanonicalizing($env, Application::getConfig());
     }
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
@@ -496,6 +527,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Database\DatabaseException
      * @throws \Rancoud\Environment\EnvironmentException
@@ -518,6 +550,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
@@ -528,7 +561,7 @@ class ApplicationTest extends TestCase
         $bag = Application::getFromBag('a');
         static::assertNull($bag);
 
-        Application::setInBag('b','c');
+        Application::setInBag('b', 'c');
 
         $bag = Application::getFromBag('b');
         static::assertSame('c', $bag);
@@ -541,6 +574,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws RouterException
      * @throws \Rancoud\Database\DatabaseException
@@ -549,11 +583,11 @@ class ApplicationTest extends TestCase
      */
     public function testGetDebug(): void
     {
-        $ds = DIRECTORY_SEPARATOR;
+        $ds = \DIRECTORY_SEPARATOR;
         $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug.env');
         $app = new Application($this->getFoldersWithTestEnv(), $env);
 
-        static::assertSame('1', ini_get('display_errors'));
+        static::assertSame('1', \ini_get('display_errors'));
 
         $infos = $app->getDebugInfos();
 
@@ -573,16 +607,16 @@ class ApplicationTest extends TestCase
 
         static::assertArrayHasKey('included_files', $infos);
         static::assertIsArray($infos['included_files']);
-        
+
         static::assertArrayHasKey('request', $infos);
         static::assertNull($infos['request']);
-        
+
         static::assertArrayHasKey('response', $infos);
         static::assertNull($infos['response']);
-        
+
         static::assertArrayHasKey('database', $infos);
         static::assertNull($infos['database']);
-        
+
         static::assertArrayHasKey('session', $infos);
         static::assertNull($infos['session']);
 
@@ -631,7 +665,7 @@ class ApplicationTest extends TestCase
             'database'     => 'test_database',
             'save_queries' => true]);
         $database = new Database($config);
-        
+
         Application::setDatabase($database);
         Session::start();
 
@@ -673,6 +707,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws RouterException
      * @throws \Rancoud\Database\DatabaseException
@@ -681,11 +716,11 @@ class ApplicationTest extends TestCase
      */
     public function testGetDebugExcludeDatabase(): void
     {
-        $ds = DIRECTORY_SEPARATOR;
+        $ds = \DIRECTORY_SEPARATOR;
         $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_database.env');
         $app = new Application($this->getFoldersWithTestEnv(), $env);
 
-        static::assertSame('0', ini_get('display_errors'));
+        static::assertSame('0', \ini_get('display_errors'));
 
         $infos = $app->getDebugInfos();
         static::assertArrayHasKey('memory', $infos);
@@ -804,12 +839,13 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
     public function testGetDebugExcludeIncludeFiles(): void
     {
-        $ds = DIRECTORY_SEPARATOR;
+        $ds = \DIRECTORY_SEPARATOR;
         $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_include_files.env');
         $app = new Application($this->getFoldersWithTestEnv(), $env);
 
@@ -847,12 +883,13 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
     public function testGetDebugExcludeMemory(): void
     {
-        $ds = DIRECTORY_SEPARATOR;
+        $ds = \DIRECTORY_SEPARATOR;
         $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_memory.env');
         $app = new Application($this->getFoldersWithTestEnv(), $env);
 
@@ -882,13 +919,14 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws RouterException
      * @throws \Rancoud\Environment\EnvironmentException
      */
     public function testGetDebugExcludeRequest(): void
     {
-        $ds = DIRECTORY_SEPARATOR;
+        $ds = \DIRECTORY_SEPARATOR;
         $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_request.env');
         $app = new Application($this->getFoldersWithTestEnv(), $env);
 
@@ -962,13 +1000,14 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws RouterException
      * @throws \Rancoud\Environment\EnvironmentException
      */
     public function testGetDebugExcludeResponse(): void
     {
-        $ds = DIRECTORY_SEPARATOR;
+        $ds = \DIRECTORY_SEPARATOR;
         $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_response.env');
         $app = new Application($this->getFoldersWithTestEnv(), $env);
 
@@ -1002,7 +1041,6 @@ class ApplicationTest extends TestCase
 
         static::assertArrayHasKey('session', $infos);
         static::assertNull($infos['session']);
-
 
         $request = $this->getRequest('GET', '/');
         $request = $request->withProtocolVersion('2');
@@ -1043,6 +1081,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws RouterException
      * @throws \Rancoud\Database\DatabaseException
@@ -1051,7 +1090,7 @@ class ApplicationTest extends TestCase
      */
     public function testGetDebugExcludeSession(): void
     {
-        $ds = DIRECTORY_SEPARATOR;
+        $ds = \DIRECTORY_SEPARATOR;
         $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_session.env');
         $app = new Application($this->getFoldersWithTestEnv(), $env);
 
@@ -1085,7 +1124,6 @@ class ApplicationTest extends TestCase
 
         static::assertArrayHasKey('session', $infos);
         static::assertNull($infos['session']);
-
 
         $request = $this->getRequest('GET', '/');
         $request = $request->withProtocolVersion('2');
@@ -1173,12 +1211,13 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
     public function testGetDebugExcludeRunElapsedTimes(): void
     {
-        $ds = DIRECTORY_SEPARATOR;
+        $ds = \DIRECTORY_SEPARATOR;
         $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_run_elapsed_times.env');
         $app = new Application($this->getFoldersWithTestEnv(), $env);
 
@@ -1215,12 +1254,13 @@ class ApplicationTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
     public function testConvertMemoryLimitToBytes(): void
     {
-        $ds = DIRECTORY_SEPARATOR;
+        $ds = \DIRECTORY_SEPARATOR;
         $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_run_elapsed_times.env');
         $app = new ImplementApplication($this->getFoldersWithTestEnv(), $env);
 
@@ -1242,13 +1282,4 @@ class ApplicationTest extends TestCase
         $value = $app->convertMemoryLimitToBytes('-1');
         static::assertSame('-1', $value);
     }
-}
-
-class ImplementApplication extends Application
-{
-    public function convertMemoryLimitToBytes($memoryLimit)
-    {
-        return parent::convertMemoryLimitToBytes($memoryLimit);
-    }
-
 }

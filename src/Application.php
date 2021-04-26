@@ -158,10 +158,7 @@ class Application
      */
     protected function setupTimezone(): void
     {
-        $timezone = $this->config->get('TIMEZONE');
-        if ($timezone === null) {
-            return;
-        }
+        $timezone = $this->config->get('TIMEZONE', 'UTC');
 
         $allTimezones = DateTimeZone::listIdentifiers();
         if (\in_array($timezone, $allTimezones, true)) {

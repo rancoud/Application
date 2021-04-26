@@ -22,10 +22,10 @@ composer require rancoud/application
 ## How to use it?
 ### General
 #### Requirements
-You need `.env` file and route file called for example `routes.php`
-Content of default `.env` file
+You need `.env` file and route file called for example `routes.php`  
+Content of default `.env` (all values are optionals, you can use an empty `.env` file if you want)
 ```dotenv
-# setup timezone, by default use timezone from php.ini (valid timezones are checked with DateTimeZone::listIdentifiers())
+# setup timezone, by default use UTC (valid timezones are checked against DateTimeZone::listIdentifiers())
 TIMEZONE=null
 
 # file names that contain route configurations, if null it will load all files in current folder provided to the Application constructor
@@ -174,7 +174,7 @@ It is used in the function `getDebugInfos()`
 You are free to use something else.  
 
 ### Timezone  
-By default the timezone used will be from php.ini  
+By default the timezone used will be UTC  
 You can specify a timezone in .env file  
 ```dotenv
 # valid timezones are checked with DateTimeZone::listIdentifiers()
@@ -225,14 +225,14 @@ Application::removeFromBag('db');
 ## Application Constructor
 ### Settings
 #### Mandatory
-| Parameter | Type | Description |
-| --- | --- | --- |
-| folders | array | Folder's list. ROOT and ROUTES are mandatory |
+| Parameter | Type  | Description                                  |
+| --------- | ----- | -------------------------------------------- |
+| folders   | array | Folder's list. ROOT and ROUTES are mandatory |
 
 #### Optionals
-| Parameter | Type | Default value | Description |
-| --- | --- | --- | --- |
-| env | Rancoud\Environment\Environment | null | Setup a different .env file |
+| Parameter | Type                            | Default value | Description                 |
+| --------- | ------------------------------- | ------------- | --------------------------- |
+| env       | Rancoud\Environment\Environment | null          | Setup a different .env file |
 
 ## Application Methods
 ### General Commands  
