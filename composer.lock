@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0e354c81797f9afa269bf5dbec22aaa",
+    "content-hash": "caad71979e8f5e605c34e68953f42d41",
     "packages": [
         {
             "name": "rancoud/environment",
@@ -1748,20 +1748,22 @@
         },
         {
             "name": "rancoud/session",
-            "version": "4.0.1",
+            "version": "5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Session.git",
-                "reference": "600809cf366702e849d9900b58354fede1bb351f"
+                "reference": "687edd8028ce96ce4d76934029067161af65ebf4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Session/zipball/600809cf366702e849d9900b58354fede1bb351f",
-                "reference": "600809cf366702e849d9900b58354fede1bb351f",
+                "url": "https://api.github.com/repos/rancoud/Session/zipball/687edd8028ce96ce4d76934029067161af65ebf4",
+                "reference": "687edd8028ce96ce4d76934029067161af65ebf4",
                 "shasum": ""
             },
             "require": {
-                "ext-openssl": ">=7.4.0",
+                "ext-mbstring": "*",
+                "ext-openssl": "*",
+                "ext-session": "*",
                 "php": ">=7.4.0"
             },
             "require-dev": {
@@ -1790,9 +1792,9 @@
             "description": "Session package",
             "support": {
                 "issues": "https://github.com/rancoud/Session/issues",
-                "source": "https://github.com/rancoud/Session/tree/4.0.1"
+                "source": "https://github.com/rancoud/Session/tree/5.0.0"
             },
-            "time": "2021-02-07T02:27:57+00:00"
+            "time": "2021-04-21T21:46:48+00:00"
         },
         {
             "name": "sebastian/cli-parser",
