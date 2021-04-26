@@ -10,7 +10,9 @@ $config = [
         [
             'methods'     => ['GET'],
             'url'         => '/no_handle',
-            'callback'    => function($a,$b){$b($a);},
+            'callback'    => static function ($a, $b) {
+                $b($a);
+            },
             'name'        => 'test_no_handle'
         ]
     ]

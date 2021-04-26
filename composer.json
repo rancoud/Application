@@ -15,6 +15,11 @@
             "Rancoud\\Application\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "tests\\": "tests"
+        }
+    },
     "require": {
         "php": ">=7.4.0",
         "rancoud/environment": "^2.0",
