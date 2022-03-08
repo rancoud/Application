@@ -183,7 +183,7 @@ class ApplicationTest extends TestCase
      */
     public function testConstructorEnvironment(): void
     {
-        $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_empty.env')); //phpcs:ignore
+        $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_empty.env')); // phpcs:ignore
 
         static::assertSame(Application::class, \get_class($app));
     }
@@ -199,7 +199,7 @@ class ApplicationTest extends TestCase
         $this->expectException(ApplicationException::class);
         $this->expectExceptionMessage('Invalid timezone: invalid. Check DateTimeZone::listIdentifiers()');
 
-        new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_bad_timezone.env')); //phpcs:ignore
+        new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_bad_timezone.env')); // phpcs:ignore
     }
 
     /**
@@ -210,7 +210,7 @@ class ApplicationTest extends TestCase
      */
     public function testConstructorEnvironmentGoodTimezone(): void
     {
-        $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_good_timezone.env')); //phpcs:ignore
+        $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_good_timezone.env')); // phpcs:ignore
 
         static::assertSame(Application::class, \get_class($app));
     }
@@ -226,7 +226,7 @@ class ApplicationTest extends TestCase
         $this->expectException(ApplicationException::class);
         $this->expectExceptionMessage('Invalid routes');
 
-        new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_invalid_routes.env')); //phpcs:ignore
+        new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_invalid_routes.env')); // phpcs:ignore
     }
 
     /**
@@ -240,7 +240,7 @@ class ApplicationTest extends TestCase
         $this->expectException(ApplicationException::class);
         $this->expectExceptionMessage('Invalid route file');
 
-        new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_invalid_route.env')); //phpcs:ignore
+        new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_invalid_route.env')); // phpcs:ignore
     }
 
     /**
@@ -308,7 +308,7 @@ class ApplicationTest extends TestCase
         $this->expectException(RouterException::class);
         $this->expectExceptionMessage('The default404 is invalid');
 
-        $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_router_404.env')); //phpcs:ignore
+        $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_router_404.env')); // phpcs:ignore
         $request = $this->getRequest('GET', '/no_handle');
         $app->run($request);
     }
@@ -325,7 +325,7 @@ class ApplicationTest extends TestCase
         $this->expectException(RouterException::class);
         $this->expectExceptionMessage('The default404 is invalid');
 
-        $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_router_404.env')); //phpcs:ignore
+        $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_router_404.env')); // phpcs:ignore
         $request = $this->getRequest('GET', '/no_handle');
         $app->run($request);
     }
