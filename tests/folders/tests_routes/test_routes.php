@@ -18,8 +18,8 @@ $config = [
         [
             'methods'     => ['GET'],
             'url'         => '/',
-            'callback'    => static function ($a, $b) {
-                return (new Factory())->createResponse(200)->withBody(Stream::create('home'));
+            'callback'    => static function () {
+                return (new Factory())->createResponse()->withBody(Stream::create('home'));
             },
             'name'        => 'test_home'
         ]

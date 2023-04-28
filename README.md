@@ -225,12 +225,12 @@ Application::removeFromBag('db');
 ### Settings
 #### Mandatory
 | Parameter | Type  | Description                                  |
-| --------- | ----- | -------------------------------------------- |
+|-----------|-------|----------------------------------------------|
 | folders   | array | Folder's list. ROOT and ROUTES are mandatory |
 
 #### Optionals
 | Parameter | Type                            | Default value | Description                 |
-| --------- | ------------------------------- | ------------- | --------------------------- |
+|-----------|---------------------------------|---------------|-----------------------------|
 | env       | Rancoud\Environment\Environment | null          | Setup a different .env file |
 
 ## Application Methods
