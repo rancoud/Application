@@ -199,7 +199,12 @@ class Application
     protected function loadAllRoutesFilesInRoutesFolder(): void
     {
         $res = \opendir($this->folders['ROUTES']);
-        while (($routeFile = \readdir($res)) !== false) {
+        while (true) {
+            $routeFile = \readdir($res);
+            if ($routeFile === false) {
+                break;
+            }
+
             if (\mb_strripos($routeFile, '.php') === \mb_strlen($routeFile) - 4) {
                 $this->loadRouteFile($routeFile);
             }
