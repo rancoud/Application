@@ -88,7 +88,7 @@ class ApplicationTest extends TestCase
         $folders = $this->getFoldersWithAppEnv();
         $app = new Application(['ROOT' => $folders['ROOT'], 'ROUTES' => $folders['ROUTES']]);
 
-        static::assertSame(Application::class, \get_class($app));
+        static::assertInstanceOf(Application::class, $app);
         static::assertNotSame($folders['ROOT'], Application::getFolder('ROOT'));
         static::assertNotSame($folders['ROUTES'], Application::getFolder('ROUTES'));
         static::assertSame($folders['ROOT'] . \DIRECTORY_SEPARATOR, Application::getFolder('ROOT'));
@@ -106,7 +106,7 @@ class ApplicationTest extends TestCase
         $folders = $this->getFoldersWithAppEnv();
         $app = new Application($folders);
 
-        static::assertSame(Application::class, \get_class($app));
+        static::assertInstanceOf(Application::class, $app);
         static::assertNotSame($folders['ROOT'], Application::getFolder('ROOT'));
         static::assertNotSame($folders['ROUTES'], Application::getFolder('ROUTES'));
         static::assertNotSame($folders['APP'], Application::getFolder('APP'));
@@ -185,7 +185,7 @@ class ApplicationTest extends TestCase
     {
         $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_empty.env')); // phpcs:ignore
 
-        static::assertSame(Application::class, \get_class($app));
+        static::assertInstanceOf(Application::class, $app);
     }
 
     /**
@@ -212,7 +212,7 @@ class ApplicationTest extends TestCase
     {
         $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_good_timezone.env')); // phpcs:ignore
 
-        static::assertSame(Application::class, \get_class($app));
+        static::assertInstanceOf(Application::class, $app);
     }
 
     /**
