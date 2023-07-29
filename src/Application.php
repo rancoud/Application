@@ -397,7 +397,7 @@ class Application
 
     /**
      * @param string $name
-     * @param $object
+     * @param mixed  $object
      *
      * @throws ApplicationException
      */
