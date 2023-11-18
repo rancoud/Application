@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "rancoud/environment",
-            "version": "2.1.6",
+            "version": "2.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Environment.git",
-                "reference": "24d8d3497d5ccab39a20e990b669efd6b9090247"
+                "reference": "fe7d28b23602c28d8b8f943176cd5103b535a0d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Environment/zipball/24d8d3497d5ccab39a20e990b669efd6b9090247",
-                "reference": "24d8d3497d5ccab39a20e990b669efd6b9090247",
+                "url": "https://api.github.com/repos/rancoud/Environment/zipball/fe7d28b23602c28d8b8f943176cd5103b535a0d7",
+                "reference": "fe7d28b23602c28d8b8f943176cd5103b535a0d7",
                 "shasum": ""
             },
             "require": {
@@ -25,7 +25,7 @@
                 "php": ">=7.4.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16",
+                "friendsofphp/php-cs-fixer": "^2.16 || ^3.0",
                 "phpunit/phpunit": "^9.1",
                 "squizlabs/php_codesniffer": "^3.5"
             },
@@ -48,22 +48,22 @@
             "description": "Environment package",
             "support": {
                 "issues": "https://github.com/rancoud/Environment/issues",
-                "source": "https://github.com/rancoud/Environment/tree/2.1.6"
+                "source": "https://github.com/rancoud/Environment/tree/2.1.7"
             },
-            "time": "2021-04-28T19:08:27+00:00"
+            "time": "2023-11-14T18:02:19+00:00"
         },
         {
             "name": "rancoud/http",
-            "version": "3.1.0",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Http.git",
-                "reference": "00bff72fba047a07149392aa93bac760b86ed826"
+                "reference": "021d3ce4ea740e901aaf735b25e40a0a79a1dd62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Http/zipball/00bff72fba047a07149392aa93bac760b86ed826",
-                "reference": "00bff72fba047a07149392aa93bac760b86ed826",
+                "url": "https://api.github.com/repos/rancoud/Http/zipball/021d3ce4ea740e901aaf735b25e40a0a79a1dd62",
+                "reference": "021d3ce4ea740e901aaf735b25e40a0a79a1dd62",
                 "shasum": ""
             },
             "require": {
@@ -76,7 +76,7 @@
                 "psr/http-message-implementation": "1.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16",
+                "friendsofphp/php-cs-fixer": "^2.16 || ^3.0",
                 "phpunit/phpunit": "^9.2",
                 "squizlabs/php_codesniffer": "^3.5",
                 "symfony/process": "^5.2"
@@ -101,22 +101,22 @@
             "description": "Http package",
             "support": {
                 "issues": "https://github.com/rancoud/Http/issues",
-                "source": "https://github.com/rancoud/Http/tree/3.1.0"
+                "source": "https://github.com/rancoud/Http/tree/3.1.2"
             },
-            "time": "2021-04-26T12:27:26+00:00"
+            "time": "2023-11-18T15:26:32+00:00"
         },
         {
             "name": "rancoud/router",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Router.git",
-                "reference": "f1719ada797e2d89cbba501193e0fcd2fdabd131"
+                "reference": "67ed4d475bda6647a143c3bc886fb16c21b11bb5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Router/zipball/f1719ada797e2d89cbba501193e0fcd2fdabd131",
-                "reference": "f1719ada797e2d89cbba501193e0fcd2fdabd131",
+                "url": "https://api.github.com/repos/rancoud/Router/zipball/67ed4d475bda6647a143c3bc886fb16c21b11bb5",
+                "reference": "67ed4d475bda6647a143c3bc886fb16c21b11bb5",
                 "shasum": ""
             },
             "require": {
@@ -124,7 +124,7 @@
                 "rancoud/http": "^3.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16",
+                "friendsofphp/php-cs-fixer": "^2.16 || ^3.0",
                 "phpunit/phpunit": "^9.1",
                 "squizlabs/php_codesniffer": "^3.5"
             },
@@ -147,9 +147,9 @@
             "description": "Router package",
             "support": {
                 "issues": "https://github.com/rancoud/Router/issues",
-                "source": "https://github.com/rancoud/Router/tree/3.1.0"
+                "source": "https://github.com/rancoud/Router/tree/3.1.1"
             },
-            "time": "2021-04-26T14:42:24+00:00"
+            "time": "2023-11-18T15:39:23+00:00"
         }
     ],
     "packages-dev": [
@@ -1332,16 +1332,16 @@
         },
         {
             "name": "rancoud/database",
-            "version": "6.0.5",
+            "version": "6.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Database.git",
-                "reference": "cce738e3ee38e5e219caaa133f787685496671d4"
+                "reference": "8a3ebe0618c9c5405ddb5645329c9b1f820c93e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Database/zipball/cce738e3ee38e5e219caaa133f787685496671d4",
-                "reference": "cce738e3ee38e5e219caaa133f787685496671d4",
+                "url": "https://api.github.com/repos/rancoud/Database/zipball/8a3ebe0618c9c5405ddb5645329c9b1f820c93e3",
+                "reference": "8a3ebe0618c9c5405ddb5645329c9b1f820c93e3",
                 "shasum": ""
             },
             "require": {
@@ -1349,7 +1349,7 @@
                 "php": ">=7.4.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16",
+                "friendsofphp/php-cs-fixer": "^2.16 || ^3.0",
                 "phpunit/phpunit": "^9.1",
                 "squizlabs/php_codesniffer": "^3.5"
             },
@@ -1377,22 +1377,22 @@
             "description": "Database package",
             "support": {
                 "issues": "https://github.com/rancoud/Database/issues",
-                "source": "https://github.com/rancoud/Database/tree/6.0.5"
+                "source": "https://github.com/rancoud/Database/tree/6.0.6"
             },
-            "time": "2021-04-23T21:55:51+00:00"
+            "time": "2023-11-14T18:01:58+00:00"
         },
         {
             "name": "rancoud/session",
-            "version": "5.0.1",
+            "version": "5.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Session.git",
-                "reference": "b5f23a9a8880995b1225d4108bda8481bb6d3eee"
+                "reference": "136da7e59f761e507cf29c88bd42445908387ec5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Session/zipball/b5f23a9a8880995b1225d4108bda8481bb6d3eee",
-                "reference": "b5f23a9a8880995b1225d4108bda8481bb6d3eee",
+                "url": "https://api.github.com/repos/rancoud/Session/zipball/136da7e59f761e507cf29c88bd42445908387ec5",
+                "reference": "136da7e59f761e507cf29c88bd42445908387ec5",
                 "shasum": ""
             },
             "require": {
@@ -1402,9 +1402,9 @@
                 "php": ">=7.4.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16",
+                "friendsofphp/php-cs-fixer": "^2.16 || ^3.0",
                 "phpunit/phpunit": "^9.1",
-                "predis/predis": "^1.1",
+                "predis/predis": "^1.1 || ^2.0",
                 "rancoud/database": "^5.0 || ^6.0",
                 "squizlabs/php_codesniffer": "^3.5"
             },
@@ -1427,9 +1427,9 @@
             "description": "Session package",
             "support": {
                 "issues": "https://github.com/rancoud/Session/issues",
-                "source": "https://github.com/rancoud/Session/tree/5.0.1"
+                "source": "https://github.com/rancoud/Session/tree/5.0.2"
             },
-            "time": "2021-04-26T20:54:53+00:00"
+            "time": "2023-11-18T14:27:58+00:00"
         },
         {
             "name": "sebastian/cli-parser",
