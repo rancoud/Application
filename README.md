@@ -10,8 +10,8 @@
 Application skeleton with strict minimum Router and Environment.  
 
 ## Dependencies
-[Environment package: https://github.com/rancoud/Environment](https://github.com/rancoud/Environment)  
-[Router package: https://github.com/rancoud/Router](https://github.com/rancoud/Router)  
+Environment package: [https://github.com/rancoud/Environment](https://github.com/rancoud/Environment)  
+Router package: [https://github.com/rancoud/Router](https://github.com/rancoud/Router)  
 
 ## Installation
 ```php
