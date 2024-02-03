@@ -59,7 +59,7 @@ class Application
      * @throws ApplicationException
      * @throws EnvironmentException
      */
-    public function __construct(array $folders, Environment $env = null)
+    public function __construct(array $folders, ?Environment $env = null)
     {
         $this->initFolders($folders);
         $this->initAttributes();
@@ -115,7 +115,7 @@ class Application
     /**
      * @param Environment|null $env
      */
-    protected function loadEnvironment(Environment $env = null): void
+    protected function loadEnvironment(?Environment $env = null): void
     {
         if ($env !== null) {
             $this->config = $env;
