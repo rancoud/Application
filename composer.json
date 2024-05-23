@@ -29,7 +29,7 @@
         "friendsofphp/php-cs-fixer": "^2.16 || ^3.0",
         "phpunit/phpunit": "^9.1 || ^10.0 || ^11.0",
         "rancoud/database": "^5.0 || ^6.0",
-        "rancoud/session": "^3.0 || ^4.0 || ^5.0",
+        "rancoud/session": "^5.0",
         "squizlabs/php_codesniffer": "^3.5"
     },
     "scripts": {
