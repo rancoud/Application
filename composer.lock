@@ -107,16 +107,16 @@
         },
         {
             "name": "rancoud/router",
-            "version": "3.1.5",
+            "version": "3.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Router.git",
-                "reference": "6322abc3dc1781cac1add3c0fc3798926a6c0e54"
+                "reference": "02efc1a90816af014d2e9e691c13a0934ffae376"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Router/zipball/6322abc3dc1781cac1add3c0fc3798926a6c0e54",
-                "reference": "6322abc3dc1781cac1add3c0fc3798926a6c0e54",
+                "url": "https://api.github.com/repos/rancoud/Router/zipball/02efc1a90816af014d2e9e691c13a0934ffae376",
+                "reference": "02efc1a90816af014d2e9e691c13a0934ffae376",
                 "shasum": ""
             },
             "require": {
@@ -147,9 +147,9 @@
             "description": "Router package",
             "support": {
                 "issues": "https://github.com/rancoud/Router/issues",
-                "source": "https://github.com/rancoud/Router/tree/3.1.5"
+                "source": "https://github.com/rancoud/Router/tree/3.1.6"
             },
-            "time": "2024-05-23T21:14:12+00:00"
+            "time": "2024-09-02T12:22:28+00:00"
         }
     ],
     "packages-dev": [
