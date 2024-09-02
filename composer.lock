@@ -1583,16 +1583,16 @@
         },
         {
             "name": "rancoud/session",
-            "version": "5.0.7",
+            "version": "5.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Session.git",
-                "reference": "91c072bd6b21f65317487de88b8d71088eabe232"
+                "reference": "58c896743f6db801ec3e08798d5353c6dd1e74d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Session/zipball/91c072bd6b21f65317487de88b8d71088eabe232",
-                "reference": "91c072bd6b21f65317487de88b8d71088eabe232",
+                "url": "https://api.github.com/repos/rancoud/Session/zipball/58c896743f6db801ec3e08798d5353c6dd1e74d7",
+                "reference": "58c896743f6db801ec3e08798d5353c6dd1e74d7",
                 "shasum": ""
             },
             "require": {
@@ -1627,9 +1627,9 @@
             "description": "Session package",
             "support": {
                 "issues": "https://github.com/rancoud/Session/issues",
-                "source": "https://github.com/rancoud/Session/tree/5.0.7"
+                "source": "https://github.com/rancoud/Session/tree/5.0.8"
             },
-            "time": "2024-05-23T21:04:28+00:00"
+            "time": "2024-09-02T12:12:21+00:00"
         },
         {
             "name": "react/cache",
