@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e63f01fd75d626e165ec4426629f7bf6",
+    "content-hash": "c468cb4abb8803274e32f3df55d1574f",
     "packages": [
         {
             "name": "rancoud/environment",
@@ -54,16 +54,16 @@
         },
         {
             "name": "rancoud/http",
-            "version": "3.3.0",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Http.git",
-                "reference": "75f3d4142565d9d9ccd5cebfdff0bb9ad35578d6"
+                "reference": "fd5b6aae261b6359dbc738dd41059c2bba4e650c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Http/zipball/75f3d4142565d9d9ccd5cebfdff0bb9ad35578d6",
-                "reference": "75f3d4142565d9d9ccd5cebfdff0bb9ad35578d6",
+                "url": "https://api.github.com/repos/rancoud/Http/zipball/fd5b6aae261b6359dbc738dd41059c2bba4e650c",
+                "reference": "fd5b6aae261b6359dbc738dd41059c2bba4e650c",
                 "shasum": ""
             },
             "require": {
@@ -73,7 +73,7 @@
             },
             "provide": {
                 "psr/http-factory-implementation": "1.0",
-                "psr/http-message-implementation": "1.0"
+                "psr/http-message-implementation": "2.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.16 || ^3.0",
@@ -101,27 +101,27 @@
             "description": "Http package",
             "support": {
                 "issues": "https://github.com/rancoud/Http/issues",
-                "source": "https://github.com/rancoud/Http/tree/3.3.0"
+                "source": "https://github.com/rancoud/Http/tree/4.0.0"
             },
-            "time": "2024-12-06T01:18:48+00:00"
+            "time": "2024-12-07T10:04:41+00:00"
         },
         {
             "name": "rancoud/router",
-            "version": "3.2.0",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Router.git",
-                "reference": "92d1e19f5ddccb40b70a79c1c122b978f036c7ef"
+                "reference": "b38c810914badee8819803ac5f5a3e30ef45a256"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Router/zipball/92d1e19f5ddccb40b70a79c1c122b978f036c7ef",
-                "reference": "92d1e19f5ddccb40b70a79c1c122b978f036c7ef",
+                "url": "https://api.github.com/repos/rancoud/Router/zipball/b38c810914badee8819803ac5f5a3e30ef45a256",
+                "reference": "b38c810914badee8819803ac5f5a3e30ef45a256",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.4.0",
-                "rancoud/http": "^3.2"
+                "rancoud/http": "^4.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.16 || ^3.0",
@@ -147,9 +147,9 @@
             "description": "Router package",
             "support": {
                 "issues": "https://github.com/rancoud/Router/issues",
-                "source": "https://github.com/rancoud/Router/tree/3.2.0"
+                "source": "https://github.com/rancoud/Router/tree/4.0.0"
             },
-            "time": "2024-12-07T10:32:41+00:00"
+            "time": "2024-12-07T10:52:53+00:00"
         }
     ],
     "packages-dev": [
