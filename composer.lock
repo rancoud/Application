@@ -54,16 +54,16 @@
         },
         {
             "name": "rancoud/http",
-            "version": "3.2.5",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Http.git",
-                "reference": "69f403d74acca98f8c74b64f47c5d9bdd004c2a0"
+                "reference": "75f3d4142565d9d9ccd5cebfdff0bb9ad35578d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Http/zipball/69f403d74acca98f8c74b64f47c5d9bdd004c2a0",
-                "reference": "69f403d74acca98f8c74b64f47c5d9bdd004c2a0",
+                "url": "https://api.github.com/repos/rancoud/Http/zipball/75f3d4142565d9d9ccd5cebfdff0bb9ad35578d6",
+                "reference": "75f3d4142565d9d9ccd5cebfdff0bb9ad35578d6",
                 "shasum": ""
             },
             "require": {
@@ -101,22 +101,22 @@
             "description": "Http package",
             "support": {
                 "issues": "https://github.com/rancoud/Http/issues",
-                "source": "https://github.com/rancoud/Http/tree/3.2.5"
+                "source": "https://github.com/rancoud/Http/tree/3.3.0"
             },
-            "time": "2024-11-09T21:46:53+00:00"
+            "time": "2024-12-06T01:18:48+00:00"
         },
         {
             "name": "rancoud/router",
-            "version": "3.1.7",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Router.git",
-                "reference": "e624ac76c1428d53e6d0b028fe6f645eaa0d1187"
+                "reference": "92d1e19f5ddccb40b70a79c1c122b978f036c7ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Router/zipball/e624ac76c1428d53e6d0b028fe6f645eaa0d1187",
-                "reference": "e624ac76c1428d53e6d0b028fe6f645eaa0d1187",
+                "url": "https://api.github.com/repos/rancoud/Router/zipball/92d1e19f5ddccb40b70a79c1c122b978f036c7ef",
+                "reference": "92d1e19f5ddccb40b70a79c1c122b978f036c7ef",
                 "shasum": ""
             },
             "require": {
@@ -147,9 +147,9 @@
             "description": "Router package",
             "support": {
                 "issues": "https://github.com/rancoud/Router/issues",
-                "source": "https://github.com/rancoud/Router/tree/3.1.7"
+                "source": "https://github.com/rancoud/Router/tree/3.2.0"
             },
-            "time": "2024-11-09T21:50:43+00:00"
+            "time": "2024-12-07T10:32:41+00:00"
         }
     ],
     "packages-dev": [
@@ -4629,12 +4629,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.4.0"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
