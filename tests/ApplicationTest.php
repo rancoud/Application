@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace tests;
 
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 use PHPUnit\Framework\TestCase;
 use Rancoud\Application\Application;
 use Rancoud\Application\ApplicationException;
@@ -83,6 +84,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testConstructorCorrectMinimumFoldersArgument(): void
     {
         $folders = $this->getFoldersWithAppEnv();
@@ -101,6 +103,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testConstructorCorrectExtraFoldersArgument(): void
     {
         $folders = $this->getFoldersWithAppEnv();
@@ -123,6 +126,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testConstructorEmptyFoldersArgument(): void
     {
         $this->expectException(ApplicationException::class);
@@ -137,6 +141,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testConstructorIncorrectFoldersValueArgumentNotString(): void
     {
         $this->expectException(ApplicationException::class);
@@ -151,6 +156,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testConstructorIncorrectFoldersValueArgumentNotFolder(): void
     {
         $this->expectException(ApplicationException::class);
@@ -165,6 +171,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testGetInvalidFolder(): void
     {
         $this->expectException(ApplicationException::class);
@@ -181,6 +188,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testConstructorEnvironment(): void
     {
         $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_empty.env')); // phpcs:ignore
@@ -194,6 +202,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testConstructorEnvironmentBadTimezone(): void
     {
         $this->expectException(ApplicationException::class);
@@ -208,6 +217,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testConstructorEnvironmentGoodTimezone(): void
     {
         $app = new Application($this->getFoldersWithTestEnv(), new Environment([$this->testsEnvFolder], 'test_good_timezone.env')); // phpcs:ignore
@@ -221,6 +231,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testConstructorEnvironmentInvalidRoutes(): void
     {
         $this->expectException(ApplicationException::class);
@@ -235,6 +246,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testConstructorEnvironmentInvalidRoute(): void
     {
         $this->expectException(ApplicationException::class);
@@ -250,6 +262,7 @@ class ApplicationTest extends TestCase
      * @throws RouterException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testRunFound(): void
     {
         $app = new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
@@ -271,6 +284,7 @@ class ApplicationTest extends TestCase
      * @throws RouterException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testRunFoundButNoHandle(): void
     {
         $app = new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
@@ -287,6 +301,7 @@ class ApplicationTest extends TestCase
      * @throws RouterException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testRunNotFound(): void
     {
         $app = new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
@@ -303,6 +318,7 @@ class ApplicationTest extends TestCase
      * @throws RouterException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testRunRouterException404Invalid(): void
     {
         $this->expectException(RouterException::class);
@@ -320,6 +336,7 @@ class ApplicationTest extends TestCase
      * @throws RouterException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testRunRouterException(): void
     {
         $this->expectException(RouterException::class);
@@ -337,6 +354,7 @@ class ApplicationTest extends TestCase
      * @throws RouterException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testRunFoundChangeServerProtocol(): void
     {
         $app = new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
@@ -377,6 +395,7 @@ class ApplicationTest extends TestCase
      *
      * @throws ApplicationException
      */
+    #[RunInSeparateProcess]
     public function testGetEmptyInstance(): void
     {
         $this->expectException(ApplicationException::class);
@@ -390,6 +409,7 @@ class ApplicationTest extends TestCase
      *
      * @throws ApplicationException
      */
+    #[RunInSeparateProcess]
     public function testGetEmptyRouter(): void
     {
         $this->expectException(ApplicationException::class);
@@ -403,6 +423,7 @@ class ApplicationTest extends TestCase
      *
      * @throws ApplicationException
      */
+    #[RunInSeparateProcess]
     public function testGetEmptyConfig(): void
     {
         $this->expectException(ApplicationException::class);
@@ -416,6 +437,7 @@ class ApplicationTest extends TestCase
      *
      * @throws ApplicationException
      */
+    #[RunInSeparateProcess]
     public function testGetEmptyDatabase(): void
     {
         $this->expectException(ApplicationException::class);
@@ -431,6 +453,7 @@ class ApplicationTest extends TestCase
      * @throws \Rancoud\Database\DatabaseException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testSetEmptyDatabase(): void
     {
         $this->expectException(ApplicationException::class);
@@ -446,6 +469,7 @@ class ApplicationTest extends TestCase
      *
      * @throws ApplicationException
      */
+    #[RunInSeparateProcess]
     public function testGetEmptyBag(): void
     {
         $this->expectException(ApplicationException::class);
@@ -459,6 +483,7 @@ class ApplicationTest extends TestCase
      *
      * @throws ApplicationException
      */
+    #[RunInSeparateProcess]
     public function testSetEmptyBag(): void
     {
         $this->expectException(ApplicationException::class);
@@ -472,6 +497,7 @@ class ApplicationTest extends TestCase
      *
      * @throws ApplicationException
      */
+    #[RunInSeparateProcess]
     public function testRemoveEmptyBag(): void
     {
         $this->expectException(ApplicationException::class);
@@ -486,6 +512,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testGetInstance(): void
     {
         $app = new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
@@ -498,6 +525,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testGetConfig(): void
     {
         new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
@@ -514,6 +542,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testGetRouter(): void
     {
         new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
@@ -532,6 +561,7 @@ class ApplicationTest extends TestCase
      * @throws \Rancoud\Database\DatabaseException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testGetSetDatabase(): void
     {
         new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
@@ -554,6 +584,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testGetSetRemoveFromBag(): void
     {
         new Application($this->getFoldersWithTestEnv(), $this->getEnvironment());
@@ -581,6 +612,7 @@ class ApplicationTest extends TestCase
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws \Exception
      */
+    #[RunInSeparateProcess]
     public function testGetDebug(): void
     {
         $ds = \DIRECTORY_SEPARATOR;
@@ -714,6 +746,7 @@ class ApplicationTest extends TestCase
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws \Exception
      */
+    #[RunInSeparateProcess]
     public function testGetDebugExcludeDatabase(): void
     {
         $ds = \DIRECTORY_SEPARATOR;
@@ -843,6 +876,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testGetDebugExcludeIncludeFiles(): void
     {
         $ds = \DIRECTORY_SEPARATOR;
@@ -887,6 +921,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testGetDebugExcludeMemory(): void
     {
         $ds = \DIRECTORY_SEPARATOR;
@@ -924,6 +959,7 @@ class ApplicationTest extends TestCase
      * @throws RouterException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testGetDebugExcludeRequest(): void
     {
         $ds = \DIRECTORY_SEPARATOR;
@@ -1005,6 +1041,7 @@ class ApplicationTest extends TestCase
      * @throws RouterException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testGetDebugExcludeResponse(): void
     {
         $ds = \DIRECTORY_SEPARATOR;
@@ -1088,6 +1125,7 @@ class ApplicationTest extends TestCase
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws \Exception
      */
+    #[RunInSeparateProcess]
     public function testGetDebugExcludeSession(): void
     {
         $ds = \DIRECTORY_SEPARATOR;
@@ -1215,6 +1253,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testGetDebugExcludeRunElapsedTimes(): void
     {
         $ds = \DIRECTORY_SEPARATOR;
@@ -1258,6 +1297,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
      */
+    #[RunInSeparateProcess]
     public function testConvertMemoryLimitToBytes(): void
     {
         $ds = \DIRECTORY_SEPARATOR;
