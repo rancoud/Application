@@ -20,41 +20,29 @@ use Rancoud\Router\RouterException;
  */
 class Application
 {
-    /** @var array */
     protected array $folders = [];
 
-    /** @var ?Application */
     protected static ?Application $app = null;
 
-    /** @var ?Router */
     protected ?Router $router = null;
 
     /** @var Environment */
     protected $config = [];
 
-    /** @var ?\Rancoud\Database\Database */
     protected ?\Rancoud\Database\Database $database = null;
 
-    /** @var ServerRequestInterface|null */
     protected ?ServerRequestInterface $request = null;
 
-    /** @var ResponseInterface|null */
     protected ?ResponseInterface $response = null;
 
-    /** @var array */
     protected array $bags = [];
 
-    /** @var array */
     protected array $runElapsedTimes = [];
 
-    /** @var bool */
     protected bool $isDebug = false;
 
     /**
      * App constructor.
-     *
-     * @param array            $folders
-     * @param Environment|null $env
      *
      * @throws ApplicationException
      * @throws EnvironmentException
@@ -69,8 +57,6 @@ class Application
     }
 
     /**
-     * @param array $folders
-     *
      * @throws ApplicationException
      */
     protected function initFolders(array $folders): void
@@ -98,9 +84,6 @@ class Application
         }
     }
 
-    /**
-     * @return array
-     */
     protected function getFoldersName(): array
     {
         return ['ROOT', 'ROUTES'];
@@ -112,9 +95,6 @@ class Application
         $this->router = new Router();
     }
 
-    /**
-     * @param Environment|null $env
-     */
     protected function loadEnvironment(?Environment $env = null): void
     {
         if ($env !== null) {
@@ -211,9 +191,6 @@ class Application
         }
     }
 
-    /**
-     * @param $file
-     */
     protected function loadRouteFile($file): void
     {
         $router = $this->router;
@@ -224,12 +201,8 @@ class Application
     }
 
     /**
-     * @param ServerRequestInterface $request
-     *
      * @throws InvalidArgumentException
      * @throws RouterException
-     *
-     * @return Response|null
      */
     public function run(ServerRequestInterface $request): ?Response
     {
@@ -257,11 +230,6 @@ class Application
         return $response;
     }
 
-    /**
-     * @param ServerRequestInterface $request
-     *
-     * @return string
-     */
     protected function extractProtocolVersion(ServerRequestInterface $request): string
     {
         $default = $request->getProtocolVersion();
@@ -275,11 +243,7 @@ class Application
     }
 
     /**
-     * @param string $index
-     *
      * @throws ApplicationException
-     *
-     * @return string
      */
     public static function getFolder(string $index): string
     {
@@ -292,8 +256,6 @@ class Application
 
     /**
      * @throws ApplicationException
-     *
-     * @return Application
      */
     public static function getInstance(): self
     {
@@ -306,8 +268,6 @@ class Application
 
     /**
      * @throws ApplicationException
-     *
-     * @return Environment
      */
     public static function getConfig(): Environment
     {
@@ -319,8 +279,6 @@ class Application
     }
 
     /**
-     * @param \Rancoud\Database\Database $database
-     *
      * @throws ApplicationException
      * @throws EnvironmentException
      */
@@ -339,8 +297,6 @@ class Application
 
     /**
      * @throws ApplicationException
-     *
-     * @return \Rancoud\Database\Database|null
      */
     public static function getDatabase(): ?\Rancoud\Database\Database
     {
@@ -353,8 +309,6 @@ class Application
 
     /**
      * @throws ApplicationException
-     *
-     * @return Router
      */
     public static function getRouter(): Router
     {
@@ -366,11 +320,7 @@ class Application
     }
 
     /**
-     * @param string $name
-     *
      * @throws ApplicationException
-     *
-     * @return mixed
      */
     public static function getFromBag(string $name)
     {
@@ -382,8 +332,6 @@ class Application
     }
 
     /**
-     * @param string $name
-     *
      * @throws ApplicationException
      */
     public static function removeFromBag(string $name): void
@@ -396,9 +344,6 @@ class Application
     }
 
     /**
-     * @param string $name
-     * @param mixed  $object
-     *
      * @throws ApplicationException
      */
     public static function setInBag(string $name, $object): void
@@ -435,8 +380,6 @@ class Application
 
     /**
      * @throws EnvironmentException
-     *
-     * @return ServerRequestInterface
      */
     protected function getDebugRequest(): ?ServerRequestInterface
     {
@@ -449,8 +392,6 @@ class Application
 
     /**
      * @throws EnvironmentException
-     *
-     * @return ResponseInterface
      */
     protected function getDebugResponse(): ?ResponseInterface
     {
@@ -463,8 +404,6 @@ class Application
 
     /**
      * @throws EnvironmentException
-     *
-     * @return array|null
      */
     protected function getDebugDatabase(): ?array
     {
@@ -478,8 +417,6 @@ class Application
     /**
      * @throws EnvironmentException
      * @throws Exception
-     *
-     * @return array|null
      */
     protected function getDebugSession(): ?array
     {
@@ -492,8 +429,6 @@ class Application
 
     /**
      * @throws EnvironmentException
-     *
-     * @return array|null
      */
     protected function getDebugMemory(): ?array
     {
@@ -517,8 +452,6 @@ class Application
 
     /**
      * @throws EnvironmentException
-     *
-     * @return array
      */
     protected function getDebugRunElapsedTimes(): array
     {
@@ -531,8 +464,6 @@ class Application
 
     /**
      * @throws EnvironmentException
-     *
-     * @return array|null
      */
     protected function getDebugIncludedFiles(): ?array
     {
@@ -543,11 +474,6 @@ class Application
         return null;
     }
 
-    /**
-     * @param $size
-     *
-     * @return string
-     */
     protected function convertMemoryUsageToHuman($size): string
     {
         $units = ['b', 'kb', 'mb', 'gb', 'tb', 'pb'];
@@ -558,20 +484,12 @@ class Application
         return \round($size / $pow, 2) . $units[$unitIndex];
     }
 
-    /**
-     * @param $memoryUsage
-     * @param $memoryLimit
-     *
-     * @return float
-     */
     protected function getMemoryPercentage($memoryUsage, $memoryLimit): float
     {
         return \round($memoryUsage * 100 / $this->convertMemoryLimitToBytes($memoryLimit), 2);
     }
 
     /**
-     * @param $memoryLimit
-     *
      * @return int
      */
     protected function convertMemoryLimitToBytes($memoryLimit)

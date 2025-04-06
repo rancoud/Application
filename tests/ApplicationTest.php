@@ -62,8 +62,6 @@ class ApplicationTest extends TestCase
 
     /**
      * @throws \Rancoud\Database\DatabaseException
-     *
-     * @return Configurator
      */
     protected function createConfigurator(): Configurator
     {
