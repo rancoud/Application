@@ -10,7 +10,7 @@ $config = [
         [
             'methods'     => ['GET'],
             'url'         => '/no_handle',
-            'callback'    => static function ($a, $b) {
+            'callback'    => static function ($a, $b): void {
                 $b($a);
             },
             'name'        => 'test_no_handle'
@@ -18,5 +18,5 @@ $config = [
     ]
 ];
 
-/* @var \Rancoud\Router\Router $router */
+// @var \Rancoud\Router\Router $router
 $router->setupRouterAndRoutesWithConfigArray($config);
