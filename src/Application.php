@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Rancoud\Application;
 
-use DateTimeZone;
-use Exception;
-use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Rancoud\Environment\Environment;
@@ -56,9 +53,7 @@ class Application
         $this->loadRoutes();
     }
 
-    /**
-     * @throws ApplicationException
-     */
+    /** @throws ApplicationException */
     protected function initFolders(array $folders): void
     {
         $props = $this->getFoldersName();
@@ -105,8 +100,8 @@ class Application
     }
 
     /**
-     * @throws EnvironmentException
      * @throws ApplicationException
+     * @throws EnvironmentException
      */
     protected function setupApplication(): void
     {
@@ -114,9 +109,7 @@ class Application
         $this->setupTimezone();
     }
 
-    /**
-     * @throws EnvironmentException
-     */
+    /** @throws EnvironmentException */
     protected function setupApplicationDebug(): void
     {
         if ($this->config->get('DEBUG') === true) {
@@ -133,18 +126,19 @@ class Application
     }
 
     /**
-     * @throws EnvironmentException
      * @throws ApplicationException
+     * @throws EnvironmentException
      */
     protected function setupTimezone(): void
     {
         $timezone = $this->config->get('TIMEZONE', 'UTC');
 
-        $allTimezones = DateTimeZone::listIdentifiers();
+        $allTimezones = \DateTimeZone::listIdentifiers();
         if (\in_array($timezone, $allTimezones, true)) {
             \date_default_timezone_set($timezone);
         } else {
             $message = 'Invalid timezone: ' . $timezone . '. Check DateTimeZone::listIdentifiers()';
+
             throw new ApplicationException($message);
         }
     }
@@ -201,7 +195,7 @@ class Application
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws RouterException
      */
     public function run(ServerRequestInterface $request): ?Response
@@ -210,13 +204,14 @@ class Application
 
         $this->router->findRouteRequest($request);
 
-        /* @var Response $response */
+        // @var Response $response
         try {
             $response = $this->router->dispatch($request);
         } catch (RouterException $routerException) {
             if ($routerException->getMessage() === 'No route found to dispatch') {
                 return null;
             }
+
             throw $routerException;
         }
 
@@ -242,9 +237,7 @@ class Application
         return \mb_substr($serverParams['SERVER_PROTOCOL'], 5);
     }
 
-    /**
-     * @throws ApplicationException
-     */
+    /** @throws ApplicationException */
     public static function getFolder(string $index): string
     {
         if (!\array_key_exists($index, static::$app->folders)) {
@@ -254,9 +247,7 @@ class Application
         return static::$app->folders[$index];
     }
 
-    /**
-     * @throws ApplicationException
-     */
+    /** @throws ApplicationException */
     public static function getInstance(): self
     {
         if (static::$app === null) {
@@ -266,9 +257,7 @@ class Application
         return static::$app;
     }
 
-    /**
-     * @throws ApplicationException
-     */
+    /** @throws ApplicationException */
     public static function getConfig(): Environment
     {
         if (static::$app === null) {
@@ -295,9 +284,7 @@ class Application
         static::$app->database = $database;
     }
 
-    /**
-     * @throws ApplicationException
-     */
+    /** @throws ApplicationException */
     public static function getDatabase(): ?\Rancoud\Database\Database
     {
         if (static::$app === null) {
@@ -307,9 +294,7 @@ class Application
         return static::$app->database;
     }
 
-    /**
-     * @throws ApplicationException
-     */
+    /** @throws ApplicationException */
     public static function getRouter(): Router
     {
         if (static::$app === null) {
@@ -319,9 +304,7 @@ class Application
         return static::$app->router;
     }
 
-    /**
-     * @throws ApplicationException
-     */
+    /** @throws ApplicationException */
     public static function getFromBag(string $name)
     {
         if (static::$app === null) {
@@ -331,9 +314,7 @@ class Application
         return static::$app->bags[$name] ?? null;
     }
 
-    /**
-     * @throws ApplicationException
-     */
+    /** @throws ApplicationException */
     public static function removeFromBag(string $name): void
     {
         if (static::$app === null) {
@@ -356,7 +337,7 @@ class Application
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      * @throws EnvironmentException
      */
     public function getDebugInfos(): array
@@ -378,9 +359,7 @@ class Application
         return $data;
     }
 
-    /**
-     * @throws EnvironmentException
-     */
+    /** @throws EnvironmentException */
     protected function getDebugRequest(): ?ServerRequestInterface
     {
         if ($this->request !== null && $this->config->get('DEBUG_REQUEST') === true) {
@@ -390,9 +369,7 @@ class Application
         return null;
     }
 
-    /**
-     * @throws EnvironmentException
-     */
+    /** @throws EnvironmentException */
     protected function getDebugResponse(): ?ResponseInterface
     {
         if ($this->response !== null && $this->config->get('DEBUG_RESPONSE') === true) {
@@ -402,9 +379,7 @@ class Application
         return null;
     }
 
-    /**
-     * @throws EnvironmentException
-     */
+    /** @throws EnvironmentException */
     protected function getDebugDatabase(): ?array
     {
         if ($this->database !== null && $this->config->get('DEBUG_DATABASE') === true) {
@@ -415,8 +390,8 @@ class Application
     }
 
     /**
+     * @throws \Exception
      * @throws EnvironmentException
-     * @throws Exception
      */
     protected function getDebugSession(): ?array
     {
@@ -427,9 +402,7 @@ class Application
         return null;
     }
 
-    /**
-     * @throws EnvironmentException
-     */
+    /** @throws EnvironmentException */
     protected function getDebugMemory(): ?array
     {
         if ($this->config->get('DEBUG_MEMORY') === true) {
@@ -450,9 +423,7 @@ class Application
         return null;
     }
 
-    /**
-     * @throws EnvironmentException
-     */
+    /** @throws EnvironmentException */
     protected function getDebugRunElapsedTimes(): array
     {
         if ($this->config->get('DEBUG_RUN_ELAPSED_TIMES') === true) {
@@ -462,9 +433,7 @@ class Application
         return [];
     }
 
-    /**
-     * @throws EnvironmentException
-     */
+    /** @throws EnvironmentException */
     protected function getDebugIncludedFiles(): ?array
     {
         if ($this->config->get('DEBUG_INCLUDED_FILES') === true) {

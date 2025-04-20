@@ -18,10 +18,13 @@ use Rancoud\Session\Session;
 
 /**
  * Class ApplicationTest.
+ *
+ * @internal
  */
 class ApplicationTest extends TestCase
 {
     protected string $folders = __DIR__ . \DIRECTORY_SEPARATOR . 'folders';
+
     protected string $testsEnvFolder = __DIR__ . \DIRECTORY_SEPARATOR . 'folders' . \DIRECTORY_SEPARATOR . 'tests_env';
 
     protected function getFoldersWithAppEnv(): array
@@ -60,9 +63,7 @@ class ApplicationTest extends TestCase
         return (new Factory())->createServerRequest($method, $path);
     }
 
-    /**
-     * @throws \Rancoud\Database\DatabaseException
-     */
+    /** @throws \Rancoud\Database\DatabaseException */
     protected function createConfigurator(): Configurator
     {
         $params = [
@@ -79,8 +80,8 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testConstructorCorrectMinimumFoldersArgument(): void
@@ -98,8 +99,8 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testConstructorCorrectExtraFoldersArgument(): void
@@ -121,8 +122,8 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testConstructorEmptyFoldersArgument(): void
@@ -136,8 +137,8 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testConstructorIncorrectFoldersValueArgumentNotString(): void
@@ -151,8 +152,8 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testConstructorIncorrectFoldersValueArgumentNotFolder(): void
@@ -166,8 +167,8 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testGetInvalidFolder(): void
@@ -183,8 +184,8 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testConstructorEnvironment(): void
@@ -197,8 +198,8 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testConstructorEnvironmentBadTimezone(): void
@@ -212,8 +213,8 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testConstructorEnvironmentGoodTimezone(): void
@@ -226,8 +227,8 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testConstructorEnvironmentInvalidRoutes(): void
@@ -241,8 +242,8 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testConstructorEnvironmentInvalidRoute(): void
@@ -256,9 +257,9 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
+     * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      * @throws RouterException
-     * @throws \Rancoud\Environment\EnvironmentException
      */
     #[RunInSeparateProcess]
     public function testRunFound(): void
@@ -278,9 +279,9 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
+     * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      * @throws RouterException
-     * @throws \Rancoud\Environment\EnvironmentException
      */
     #[RunInSeparateProcess]
     public function testRunFoundButNoHandle(): void
@@ -295,9 +296,9 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
+     * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      * @throws RouterException
-     * @throws \Rancoud\Environment\EnvironmentException
      */
     #[RunInSeparateProcess]
     public function testRunNotFound(): void
@@ -312,9 +313,9 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
+     * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      * @throws RouterException
-     * @throws \Rancoud\Environment\EnvironmentException
      */
     #[RunInSeparateProcess]
     public function testRunRouterException404Invalid(): void
@@ -330,9 +331,9 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
+     * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      * @throws RouterException
-     * @throws \Rancoud\Environment\EnvironmentException
      */
     #[RunInSeparateProcess]
     public function testRunRouterException(): void
@@ -348,9 +349,9 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
+     * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      * @throws RouterException
-     * @throws \Rancoud\Environment\EnvironmentException
      */
     #[RunInSeparateProcess]
     public function testRunFoundChangeServerProtocol(): void
@@ -447,9 +448,9 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Database\DatabaseException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testSetEmptyDatabase(): void
@@ -507,8 +508,8 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testGetInstance(): void
@@ -520,8 +521,8 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testGetConfig(): void
@@ -537,8 +538,8 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testGetRouter(): void
@@ -555,9 +556,9 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Database\DatabaseException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testGetSetDatabase(): void
@@ -579,8 +580,8 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testGetSetRemoveFromBag(): void
@@ -604,11 +605,11 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
-     * @throws RouterException
+     * @throws \Exception
      * @throws \Rancoud\Database\DatabaseException
      * @throws \Rancoud\Environment\EnvironmentException
-     * @throws \Exception
+     * @throws ApplicationException
+     * @throws RouterException
      */
     #[RunInSeparateProcess]
     public function testGetDebug(): void
@@ -738,11 +739,11 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
-     * @throws RouterException
+     * @throws \Exception
      * @throws \Rancoud\Database\DatabaseException
      * @throws \Rancoud\Environment\EnvironmentException
-     * @throws \Exception
+     * @throws ApplicationException
+     * @throws RouterException
      */
     #[RunInSeparateProcess]
     public function testGetDebugExcludeDatabase(): void
@@ -871,8 +872,8 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testGetDebugExcludeIncludeFiles(): void
@@ -916,8 +917,8 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testGetDebugExcludeMemory(): void
@@ -953,9 +954,9 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
+     * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      * @throws RouterException
-     * @throws \Rancoud\Environment\EnvironmentException
      */
     #[RunInSeparateProcess]
     public function testGetDebugExcludeRequest(): void
@@ -1035,9 +1036,9 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
+     * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      * @throws RouterException
-     * @throws \Rancoud\Environment\EnvironmentException
      */
     #[RunInSeparateProcess]
     public function testGetDebugExcludeResponse(): void
@@ -1117,11 +1118,11 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
-     * @throws RouterException
+     * @throws \Exception
      * @throws \Rancoud\Database\DatabaseException
      * @throws \Rancoud\Environment\EnvironmentException
-     * @throws \Exception
+     * @throws ApplicationException
+     * @throws RouterException
      */
     #[RunInSeparateProcess]
     public function testGetDebugExcludeSession(): void
@@ -1248,8 +1249,8 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testGetDebugExcludeRunElapsedTimes(): void
@@ -1292,8 +1293,8 @@ class ApplicationTest extends TestCase
     /**
      * @runInSeparateProcess
      *
-     * @throws ApplicationException
      * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
      */
     #[RunInSeparateProcess]
     public function testConvertMemoryLimitToBytes(): void
