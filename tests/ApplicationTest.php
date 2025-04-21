@@ -16,11 +16,7 @@ use Rancoud\Http\Message\Uri;
 use Rancoud\Router\RouterException;
 use Rancoud\Session\Session;
 
-/**
- * Class ApplicationTest.
- *
- * @internal
- */
+/** @internal */
 class ApplicationTest extends TestCase
 {
     protected string $folders = __DIR__ . \DIRECTORY_SEPARATOR . 'folders';
@@ -78,8 +74,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      */
@@ -97,8 +91,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      */
@@ -120,8 +112,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      */
@@ -135,8 +125,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      */
@@ -150,8 +138,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      */
@@ -165,8 +151,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      */
@@ -182,8 +166,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      */
@@ -196,8 +178,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      */
@@ -211,8 +191,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      */
@@ -225,8 +203,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      */
@@ -240,8 +216,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      */
@@ -255,8 +229,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      * @throws RouterException
@@ -277,8 +249,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      * @throws RouterException
@@ -294,8 +264,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      * @throws RouterException
@@ -311,8 +279,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      * @throws RouterException
@@ -329,8 +295,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      * @throws RouterException
@@ -347,8 +311,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      * @throws RouterException
@@ -389,11 +351,7 @@ class ApplicationTest extends TestCase
         static::assertSame('0.9', $response->getProtocolVersion());
     }
 
-    /**
-     * @runInSeparateProcess
-     *
-     * @throws ApplicationException
-     */
+    /** @throws ApplicationException */
     #[RunInSeparateProcess]
     public function testGetEmptyInstance(): void
     {
@@ -403,11 +361,7 @@ class ApplicationTest extends TestCase
         Application::getInstance();
     }
 
-    /**
-     * @runInSeparateProcess
-     *
-     * @throws ApplicationException
-     */
+    /** @throws ApplicationException */
     #[RunInSeparateProcess]
     public function testGetEmptyRouter(): void
     {
@@ -417,11 +371,7 @@ class ApplicationTest extends TestCase
         Application::getRouter();
     }
 
-    /**
-     * @runInSeparateProcess
-     *
-     * @throws ApplicationException
-     */
+    /** @throws ApplicationException */
     #[RunInSeparateProcess]
     public function testGetEmptyConfig(): void
     {
@@ -431,11 +381,7 @@ class ApplicationTest extends TestCase
         Application::getConfig();
     }
 
-    /**
-     * @runInSeparateProcess
-     *
-     * @throws ApplicationException
-     */
+    /** @throws ApplicationException */
     #[RunInSeparateProcess]
     public function testGetEmptyDatabase(): void
     {
@@ -446,8 +392,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Database\DatabaseException
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
@@ -463,11 +407,7 @@ class ApplicationTest extends TestCase
         Application::setDatabase($database);
     }
 
-    /**
-     * @runInSeparateProcess
-     *
-     * @throws ApplicationException
-     */
+    /** @throws ApplicationException */
     #[RunInSeparateProcess]
     public function testGetEmptyBag(): void
     {
@@ -477,11 +417,7 @@ class ApplicationTest extends TestCase
         Application::getFromBag('a');
     }
 
-    /**
-     * @runInSeparateProcess
-     *
-     * @throws ApplicationException
-     */
+    /** @throws ApplicationException */
     #[RunInSeparateProcess]
     public function testSetEmptyBag(): void
     {
@@ -491,11 +427,7 @@ class ApplicationTest extends TestCase
         Application::setInBag('a', 'b');
     }
 
-    /**
-     * @runInSeparateProcess
-     *
-     * @throws ApplicationException
-     */
+    /** @throws ApplicationException */
     #[RunInSeparateProcess]
     public function testRemoveEmptyBag(): void
     {
@@ -506,8 +438,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      */
@@ -519,8 +449,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      */
@@ -536,8 +464,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      */
@@ -554,8 +480,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Database\DatabaseException
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
@@ -578,8 +502,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      */
@@ -603,8 +525,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Exception
      * @throws \Rancoud\Database\DatabaseException
      * @throws \Rancoud\Environment\EnvironmentException
@@ -737,8 +657,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Exception
      * @throws \Rancoud\Database\DatabaseException
      * @throws \Rancoud\Environment\EnvironmentException
@@ -870,8 +788,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      */
@@ -915,8 +831,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      */
@@ -952,8 +866,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      * @throws RouterException
@@ -1034,8 +946,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      * @throws RouterException
@@ -1116,8 +1026,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Exception
      * @throws \Rancoud\Database\DatabaseException
      * @throws \Rancoud\Environment\EnvironmentException
@@ -1247,8 +1155,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      */
@@ -1291,8 +1197,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws \Rancoud\Environment\EnvironmentException
      * @throws ApplicationException
      */
@@ -1319,6 +1223,24 @@ class ApplicationTest extends TestCase
         static::assertSame(1073741824, $value);
 
         $value = $app->convertMemoryLimitToBytes('-1');
-        static::assertSame('-1', $value);
+        static::assertSame(-1, $value);
+    }
+
+    /**
+     * @throws \Rancoud\Environment\EnvironmentException
+     * @throws ApplicationException
+     */
+    #[RunInSeparateProcess]
+    public function testGetMemoryPercentage(): void
+    {
+        $ds = \DIRECTORY_SEPARATOR;
+        $env = new Environment([$this->folders . $ds . 'tests_env' . $ds], 'test_debug_exclude_run_elapsed_times.env');
+        $app = new ImplementApplication($this->getFoldersWithTestEnv(), $env);
+
+        $value = $app->getMemoryPercentage(33554432, '64M');
+        static::assertSame(50.0, $value);
+
+        $value = $app->getMemoryPercentage(33554432, '-1');
+        static::assertSame(0.0, $value);
     }
 }

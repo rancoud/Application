@@ -12,9 +12,6 @@ use Rancoud\Http\Message\Response;
 use Rancoud\Router\Router;
 use Rancoud\Router\RouterException;
 
-/**
- * Class Application.
- */
 class Application
 {
     protected array $folders = [];
@@ -23,8 +20,7 @@ class Application
 
     protected ?Router $router = null;
 
-    /** @var Environment */
-    protected $config = [];
+    protected array|Environment $config = [];
 
     protected ?\Rancoud\Database\Database $database = null;
 
@@ -39,8 +35,6 @@ class Application
     protected bool $isDebug = false;
 
     /**
-     * App constructor.
-     *
      * @throws ApplicationException
      * @throws EnvironmentException
      */
@@ -185,7 +179,7 @@ class Application
         }
     }
 
-    protected function loadRouteFile($file): void
+    protected function loadRouteFile(string $file): void
     {
         $router = $this->router;
 
@@ -324,10 +318,8 @@ class Application
         unset(static::$app->bags[$name]);
     }
 
-    /**
-     * @throws ApplicationException
-     */
-    public static function setInBag(string $name, $object): void
+    /** @throws ApplicationException */
+    public static function setInBag(string $name, mixed $object): void
     {
         if (static::$app === null) {
             throw new ApplicationException('Empty Instance');
@@ -443,7 +435,7 @@ class Application
         return null;
     }
 
-    protected function convertMemoryUsageToHuman($size): string
+    protected function convertMemoryUsageToHuman(int $size): string
     {
         $units = ['b', 'kb', 'mb', 'gb', 'tb', 'pb'];
         $log = \log($size, 1024);
@@ -453,15 +445,18 @@ class Application
         return \round($size / $pow, 2) . $units[$unitIndex];
     }
 
-    protected function getMemoryPercentage($memoryUsage, $memoryLimit): float
+    protected function getMemoryPercentage(int $memoryUsage, string $memoryLimit): float
     {
+        $bytes = $this->convertMemoryLimitToBytes($memoryLimit);
+
+        if ($bytes < 1) {
+            return 0.0;
+        }
+
         return \round($memoryUsage * 100 / $this->convertMemoryLimitToBytes($memoryLimit), 2);
     }
 
-    /**
-     * @return int
-     */
-    protected function convertMemoryLimitToBytes($memoryLimit)
+    protected function convertMemoryLimitToBytes(string $memoryLimit): int
     {
         $value = (int) \mb_substr($memoryLimit, 0, -1);
         if (\mb_substr($memoryLimit, -1) === 'K') {
@@ -476,6 +471,6 @@ class Application
             return $value * 1024 * 1024 * 1024;
         }
 
-        return $memoryLimit;
+        return (int) $memoryLimit;
     }
 }
