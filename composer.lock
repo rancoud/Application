@@ -4,30 +4,29 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e38e3d462543f0b187786e438d144a21",
+    "content-hash": "3bbb41ce8b5b371e8eabc72b4b2c8482",
     "packages": [
         {
             "name": "rancoud/environment",
-            "version": "2.2.1",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Environment.git",
-                "reference": "985bf6dfe19f3ff82a8294b29dc41aa9e4eb40d5"
+                "reference": "89db374b386caa1c302510bbd8ecf71b1ce85101"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Environment/zipball/985bf6dfe19f3ff82a8294b29dc41aa9e4eb40d5",
-                "reference": "985bf6dfe19f3ff82a8294b29dc41aa9e4eb40d5",
+                "url": "https://api.github.com/repos/rancoud/Environment/zipball/89db374b386caa1c302510bbd8ecf71b1ce85101",
+                "reference": "89db374b386caa1c302510bbd8ecf71b1ce85101",
                 "shasum": ""
             },
             "require": {
-                "ext-mbstring": ">=7.4.0",
-                "php": ">=7.4.0"
+                "ext-mbstring": "*",
+                "php": ">=8.4.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16 || ^3.0",
-                "phpunit/phpunit": "^9.1 || ^10.0 || ^11.0",
-                "squizlabs/php_codesniffer": "^3.5"
+                "friendsofphp/php-cs-fixer": "^3.0",
+                "phpunit/phpunit": "^12.0"
             },
             "type": "library",
             "autoload": {
@@ -48,9 +47,9 @@
             "description": "Environment package",
             "support": {
                 "issues": "https://github.com/rancoud/Environment/issues",
-                "source": "https://github.com/rancoud/Environment/tree/2.2.1"
+                "source": "https://github.com/rancoud/Environment/tree/3.0.0"
             },
-            "time": "2024-12-08T13:31:09+00:00"
+            "time": "2025-04-20T19:41:17+00:00"
         },
         {
             "name": "rancoud/http",
@@ -4286,12 +4285,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=8.4.0"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }

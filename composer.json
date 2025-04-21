@@ -22,7 +22,7 @@
     },
     "require": {
         "php": ">=8.4.0",
-        "rancoud/environment": "^2.0",
+        "rancoud/environment": "^2.0 || ^3.0",
         "rancoud/router": "^4.0"
     },
     "require-dev": {
