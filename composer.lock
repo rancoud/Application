@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4163c725ca49f8daf8bf9f4f4861c07d",
+    "content-hash": "38c076bcee892f947b1bf2069dc7c28b",
     "packages": [
         {
             "name": "rancoud/environment",
@@ -1515,30 +1515,29 @@
         },
         {
             "name": "rancoud/session",
-            "version": "5.2.1",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Session.git",
-                "reference": "fbea55df1534d730443bab53d0c26ef4ba07cdc7"
+                "reference": "5ebe475986cc73a6af34f7383ec87f3b407d1129"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Session/zipball/fbea55df1534d730443bab53d0c26ef4ba07cdc7",
-                "reference": "fbea55df1534d730443bab53d0c26ef4ba07cdc7",
+                "url": "https://api.github.com/repos/rancoud/Session/zipball/5ebe475986cc73a6af34f7383ec87f3b407d1129",
+                "reference": "5ebe475986cc73a6af34f7383ec87f3b407d1129",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "ext-openssl": "*",
                 "ext-session": "*",
-                "php": ">=7.4.0"
+                "php": ">=8.4.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16 || ^3.0",
-                "phpunit/phpunit": "^9.1 || ^10.0 || ^11.0",
-                "predis/predis": "^1.1 || ^2.0",
-                "rancoud/database": "^6.0",
-                "squizlabs/php_codesniffer": "^3.5"
+                "friendsofphp/php-cs-fixer": "^3.0",
+                "phpunit/phpunit": "^12.0",
+                "predis/predis": "^2.0",
+                "rancoud/database": "^7.0"
             },
             "type": "library",
             "autoload": {
@@ -1559,9 +1558,9 @@
             "description": "Session package",
             "support": {
                 "issues": "https://github.com/rancoud/Session/issues",
-                "source": "https://github.com/rancoud/Session/tree/5.2.1"
+                "source": "https://github.com/rancoud/Session/tree/6.0.0"
             },
-            "time": "2024-12-07T23:44:38+00:00"
+            "time": "2025-04-20T23:25:11+00:00"
         },
         {
             "name": "react/cache",
@@ -4287,12 +4286,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=8.4.0"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
