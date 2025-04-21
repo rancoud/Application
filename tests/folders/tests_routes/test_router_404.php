@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
+use tests\InvalidClass;
+
 $config = [
     'router' => [
-        'default_404' => false
+        'default_404' => InvalidClass::class
     ],
     'routes' => [
         [
