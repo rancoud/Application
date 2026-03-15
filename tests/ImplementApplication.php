@@ -6,7 +6,9 @@ namespace tests;
 
 use Rancoud\Application\Application;
 
-/** @internal */
+/**
+ * @internal
+ */
 class ImplementApplication extends Application
 {
     public function convertMemoryLimitToBytes(string $memoryLimit): int
