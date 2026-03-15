@@ -16,7 +16,9 @@ use Rancoud\Http\Message\Uri;
 use Rancoud\Router\RouterException;
 use Rancoud\Session\Session;
 
-/** @internal */
+/**
+ * @internal
+ */
 class ApplicationTest extends TestCase
 {
     protected string $folders = __DIR__ . \DIRECTORY_SEPARATOR . 'folders';
