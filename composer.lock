@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bb78263ee516b17e527be07db59d65ce",
+    "content-hash": "7238cd838c7e1487885d7e712b731814",
     "packages": [
         {
             "name": "rancoud/environment",
@@ -1528,16 +1528,16 @@
         },
         {
             "name": "rancoud/session",
-            "version": "6.1.1",
+            "version": "6.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rancoud/Session.git",
-                "reference": "e5d5c27789d817c6d191afa0dfae3d0c7118c4fd"
+                "reference": "0952520589497cbf401e26c34d319d150c2a64b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rancoud/Session/zipball/e5d5c27789d817c6d191afa0dfae3d0c7118c4fd",
-                "reference": "e5d5c27789d817c6d191afa0dfae3d0c7118c4fd",
+                "url": "https://api.github.com/repos/rancoud/Session/zipball/0952520589497cbf401e26c34d319d150c2a64b6",
+                "reference": "0952520589497cbf401e26c34d319d150c2a64b6",
                 "shasum": ""
             },
             "require": {
@@ -1571,9 +1571,9 @@
             "description": "Session package",
             "support": {
                 "issues": "https://github.com/rancoud/Session/issues",
-                "source": "https://github.com/rancoud/Session/tree/6.1.1"
+                "source": "https://github.com/rancoud/Session/tree/6.2.0"
             },
-            "time": "2026-03-28T12:35:52+00:00"
+            "time": "2026-03-28T14:28:48+00:00"
         },
         {
             "name": "react/cache",
