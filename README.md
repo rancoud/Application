@@ -5,7 +5,6 @@
 [![Packagist Downloads](https://img.shields.io/packagist/dt/rancoud/application)](https://packagist.org/packages/rancoud/application)
 [![Composer dependencies](https://img.shields.io/badge/dependencies-2-brightgreen)](https://github.com/rancoud/application/blob/master/composer.json)
 [![Test workflow](https://img.shields.io/github/actions/workflow/status/rancoud/application/test.yml?branch=master)](https://github.com/rancoud/application/actions/workflows/test.yml)
-[![Codecov](https://img.shields.io/codecov/c/github/rancoud/application?logo=codecov)](https://codecov.io/gh/rancoud/application)
 
 Application skeleton with strict minimum Router and Environment.  
 
